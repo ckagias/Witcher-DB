@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Lore | The Witcher DB</title>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://fonts.googleapis.com/css2?family=Cinzel&amp;family=Lora&amp;display=swap"
+        />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="icon" type="image/x-icon" href="images/favicon.png" />
+        <script src="js/main.js"></script>
+    </head>
+    <body>
+        <div class="site-bg site-bg--lore">
+            <div class="overlay"></div>
+            <div class="nav-wrap">
+                <div class="nav">
+                    <button type="button" class="menu-btn" onclick="toggleMenu()">Menu</button>
+                    <div id="nav-menu" class="nav-links">
+                        <a href="home.html">Home</a>
+                        <a href="characters.html">Characters</a>
+                        <a href="gwent.html">Gwent</a>
+                        <a href="map.html">Map</a>
+                        <a href="timeline.html">Timeline</a>
+                        <a href="book.html">Books</a>
+                        <a href="lore.html" aria-current="page">Lore</a>
+                        <a href="bestiary.html">Bestiary</a>
+                        <a href="gallery.html">Gallery</a>
+                        <a href="feedback.html">Feedback</a>
+                    </div>
+                </div>
+            </div>
+            <div class="page-inner">
+                <h1>Lore </h1>
+                <p>
+                    A compact reference to ideas that shape the Continent across books, games, and
+                    adaptations. Use the search box below to filter topics on this page as you type.
+                </p>
+                <div class="page-search-toolbar" role="search">
+                    <input
+                        type="search"
+                        id="lore-page-search"
+                        class="page-search-input"
+                        placeholder="e.g. Elder Blood, Trial…"
+                        aria-label="Filter lore topics on this page"
+                        autocomplete="off"
+                    />
+                </div>
+                <p id="lore-no-results" class="lore-no-results" hidden>
+                    No topics match your search. Try a different term.
+                </p>
+
+                <section class="intro-panel lore-section" id="conjunction" aria-labelledby="conjunction-h">
+                    <span class="lore-icon" aria-hidden="true">✦</span>
+                    <h2 id="conjunction-h">Conjunction of the Spheres</h2>
+                    <p>
+                        A cosmic catastrophe that merged many worlds. Humans arrived; monsters
+                        appeared; elder races lost ground. Almost every conflict in the saga traces
+                        back to this event.
+                    </p>
+                    <ul>
+                        <li>
+                            Aftermath on the Continent
+                            <ul>
+                                <li>Displacement of elves and dwarves</li>
+                                <li>Spread of magical “chaos” and new creatures</li>
+                                <li>Human kingdoms and later empires (e.g. Nilfgaard)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="intro-panel lore-section" id="elder-blood" aria-labelledby="elder-h">
+                    <span class="lore-icon" aria-hidden="true">⚡</span>
+                    <h2 id="elder-h">Elder Blood</h2>
+                    <p>
+                        A latent magical lineage tied to elven prophecy, concentrated in rare
+                        descendants. It drives much of the political and personal stakes around Ciri.
+                    </p>
+                    <ol>
+                        <li>
+                            In-universe views
+                            <ul>
+                                <li>Elven prophecies of a world-ending or world-saving child</li>
+                                <li>Human rulers who hunt or exploit carriers</li>
+                                <li>Sorcerers who study or fear the gene line</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </section>
+
+                <section class="intro-panel lore-section" id="trials" aria-labelledby="trials-h">
+                    <span class="lore-icon" aria-hidden="true">⚔</span>
+                    <h2 id="trials-h">Witcher trials</h2>
+                    <p>
+                        Grueling mutations and training that give witchers enhanced reflexes,
+                        longevity, and resistance — at a brutal survival rate.
+                    </p>
+                    <ul>
+                        <li>
+                            School of the Wolf (Kaer Morhen)
+                            <ul>
+                                <li>Herb trials, viral strains, and combat drills</li>
+                                <li>Signs taught as controlled bursts of chaos</li>
+                            </ul>
+                        </li>
+                        <li>Other schools (Cat, Griffin, Bear, Viper…) follow similar myths with different reputations.</li>
+                    </ul>
+                </section>
+
+                <section class="intro-panel lore-section" id="signs" aria-labelledby="signs-h">
+                    <span class="lore-icon" aria-hidden="true">🔥</span>
+                    <h2 id="signs-h">Signs &amp; magic</h2>
+                    <p>
+                        Witcher Signs are simple combat spells. True sorcery is studied for decades
+                        at academies and shaped by politics through the Brotherhood and Lodge.
+                    </p>
+                    <div class="sign-grid" role="list">
+                        <div class="sign-card" role="listitem">
+                            <strong>Aard</strong>
+                            <span>Force push</span>
+                        </div>
+                        <div class="sign-card" role="listitem">
+                            <strong>Igni</strong>
+                            <span>Flame burst</span>
+                        </div>
+                        <div class="sign-card" role="listitem">
+                            <strong>Quen</strong>
+                            <span>Protective shield</span>
+                        </div>
+                        <div class="sign-card" role="listitem">
+                            <strong>Yrden</strong>
+                            <span>Slowing ward</span>
+                        </div>
+                        <div class="sign-card" role="listitem">
+                            <strong>Axii</strong>
+                            <span>Influence &amp; charm</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="footer">
+                <div class="footer-inner">
+                    <div class="footer-row">
+                        <div class="footer-copy">
+                            <span class="footer-brand">TW</span><span class="footer-site"> DB</span>
+                            &copy; 2026 | All rights reserved
+                        </div>
+                        <div class="footer-dev">
+                            Developed &amp; Designed by
+                            <a href="https://github.com/ckagias" target="_blank" rel="noopener noreferrer"
+                                >Christoforos Kagias</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Gwent | The Witcher DB</title>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://fonts.googleapis.com/css2?family=Cinzel&amp;family=Lora&amp;display=swap"
+        />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="icon" type="image/x-icon" href="images/favicon.png">
+        <script src="js/main.js"></script>
+    </head>
+    <body>
+        <div class="site-bg site-bg--gwent">
+            <div class="overlay"></div>
+            <div class="nav-wrap">
+                <div class="nav">
+                    <button type="button" class="menu-btn" onclick="toggleMenu()">Menu</button>
+                    <div id="nav-menu" class="nav-links">
+                        <a href="home.html">Home</a>
+                        <a href="characters.html">Characters</a>
+                        <a href="gwent.html" aria-current="page">Gwent</a>
+                        <a href="map.html">Map</a>
+                        <a href="timeline.html">Timeline</a>
+                        <a href="book.html">Books</a>
+                        <a href="schools.html">Schools</a>
+                        <a href="bestiary.html">Bestiary</a>
+                        <a href="gallery.html">Gallery</a>
+                        <a href="feedback.html">Feedback</a>
+                    </div>
+                </div>
+            </div>
+            <div class="page-inner">
+                <h1>Gwent in The Witcher 3</h1>
+                <p>
+                    Gwent is the card game Geralt plays in taverns with quest givers
+                    across The Witcher 3: Wild Hunt. Two players sit and build decks tied to one of the five
+                    factions, place unit and special cards into melee, ranged, and siege rows, and
+                    compete for the higher total strength over up to three rounds. The first player
+                    to win two rounds wins the match.
+                </p>
+                <div id="gwent-lightbox-source">
+                    <img
+                        class="faction-hero-img"
+                        src="images/factions/factions.jpg"
+                        width="500"
+                        height="320"
+                        alt="All 6 Gwent decks"
+                    />
+                </div>
+                <h2>How a match works</h2>
+                <p>
+                    Each round you may play one card per turn or pass. When both players pass, the
+                    round ends and the higher combined strength wins the round. Winning a round
+                    costs nothing from your hand for the next round except what you already played;
+                    the tutorial at White Orchard teaches redraw and basic row placement. Weather
+                    cards affect a whole row on both sides; commanders’ horns and decoys add combos
+                    once you collect more cards from merchants and quests.
+                </p>
+                <h2>Deck factions and card ideas</h2>
+                <p>
+                    The nested list below walks through each major deck faction—its broad playstyle and a few signature mechanics you will
+                    recognise from The Witcher 3, plus Syndicate as it appears in the standalone Gwent card game.
+                </p>
+                <ul class="gwent-nested-tree">
+                    <li>
+                        Northern Realms
+                        <ul>
+                            <li>
+                                Strong in balanced rows and resilience
+                                <ul>
+                                    <li>Spy cards — play on the opponent’s side, draw two cards</li>
+                                    <li>Tight Bond — duplicate names boost each other in one row</li>
+                                    <li>Medics — revive a unit from the discard pile</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Nilfgaard
+                        <ul>
+                            <li>
+                                Emphasis on control and hand manipulation
+                                <ul>
+                                    <li>Spies — same draw trick as the North, themed for Empire</li>
+                                    <li>Reveals and seize effects in later collected cards</li>
+                                    <li>High siege and disciplined melee lines</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Scoia'tael
+                        <ul>
+                            <li>
+                                Mobility and ambush flavour
+                                <ul>
+                                    <li>Agile units — choice of row when played</li>
+                                    <li>Medic and muster pairs in themed sets</li>
+                                    <li>Weather synergy in some builds</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Monsters
+                        <ul>
+                            <li>
+                                Raw strength and muster chains
+                                <ul>
+                                    <li>Muster — playing one card pulls matching ones from deck</li>
+                                    <li>Close-combat brutes and fear-themed specials</li>
+                                    <li>Leader cards that bind the theme together</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Skellige
+                        <ul>
+                            <li>
+                                Discards and round-two surges
+                                <ul>
+                                    <li>Cards that benefit from units in the graveyard</li>
+                                    <li>High risk, high reward round three swings</li>
+                                    <li>War longships and clan warriors across rows</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Syndicate
+                        <ul>
+                            <li>
+                                Crime families, coin economy, and control
+                                <ul>
+                                    <li>Profit and fee-style effects that reward setup and timing</li>
+                                    <li>Bodies and intimidation—thugs and enforcers across rows</li>
+                                    <li>Leader abilities tied to syndicate bosses and turf</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <h2>Special and leader cards</h2>
+                <p>
+                    Beyond numbered units, these card types appear in most collections and decide
+                    many games once you understand timing.
+                </p>
+                <ul class="faction-key-list">
+                    <li>
+                        <strong>Weather</strong> — Biting Frost, Impenetrable Fog, Skellige Storm (and
+                        variants) set a row’s strength to one for affected cards until cleared or
+                        replaced.
+                    </li>
+                    <li>
+                        <strong>Decoy</strong> — return a non-hero unit on your side to hand and play
+                        the Decoy in its place; core for reusing spies and medics.
+                    </li>
+                    <li>
+                        <strong>Commander’s Horn</strong> — doubles strength of all units in a row
+                        on your side (excluding heroes unless card text says otherwise).
+                    </li>
+                    <li>
+                        <strong>Leader cards</strong> — one per deck, single use per match; effects
+                        range from drawing cards to reviving discards or crushing a row.
+                    </li>
+                </ul>
+                <h2>Collecting cards</h2>
+                <p>
+                    You win unique cards from specific players, buy basics from innkeepers, and find
+                    rares through quests. Building a full collection is its own side journey across
+                    Velen, Novigrad, Skellige, and Toussaint. It's worth it if you want every edge before
+                    the tournament-style matches in the city hubs.
+                </p>
+            </div>
+            <div
+                id="gwent-lightbox"
+                class="gallery-lightbox"
+                hidden
+                role="dialog"
+                aria-modal="true"
+                aria-label="Image preview"
+            >
+                <button
+                    type="button"
+                    class="gallery-lightbox__backdrop"
+                    aria-label="Close preview"
+                ></button>
+                <div class="gallery-lightbox__panel">
+                    <button type="button" class="gallery-lightbox__close" aria-label="Close">
+                        &times;
+                    </button>
+                    <img
+                        class="gallery-lightbox__img"
+                        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                        alt=""
+                    />
+                    <p class="gallery-lightbox__caption"></p>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="footer-inner">
+                    <div class="footer-row">
+                        <div class="footer-copy">
+                            <span class="footer-brand">TW</span
+                            ><span class="footer-site"> DB</span> &copy; 2026 | All rights reserved
+                        </div>
+                        <div class="footer-dev">
+                            Developed &amp; Designed by
+                            <a href="https://github.com/ckagias" target="_blank"
+                                >Christoforos Kagias</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Map | The Witcher DB</title>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://fonts.googleapis.com/css2?family=Cinzel&amp;family=Lora&amp;display=swap"
+        />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="icon" type="image/x-icon" href="images/favicon.png">
+        <script src="js/main.js"></script>
+    </head>
+    <body class="map-page">
+        <div class="site-bg site-bg--map">
+            <div class="overlay"></div>
+            <div class="nav-wrap">
+                <div class="nav">
+                    <button type="button" class="menu-btn" onclick="toggleMenu()">Menu</button>
+                    <div id="nav-menu" class="nav-links">
+                        <a href="home.html">Home</a>
+                        <a href="characters.html">Characters</a>
+                        <a href="gwent.html">Gwent</a>
+                        <a href="map.html" aria-current="page">Map</a>
+                        <a href="timeline.html">Timeline</a>
+                        <a href="book.html">Books</a>
+                        <a href="schools.html">Schools</a>
+                        <a href="bestiary.html">Bestiary</a>
+                        <a href="gallery.html">Gallery</a>
+                        <a href="feedback.html">Feedback</a>
+                    </div>
+                </div>
+            </div>
+            <div class="page-inner">
+                <h1>The Continent</h1>
+                <p class="map-subtitle">
+                    Every path, every contract, every ruin mapped.
+                </p>
+                <p>
+                    Choose a region below to swap the map view. Each area plays a major role in the
+                    books and games.
+                </p>
+                <div class="map-region-strip">
+                    <div
+                        class="map-region-card"
+                        data-src="images/map/map-continent.jpg"
+                        data-label="Full Continent overview"
+                        data-lore="The known world stretches from the Korath desert to the edges of Skellige — home to witchers, kings, and older things."
+                    >
+                        <div class="map-region-card__bg"></div>
+                        <div class="map-region-card__body">
+                            <h2>Full Continent</h2>
+                            <p class="map-region-card__lore">
+                                The known world stretches from the Korath desert to the edges of Skellige — home to witchers, kings, and older things.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="map-region-card"
+                        data-src="images/map/northern-kingdoms.jpg"
+                        data-label="Northern Kingdoms and battlefields"
+                        data-lore="Temeria, Redania, Kaedwen — fragile crowns locked in endless war while darker forces gather."
+                    >
+                        <div class="map-region-card__bg"></div>
+                        <div class="map-region-card__body">
+                            <h2>Northern Kingdoms</h2>
+                            <p class="map-region-card__lore">
+                                Temeria, Redania, Kaedwen — fragile crowns locked in endless war while darker forces gather.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="map-region-card"
+                        data-src="images/map/nilfgaard.webp"
+                        data-label="Nilfgaardian Empire"
+                        data-lore="The empire of the Golden Sun, whose legions have swallowed every kingdom they have ever marched upon."
+                    >
+                        <div class="map-region-card__bg"></div>
+                        <div class="map-region-card__body">
+                            <h2>Nilfgaard</h2>
+                            <p class="map-region-card__lore">
+                                The empire of the Golden Sun, whose legions have swallowed every kingdom they have ever marched upon.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="map-region-card"
+                        data-src="images/map/skellige.jpg"
+                        data-label="Skellige isles and coasts"
+                        data-lore="Storm-lashed isles where the old gods still answer, and honour is measured in scars."
+                    >
+                        <div class="map-region-card__bg"></div>
+                        <div class="map-region-card__body">
+                            <h2>Skellige</h2>
+                            <p class="map-region-card__lore">
+                                Storm-lashed isles where the old gods still answer, and honour is measured in scars.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="map-region-card"
+                        data-src="images/gallery/shot5.jpg"
+                        data-label="Toussaint and duchy lands"
+                        data-lore="A duchy of wine and chivalry that hides its monsters behind painted smiles."
+                    >
+                        <div class="map-region-card__bg"></div>
+                        <div class="map-region-card__body">
+                            <h2>Toussaint</h2>
+                            <p class="map-region-card__lore">
+                                A duchy of wine and chivalry that hides its monsters behind painted smiles.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-divider">
+                    <span class="map-divider__line"></span>
+                    <span class="map-divider__icon">✦</span>
+                    <span class="map-divider__line"></span>
+                </div>
+                <p class="map-interactive-label">Explore the Continent Interactively</p>
+                <a
+                    class="map-iframe-badge"
+                    href="https://witcher3map.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    External — witcher3map.com ↗
+                </a>
+                <div class="map-iframe-wrap">
+                    <iframe
+                        src="https://witcher3map.com/"
+                        title="Witcher 3 interactive map (witcher3map.com)"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="footer-inner">
+                    <div class="footer-row">
+                        <div class="footer-copy">
+                            <span class="footer-brand">TW</span><span class="footer-site"> DB</span>
+                            &copy; 2026 | All rights reserved
+                        </div>
+                        <div class="footer-dev">
+                            Developed &amp; Designed by
+                            <a href="https://github.com/ckagias" target="_blank"
+                                >Christoforos Kagias</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var cards = document.querySelectorAll(".map-region-card");
+                var i;
+                var j;
+                if (!cards.length) {
+                    return;
+                }
+                for (i = 0; i < cards.length; i++) {
+                    var bg = cards[i].querySelector(".map-region-card__bg");
+                    if (bg) {
+                        bg.style.backgroundImage =
+                            "url(" + cards[i].getAttribute("data-src") + ")";
+                    }
+                }
+                cards[0].classList.add("map-region-card--active");
+                for (i = 0; i < cards.length; i++) {
+                    cards[i].addEventListener("click", function () {
+                        var all = document.querySelectorAll(".map-region-card");
+                        for (j = 0; j < all.length; j++) {
+                            all[j].classList.remove("map-region-card--active");
+                        }
+                        this.classList.add("map-region-card--active");
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>

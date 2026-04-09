@@ -1,0 +1,1104 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Bestiary | The Witcher DB</title>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://fonts.googleapis.com/css2?family=Cinzel&amp;family=Lora&amp;display=swap"
+        />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="icon" type="image/x-icon" href="images/favicon.png" />
+        <script src="js/main.js" defer></script>
+    </head>
+    <body>
+        <div class="site-bg site-bg--bestiary">
+            <div class="overlay"></div>
+            <div class="nav-wrap">
+                <div class="nav">
+                    <button type="button" class="menu-btn" onclick="toggleMenu()">Menu</button>
+                    <div id="nav-menu" class="nav-links">
+                        <a href="home.html">Home</a>
+                        <a href="characters.html">Characters</a>
+                        <a href="gwent.html">Gwent</a>
+                        <a href="map.html">Map</a>
+                        <a href="timeline.html">Timeline</a>
+                        <a href="book.html">Books</a>
+                        <a href="schools.html">Schools</a>
+                        <a href="bestiary.html" aria-current="page">Bestiary</a>
+                        <a href="gallery.html">Gallery</a>
+                        <a href="feedback.html">Feedback</a>
+                    </div>
+                </div>
+            </div>
+            <div class="page-inner">
+                <h1>Bestiary</h1>
+                <p class="bestiary-taxonomy__note">
+                    Creatures from
+                    <a href="https://witcher.fandom.com/wiki/Category:The_Witcher_bestiary" target="_blank" rel="noopener noreferrer">The Witcher Bestiary</a>
+                    on the Witcher Wiki. Filter by category below, or use the search box to filter by name, category, or keyword. Each card links to the wiki.
+                </p>
+                <div class="page-search-toolbar" role="search">
+                    <input
+                        type="search"
+                        id="bestiary-search"
+                        class="page-search-input"
+                        placeholder="Search beasts, categories, or tactics…"
+                        aria-label="Search bestiary by name or category"
+                        autocomplete="off"
+                    />
+                </div>
+                <nav class="bestiary-chip-nav" aria-label="Filter by creature category">
+                    <a href="#" class="bestiary-chip bestiary-chip--all bestiary-chip--active" data-bestiary-filter="all" aria-current="true">
+                        <span class="bestiary-chip__icon">
+                            <img
+                                src="images/bestiary/favicons/all.png"
+                                width="20"
+                                height="20"
+                                alt=""
+                                aria-hidden="true"
+                                loading="lazy"
+                            />
+                        </span>
+                        <span class="bestiary-chip__label">Show all</span>
+                        <span class="bestiary-chip__count" data-count-for="bestiary-catalog-section"></span>
+                    </a>
+                    <a href="#" class="bestiary-chip" data-target="bestiary-beasts">
+                        <span class="bestiary-chip__icon">
+                            <img
+                                src="images/bestiary/favicons/beasts.png"
+                                width="20"
+                                height="20"
+                                alt=""
+                                aria-hidden="true"
+                                loading="lazy"
+                            />
+                        </span>
+                        <span class="bestiary-chip__label">Beasts</span>
+                        <span class="bestiary-chip__count" data-count-for="bestiary-beasts"></span>
+                    </a>
+                    <a href="#" class="bestiary-chip" data-target="bestiary-cursed">
+                        <span class="bestiary-chip__icon">
+                            <img
+                                src="images/bestiary/favicons/cursed.png"
+                                width="20"
+                                height="20"
+                                alt=""
+                                aria-hidden="true"
+                                loading="lazy"
+                            />
+                        </span>
+                        <span class="bestiary-chip__label">Cursed ones</span>
+                        <span class="bestiary-chip__count" data-count-for="bestiary-cursed"></span>
+                    </a>
+                    <a href="#" class="bestiary-chip" data-target="bestiary-draconids">
+                        <span class="bestiary-chip__icon">
+                            <img
+                                src="images/bestiary/favicons/wyvern.png"
+                                width="20"
+                                height="20"
+                                alt=""
+                                aria-hidden="true"
+                                loading="lazy"
+                            />
+                        </span>
+                        <span class="bestiary-chip__label">Draconids</span>
+                        <span class="bestiary-chip__count" data-count-for="bestiary-draconids"></span>
+                    </a>
+                    <a href="#" class="bestiary-chip" data-target="bestiary-elementa">
+                        <span class="bestiary-chip__icon">
+                            <img
+                                src="images/bestiary/favicons/constructs.png"
+                                width="20"
+                                height="20"
+                                alt=""
+                                aria-hidden="true"
+                                loading="lazy"
+                            />
+                        </span>
+                        <span class="bestiary-chip__label">Elementa</span>
+                        <span class="bestiary-chip__count" data-count-for="bestiary-elementa"></span>
+                    </a>
+                    <a href="#" class="bestiary-chip" data-target="bestiary-hybrids">
+                        <span class="bestiary-chip__icon">
+                            <img
+                                src="images/bestiary/favicons/wyvern.png"
+                                width="20"
+                                height="20"
+                                alt=""
+                                aria-hidden="true"
+                                loading="lazy"
+                            />
+                        </span>
+                        <span class="bestiary-chip__label">Hybrids</span>
+                        <span class="bestiary-chip__count" data-count-for="bestiary-hybrids"></span>
+                    </a>
+                    <a href="#" class="bestiary-chip" data-target="bestiary-insectoids">
+                        <span class="bestiary-chip__icon">
+                            <img
+                                src="images/bestiary/favicons/insectoid.png"
+                                width="20"
+                                height="20"
+                                alt=""
+                                aria-hidden="true"
+                                loading="lazy"
+                            />
+                        </span>
+                        <span class="bestiary-chip__label">Insectoids</span>
+                        <span class="bestiary-chip__count" data-count-for="bestiary-insectoids"></span>
+                    </a>
+                    <a href="#" class="bestiary-chip" data-target="bestiary-necrophages">
+                        <span class="bestiary-chip__icon">
+                            <img
+                                src="images/bestiary/favicons/necrophage.png"
+                                width="20"
+                                height="20"
+                                alt=""
+                                aria-hidden="true"
+                                loading="lazy"
+                            />
+                        </span>
+                        <span class="bestiary-chip__label">Necrophages</span>
+                        <span class="bestiary-chip__count" data-count-for="bestiary-necrophages"></span>
+                    </a>
+                    <a href="#" class="bestiary-chip" data-target="bestiary-ogroids">
+                        <span class="bestiary-chip__icon">
+                            <img
+                                src="images/bestiary/favicons/beasts.png"
+                                width="20"
+                                height="20"
+                                alt=""
+                                aria-hidden="true"
+                                loading="lazy"
+                            />
+                        </span>
+                        <span class="bestiary-chip__label">Ogroids</span>
+                        <span class="bestiary-chip__count" data-count-for="bestiary-ogroids"></span>
+                    </a>
+                    <a href="#" class="bestiary-chip" data-target="bestiary-relicts">
+                        <span class="bestiary-chip__icon">
+                            <img
+                                src="images/bestiary/favicons/relicts.png"
+                                width="20"
+                                height="20"
+                                alt=""
+                                aria-hidden="true"
+                                loading="lazy"
+                            />
+                        </span>
+                        <span class="bestiary-chip__label">Relicts</span>
+                        <span class="bestiary-chip__count" data-count-for="bestiary-relicts"></span>
+                    </a>
+                    <a href="#" class="bestiary-chip" data-target="bestiary-specters">
+                        <span class="bestiary-chip__icon">
+                            <img
+                                src="images/bestiary/favicons/specters.png"
+                                width="20"
+                                height="20"
+                                alt=""
+                                aria-hidden="true"
+                                loading="lazy"
+                            />
+                        </span>
+                        <span class="bestiary-chip__label">Specters</span>
+                        <span class="bestiary-chip__count" data-count-for="bestiary-specters"></span>
+                    </a>
+                    <a href="#" class="bestiary-chip" data-target="bestiary-vampires">
+                        <span class="bestiary-chip__icon">
+                            <img
+                                src="images/bestiary/favicons/vampire.png"
+                                width="20"
+                                height="20"
+                                alt=""
+                                aria-hidden="true"
+                                loading="lazy"
+                            />
+                        </span>
+                        <span class="bestiary-chip__label">Vampires</span>
+                        <span class="bestiary-chip__count" data-count-for="bestiary-vampires"></span>
+                    </a>
+                </nav>
+                <div id="bestiary-catalog-section" class="bestiary-catalog" aria-label="Creature catalog">
+                <div id="bestiary-empty" class="bestiary-empty" hidden>
+                    <p>No creatures found. Try a different name or category.</p>
+                </div>
+                <section class="bestiary-category" id="bestiary-beasts" aria-labelledby="bestiary-beasts-h">
+                    <h2 id="bestiary-beasts-h" class="bestiary-category__title">Beasts</h2>
+                    <div class="grid gallery-grid bestiary-grid">
+                        <div class="card bestiary-beast-card" data-search-text="bear beasts forest predator.">
+                            <a href="https://witcher.fandom.com/wiki/Bear" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/beasts/bear.webp" alt="Bear" class="gallery-img" loading="lazy" />
+                                <p><strong>Bear</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="beast beauclair boss cursed.">
+                            <a href="https://witcher.fandom.com/wiki/The_Beast_of_Beauclair" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/beasts/beast_of_beauclair.webp" alt="The Beast of Beauclair" class="gallery-img" loading="lazy" />
+                                <p><strong>The Beast of Beauclair</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="dog beasts.">
+                            <a href="https://witcher.fandom.com/wiki/Dog" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/beasts/dog.webp" alt="Dog" class="gallery-img" loading="lazy" />
+                                <p><strong>Dog</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="panther beasts cat.">
+                            <a href="https://witcher.fandom.com/wiki/Panther" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/beasts/panther.webp" alt="Panther" class="gallery-img" loading="lazy" />
+                                <p><strong>Panther</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="three little pigs beasts.">
+                            <a href="https://witcher.fandom.com/wiki/Three_Little_Pigs" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/beasts/three_little_pigs.webp" alt="Three Little Pigs" class="gallery-img" loading="lazy" />
+                                <p><strong>Three Little Pigs</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="wild boar beasts.">
+                            <a href="https://witcher.fandom.com/wiki/Wild_boar" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/beasts/wild_boar.webp" alt="Wild boar" class="gallery-img" loading="lazy" />
+                                <p><strong>Wild boar</strong></p>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bestiary-category" id="bestiary-cursed" aria-labelledby="bestiary-cursed-h">
+                    <h2 id="bestiary-cursed-h" class="bestiary-category__title">Cursed ones</h2>
+                    <div class="grid gallery-grid bestiary-grid">
+                        <div class="card bestiary-beast-card" data-search-text="archespore cursed plant.">
+                            <a href="https://witcher.fandom.com/wiki/Archespore" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/cursed/archespore.webp" alt="Archespore" class="gallery-img" loading="lazy" />
+                                <p><strong>Archespore</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="berserker cursed bear.">
+                            <a href="https://witcher.fandom.com/wiki/Werebear" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/cursed/berserker.webp" alt="Berserker" class="gallery-img" loading="lazy" />
+                                <p><strong>Berserker</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="botchling cursed.">
+                            <a href="https://witcher.fandom.com/wiki/Botchling" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/cursed/botchling.webp" alt="Botchling" class="gallery-img" loading="lazy" />
+                                <p><strong>Botchling</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="toad prince cursed.">
+                            <a href="https://witcher.fandom.com/wiki/The_Toad_Prince" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/cursed/the_toad_prince.webp" alt="The Toad Prince" class="gallery-img" loading="lazy" />
+                                <p><strong>The Toad Prince</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="ulfhedinn cursed werewolf.">
+                            <a href="https://witcher.fandom.com/wiki/Ulfhedinn" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/cursed/ulfhedinn.webp" alt="Ulfhedinn" class="gallery-img" loading="lazy" />
+                                <p><strong>Ulfhedinn</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="werewolf cursed.">
+                            <a href="https://witcher.fandom.com/wiki/Werewolf" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/cursed/werewolf.webp" alt="Werewolf" class="gallery-img" loading="lazy" />
+                                <p><strong>Werewolf</strong></p>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bestiary-category" id="bestiary-draconids" aria-labelledby="bestiary-draconids-h">
+                    <h2 id="bestiary-draconids-h" class="bestiary-category__title">Draconids</h2>
+                    <div class="grid gallery-grid bestiary-grid">
+                        <div class="card bestiary-beast-card" data-search-text="basilisk draconids.">
+                            <a href="https://witcher.fandom.com/wiki/Basilisk" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/draconids/basilisk.webp" alt="Basilisk" class="gallery-img" loading="lazy" />
+                                <p><strong>Basilisk</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="cockatrice draconids.">
+                            <a href="https://witcher.fandom.com/wiki/Cockatrice" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/draconids/cockatrice.webp" alt="Cockatrice" class="gallery-img" loading="lazy" />
+                                <p><strong>Cockatrice</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="forktail draconids.">
+                            <a href="https://witcher.fandom.com/wiki/Forktail" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/draconids/forktail.webp" alt="Forktail" class="gallery-img" loading="lazy" />
+                                <p><strong>Forktail</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="royal wyvern draconids.">
+                            <a href="https://witcher.fandom.com/wiki/Royal_wyvern" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/draconids/royal_wyvern.webp" alt="Royal wyvern" class="gallery-img" loading="lazy" />
+                                <p><strong>Royal wyvern</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="shrieker draconids.">
+                            <a href="https://witcher.fandom.com/wiki/Shrieker" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/draconids/shrieker.webp" alt="Shrieker" class="gallery-img" loading="lazy" />
+                                <p><strong>Shrieker</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="silver basilisk draconids.">
+                            <a href="https://witcher.fandom.com/wiki/Silver_basilisk" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/draconids/silver_basilisk.webp" alt="Silver basilisk" class="gallery-img" loading="lazy" />
+                                <p><strong>Silver basilisk</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="slyzard draconids.">
+                            <a href="https://witcher.fandom.com/wiki/Slyzard" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/draconids/slyzard.webp" alt="Slyzard" class="gallery-img" loading="lazy" />
+                                <p><strong>Slyzard</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="slyzard matriarch draconids.">
+                            <a href="https://witcher.fandom.com/wiki/Slyzard_matriarch" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/draconids/slyzard_matriarch.webp" alt="Slyzard matriarch" class="gallery-img" loading="lazy" />
+                                <p><strong>Slyzard matriarch</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="dragon fyresdal draconids.">
+                            <a href="https://witcher.fandom.com/wiki/The_Dragon_of_Fyresdal" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/draconids/thedragonoffyresdal.webp" alt="The Dragon of Fyresdal" class="gallery-img" loading="lazy" />
+                                <p><strong>The Dragon of Fyresdal</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="wyvern draconids.">
+                            <a href="https://witcher.fandom.com/wiki/Wyvern" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/draconids/wyvern.webp" alt="Wyvern" class="gallery-img" loading="lazy" />
+                                <p><strong>Wyvern</strong></p>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bestiary-category" id="bestiary-elementa" aria-labelledby="bestiary-elementa-h">
+                    <h2 id="bestiary-elementa-h" class="bestiary-category__title">Elementa</h2>
+                    <div class="grid gallery-grid bestiary-grid">
+                        <div class="card bestiary-beast-card" data-search-text="djinn elementa.">
+                            <a href="https://witcher.fandom.com/wiki/Djinn" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/elementa/djinn.webp" alt="Djinn" class="gallery-img" loading="lazy" />
+                                <p><strong>Djinn</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="earth elemental elementa.">
+                            <a href="https://witcher.fandom.com/wiki/Earth_Elemental" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/elementa/earth_elemental.webp" alt="Earth elemental" class="gallery-img" loading="lazy" />
+                                <p><strong>Earth elemental</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="fire elemental elementa.">
+                            <a href="https://witcher.fandom.com/wiki/Fire_Elemental" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/elementa/fire_elemental.webp" alt="Fire elemental" class="gallery-img" loading="lazy" />
+                                <p><strong>Fire elemental</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="gargoyle elementa.">
+                            <a href="https://witcher.fandom.com/wiki/Gargoyle" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/elementa/gargoyle.webp" alt="Gargoyle" class="gallery-img" loading="lazy" />
+                                <p><strong>Gargoyle</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="golem elementa.">
+                            <a href="https://witcher.fandom.com/wiki/Golem" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/elementa/golem.webp" alt="Golem" class="gallery-img" loading="lazy" />
+                                <p><strong>Golem</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="hound wild hunt elementa.">
+                            <a href="https://witcher.fandom.com/wiki/Hound_of_the_Wild_Hunt" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/elementa/hound_of_the_wild_hunt.webp" alt="Hound of the Wild Hunt" class="gallery-img" loading="lazy" />
+                                <p><strong>Hound of the Wild Hunt</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="ice elemental elementa.">
+                            <a href="https://witcher.fandom.com/wiki/Ice_Elemental" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/elementa/ice_elemental.webp" alt="Ice elemental" class="gallery-img" loading="lazy" />
+                                <p><strong>Ice elemental</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="moreau golem elementa.">
+                            <a href="https://witcher.fandom.com/wiki/Moreau%27s_Golem" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/elementa/moreaus_golem.webp" alt="Moreau's Golem" class="gallery-img" loading="lazy" />
+                                <p><strong>Moreau's Golem</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="pixies elementa.">
+                            <a href="https://witcher.fandom.com/wiki/Pixie" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/elementa/pixie.webp" alt="Pixies" class="gallery-img" loading="lazy" />
+                                <p><strong>Pixies</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="apiarian phantom elementa.">
+                            <a href="https://witcher.fandom.com/wiki/The_Apiarian_Phantom" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/elementa/the_apiarian_phantom.webp" alt="The Apiarian Phantom" class="gallery-img" loading="lazy" />
+                                <p><strong>The Apiarian Phantom</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="therazane elementa.">
+                            <a href="https://witcher.fandom.com/wiki/Therazane" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/elementa/therazane.webp" alt="Therazane" class="gallery-img" loading="lazy" />
+                                <p><strong>Therazane</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="eredin bréacc glas wild hunt elementa.">
+                            <a href="https://witcher.fandom.com/wiki/Eredin_Br%C3%A9acc_Glas" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/elementa/eredin.webp" alt="Eredin Bréacc Glas" class="gallery-img" loading="lazy" />
+                                <p><strong>Eredin</strong></p>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bestiary-category" id="bestiary-hybrids" aria-labelledby="bestiary-hybrids-h">
+                    <h2 id="bestiary-hybrids-h" class="bestiary-category__title">Hybrids</h2>
+                    <div class="grid gallery-grid bestiary-grid">
+                        <div class="card bestiary-beast-card" data-search-text="archgriffin hybrids griffin subspecies.">
+                            <a href="https://witcher.fandom.com/wiki/Archgriffin" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/hybrids/archgriffin.webp" alt="Archgriffin" class="gallery-img" loading="lazy" />
+                                <p><strong>Archgriffin</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="erynia hybrids.">
+                            <a href="https://witcher.fandom.com/wiki/Erynia" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/hybrids/erynia.webp" alt="Erynia" class="gallery-img" loading="lazy" />
+                                <p><strong>Erynia</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="griffin hybrids.">
+                            <a href="https://witcher.fandom.com/wiki/Griffin_(creature)" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/hybrids/griffin.webp" alt="Griffin" class="gallery-img" loading="lazy" />
+                                <p><strong>Griffin</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="harpy hybrids.">
+                            <a href="https://witcher.fandom.com/wiki/Harpy" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/hybrids/harpy.webp" alt="Harpy" class="gallery-img" loading="lazy" />
+                                <p><strong>Harpy</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="melusine hybrids.">
+                            <a href="https://witcher.fandom.com/wiki/Melusine" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/hybrids/melusine.webp" alt="Melusine" class="gallery-img" loading="lazy" />
+                                <p><strong>Melusine</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="opinicus hybrids.">
+                            <a href="https://witcher.fandom.com/wiki/Opinicus" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/hybrids/archgriffin.webp" alt="Opinicus" class="gallery-img" loading="lazy" />
+                                <p><strong>Opinicus</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="salma hybrids.">
+                            <a href="https://witcher.fandom.com/wiki/Salma" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/hybrids/salma.webp" alt="Salma" class="gallery-img" loading="lazy" />
+                                <p><strong>Salma</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="siren hybrids.">
+                            <a href="https://witcher.fandom.com/wiki/Siren" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/hybrids/siren.webp" alt="Siren" class="gallery-img" loading="lazy" />
+                                <p><strong>Siren</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="succubus hybrids.">
+                            <a href="https://witcher.fandom.com/wiki/Succubus" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/hybrids/succubus.webp" alt="Succubus" class="gallery-img" loading="lazy" />
+                                <p><strong>Succubus</strong></p>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bestiary-category" id="bestiary-insectoids" aria-labelledby="bestiary-insectoids-h">
+                    <h2 id="bestiary-insectoids-h" class="bestiary-category__title">Insectoids</h2>
+                    <div class="grid gallery-grid bestiary-grid">
+                        <div class="card bestiary-beast-card" data-search-text="armored arachas insectoids.">
+                            <a href="https://witcher.fandom.com/wiki/Armored_arachas" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/insectoids/armored_arachas.webp" alt="Armored arachas" class="gallery-img" loading="lazy" />
+                                <p><strong>Armored arachas</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="arachas arachasae insectoids.">
+                            <a href="https://witcher.fandom.com/wiki/Arachas" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/insectoids/arachas.webp" alt="Arachas" class="gallery-img" loading="lazy" />
+                                <p><strong>Arachas</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="arachnomorphs insectoids.">
+                            <a href="https://witcher.fandom.com/wiki/Arachnomorph" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/insectoids/arachnomorph.webp" alt="Arachnomorphs" class="gallery-img" loading="lazy" />
+                                <p><strong>Arachnomorphs</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="endrega drone insectoids.">
+                            <a href="https://witcher.fandom.com/wiki/Endrega_drone" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/insectoids/endrega_drone.webp" alt="Endrega drone" class="gallery-img" loading="lazy" />
+                                <p><strong>Endrega drone</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="endrega warrior insectoids.">
+                            <a href="https://witcher.fandom.com/wiki/Endrega_warrior" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/insectoids/endrega_warrior.webp" alt="Endrega warrior" class="gallery-img" loading="lazy" />
+                                <p><strong>Endrega warrior</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="endrega worker insectoids.">
+                            <a href="https://witcher.fandom.com/wiki/Endrega_worker" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/insectoids/endrega_worker.webp" alt="Endrega worker" class="gallery-img" loading="lazy" />
+                                <p><strong>Endrega worker</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="giant centipede insectoids.">
+                            <a href="https://witcher.fandom.com/wiki/Giant_centipede" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/insectoids/giant_centipede.webp" alt="Giant centipede" class="gallery-img" loading="lazy" />
+                                <p><strong>Giant centipede</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="harrisi insectoids.">
+                            <a href="https://witcher.fandom.com/wiki/Harrisi" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/insectoids/harrisi.webp" alt="Harrisi" class="gallery-img" loading="lazy" />
+                                <p><strong>Harrisi</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="kikimore queen insectoids.">
+                            <a href="https://witcher.fandom.com/wiki/Kikimore_queen" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/insectoids/kikimore_queen.webp" alt="Kikimore queen" class="gallery-img" loading="lazy" />
+                                <p><strong>Kikimore queen</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="kikimore warrior insectoids.">
+                            <a href="https://witcher.fandom.com/wiki/Kikimore_warrior" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/insectoids/kikimore_warrior.webp" alt="Kikimore warrior" class="gallery-img" loading="lazy" />
+                                <p><strong>Kikimore warrior</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="kikimore worker insectoids.">
+                            <a href="https://witcher.fandom.com/wiki/Kikimore_worker" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/insectoids/kikimore_worker.webp" alt="Kikimore worker" class="gallery-img" loading="lazy" />
+                                <p><strong>Kikimore worker</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="pale widow insectoids.">
+                            <a href="https://witcher.fandom.com/wiki/Pale_Widow" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/insectoids/pale_widow.webp" alt="Pale widow" class="gallery-img" loading="lazy" />
+                                <p><strong>Pale widow</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="venomous arachas insectoids.">
+                            <a href="https://witcher.fandom.com/wiki/Venomous_arachas" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/insectoids/venomous_arachas.webp" alt="Venomous arachas" class="gallery-img" loading="lazy" />
+                                <p><strong>Venomous arachas</strong></p>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bestiary-category" id="bestiary-necrophages" aria-labelledby="bestiary-necrophages-h">
+                    <h2 id="bestiary-necrophages-h" class="bestiary-category__title">Necrophages</h2>
+                    <div class="grid gallery-grid bestiary-grid">
+                        <div class="card bestiary-beast-card" data-search-text="abaya necrophages.">
+                            <a href="https://witcher.fandom.com/wiki/Abaya" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/necrophages/abaya.webp" alt="Abaya" class="gallery-img" loading="lazy" />
+                                <p><strong>Abaya</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="alghoul necrophages.">
+                            <a href="https://witcher.fandom.com/wiki/Alghoul" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/necrophages/alghoul.webp" alt="Alghoul" class="gallery-img" loading="lazy" />
+                                <p><strong>Alghoul</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="drowner necrophages.">
+                            <a href="https://witcher.fandom.com/wiki/Drowner" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/necrophages/drowner.webp" alt="Drowner" class="gallery-img" loading="lazy" />
+                                <p><strong>Drowner</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="drowned dead necrophages.">
+                            <a href="https://witcher.fandom.com/wiki/Drowned_dead" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/necrophages/drowned_dead.webp" alt="Drowned dead" class="gallery-img" loading="lazy" />
+                                <p><strong>Drowned dead</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="foglet necrophages.">
+                            <a href="https://witcher.fandom.com/wiki/Foglet" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/necrophages/foglet.webp" alt="Foglet" class="gallery-img" loading="lazy" />
+                                <p><strong>Foglet</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="ghoul necrophages.">
+                            <a href="https://witcher.fandom.com/wiki/Ghoul" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/necrophages/ghoul.webp" alt="Ghoul" class="gallery-img" loading="lazy" />
+                                <p><strong>Ghoul</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="grave hag necrophages.">
+                            <a href="https://witcher.fandom.com/wiki/Grave_hag" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/necrophages/grave_hag.webp" alt="Grave hag" class="gallery-img" loading="lazy" />
+                                <p><strong>Grave hag</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="ignis fatuus necrophages.">
+                            <a href="https://witcher.fandom.com/wiki/Ignis_Fatuus" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/necrophages/ignis_fatuus.webp" alt="Ignis Fatuus" class="gallery-img" loading="lazy" />
+                                <p><strong>Ignis Fatuus</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="mourntart necrophages.">
+                            <a href="https://witcher.fandom.com/wiki/Mourntart" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/necrophages/mourntart.webp" alt="Mourntart" class="gallery-img" loading="lazy" />
+                                <p><strong>Mourntart</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="mucknixer necrophages.">
+                            <a href="https://witcher.fandom.com/wiki/Mucknixer" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/necrophages/mucknixer.webp" alt="Mucknixer" class="gallery-img" loading="lazy" />
+                                <p><strong>Mucknixer</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="rotfiend necrophages.">
+                            <a href="https://witcher.fandom.com/wiki/Rotfiend" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/necrophages/rotfiend.webp" alt="Rotfiend" class="gallery-img" loading="lazy" />
+                                <p><strong>Rotfiend</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="scurver necrophages.">
+                            <a href="https://witcher.fandom.com/wiki/Scurver" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/necrophages/scurver.webp" alt="Scurver" class="gallery-img" loading="lazy" />
+                                <p><strong>Scurver</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="spotted wight necrophages.">
+                            <a href="https://witcher.fandom.com/wiki/Spotted_wight" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/necrophages/spotted_wight.webp" alt="Spotted wight" class="gallery-img" loading="lazy" />
+                                <p><strong>Spotted wight</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="water hag necrophages.">
+                            <a href="https://witcher.fandom.com/wiki/Water_hag" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/necrophages/water_hag.webp" alt="Water hag" class="gallery-img" loading="lazy" />
+                                <p><strong>Water hag</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="wight necrophages.">
+                            <a href="https://witcher.fandom.com/wiki/Wight_(creature)" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/necrophages/wight.webp" alt="Wight" class="gallery-img" loading="lazy" />
+                                <p><strong>Wight</strong></p>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bestiary-category" id="bestiary-ogroids" aria-labelledby="bestiary-ogroids-h">
+                    <h2 id="bestiary-ogroids-h" class="bestiary-category__title">Ogroids</h2>
+                    <div class="grid gallery-grid bestiary-grid">
+                        <div class="card bestiary-beast-card" data-search-text="cloud giant ogroids.">
+                            <a href="https://witcher.fandom.com/wiki/Cloud_Giant" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/ogroids/cloud_giant.webp" alt="Cloud giant" class="gallery-img" loading="lazy" />
+                                <p><strong>Cloud giant</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="cyclops cyclopses ogroids.">
+                            <a href="https://witcher.fandom.com/wiki/Cyclops" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/ogroids/cyclops.webp" alt="Cyclops" class="gallery-img" loading="lazy" />
+                                <p><strong>Cyclops</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="golyat ogroids.">
+                            <a href="https://witcher.fandom.com/wiki/Golyat" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/ogroids/golyat.webp" alt="Golyat" class="gallery-img" loading="lazy" />
+                                <p><strong>Golyat</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="hagubman ogroids.">
+                            <a href="https://witcher.fandom.com/wiki/Hagubman" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/ogroids/hagubman.webp" alt="Hagubman" class="gallery-img" loading="lazy" />
+                                <p><strong>Hagubman</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="ice giant ogroids.">
+                            <a href="https://witcher.fandom.com/wiki/Ice_giant" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/ogroids/ice_giant.webp" alt="Ice giant" class="gallery-img" loading="lazy" />
+                                <p><strong>Ice giant</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="ice troll ogroids.">
+                            <a href="https://witcher.fandom.com/wiki/Ice_troll" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/ogroids/ice_troll.webp" alt="Ice troll" class="gallery-img" loading="lazy" />
+                                <p><strong>Ice troll</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="nekker nekkers ogroids.">
+                            <a href="https://witcher.fandom.com/wiki/Nekker" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/ogroids/nekker.webp" alt="Nekker" class="gallery-img" loading="lazy" />
+                                <p><strong>Nekker</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="rock troll ogroids.">
+                            <a href="https://witcher.fandom.com/wiki/Rock_troll" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/ogroids/rock_troll.webp" alt="Rock troll" class="gallery-img" loading="lazy" />
+                                <p><strong>Rock troll</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="wham a wham ogroids.">
+                            <a href="https://witcher.fandom.com/wiki/Wham-a-Wham" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/ogroids/wham_a_wham.webp" alt="Wham-a-Wham" class="gallery-img" loading="lazy" />
+                                <p><strong>Wham-a-Wham</strong></p>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bestiary-category" id="bestiary-relicts" aria-labelledby="bestiary-relicts-h">
+                    <h2 id="bestiary-relicts-h" class="bestiary-category__title">Relicts</h2>
+                    <div class="grid gallery-grid bestiary-grid">
+                        <div class="card bestiary-beast-card" data-search-text="chorts relicts.">
+                            <a href="https://witcher.fandom.com/wiki/Chort" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/chort.webp" alt="Chort" class="gallery-img" loading="lazy" />
+                                <p><strong>Chort</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="crones relicts.">
+                            <a href="https://witcher.fandom.com/wiki/Crones" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/crones.webp" alt="Crones" class="gallery-img" loading="lazy" />
+                                <p><strong>Crones</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="doppler relicts.">
+                            <a href="https://witcher.fandom.com/wiki/Doppler" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/doppler.webp" alt="Doppler" class="gallery-img" loading="lazy" />
+                                <p><strong>Doppler</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="fiends relicts.">
+                            <a href="https://witcher.fandom.com/wiki/Fiend" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/fiend.webp" alt="Fiend" class="gallery-img" loading="lazy" />
+                                <p><strong>Fiend</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="fugas relicts.">
+                            <a href="https://witcher.fandom.com/wiki/Fugas" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/fugas.webp" alt="Fugas" class="gallery-img" loading="lazy" />
+                                <p><strong>Fugas</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="godling relicts.">
+                            <a href="https://witcher.fandom.com/wiki/Godling" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/godlings.webp" alt="Godling" class="gallery-img" loading="lazy" />
+                                <p><strong>Godling</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="grottore relicts.">
+                            <a href="https://witcher.fandom.com/wiki/Grottore" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/grottore.webp" alt="Grottore" class="gallery-img" loading="lazy" />
+                                <p><strong>Grottore</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="howler relicts.">
+                            <a href="https://witcher.fandom.com/wiki/Howler" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/howler.webp" alt="Howler" class="gallery-img" loading="lazy" />
+                                <p><strong>Howler</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="imp relicts.">
+                            <a href="https://witcher.fandom.com/wiki/Imp" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/imp.webp" alt="Imp" class="gallery-img" loading="lazy" />
+                                <p><strong>Imp</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="kernun relicts.">
+                            <a href="https://witcher.fandom.com/wiki/Kernun" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/kernun.webp" alt="Kernun" class="gallery-img" loading="lazy" />
+                                <p><strong>Kernun</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="leshen relicts.">
+                            <a href="https://witcher.fandom.com/wiki/Leshen" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/leshen.webp" alt="Leshen" class="gallery-img" loading="lazy" />
+                                <p><strong>Leshen</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="morvudd relicts.">
+                            <a href="https://witcher.fandom.com/wiki/Morvudd" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/morvudd.webp" alt="Morvudd" class="gallery-img" loading="lazy" />
+                                <p><strong>Morvudd</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="shaelmaar relicts.">
+                            <a href="https://witcher.fandom.com/wiki/Shaelmaar" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/shaelmaar.webp" alt="Shaelmaar" class="gallery-img" loading="lazy" />
+                                <p><strong>Shaelmaar</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="shaelmaar emperor nilfgaard relicts.">
+                            <a href="https://witcher.fandom.com/wiki/Shaelmaar_from_the_Emperor_of_Nilfgaard" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/shaelmaar_nilfgaard.webp" alt="Shaelmaar from the Emperor of Nilfgaard" class="gallery-img" loading="lazy" />
+                                <p><strong>Shaelmaar of Nilfgaard</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="spriggans relicts.">
+                            <a href="https://witcher.fandom.com/wiki/Spriggan" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/spriggan.webp" alt="Spriggans" class="gallery-img" loading="lazy" />
+                                <p><strong>Spriggans</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="sylvans relicts.">
+                            <a href="https://witcher.fandom.com/wiki/Sylvan" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/sylvan.webp" alt="Sylvans" class="gallery-img" loading="lazy" />
+                                <p><strong>Sylvans</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="caretaker relicts.">
+                            <a href="https://witcher.fandom.com/wiki/The_Caretaker" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/caretaker.webp" alt="The Caretaker" class="gallery-img" loading="lazy" />
+                                <p><strong>The Caretaker</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="monster tufo relicts.">
+                            <a href="https://witcher.fandom.com/wiki/The_Monster_of_Tufo" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/monster_of_tufo.webp" alt="The Monster of Tufo" class="gallery-img" loading="lazy" />
+                                <p><strong>The Monster of Tufo</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="wicked witch relicts.">
+                            <a href="https://witcher.fandom.com/wiki/Wicked_Witch" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/wicked_witch.webp" alt="Wicked Witch" class="gallery-img" loading="lazy" />
+                                <p><strong>Wicked Witch</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="woodland spirit relicts.">
+                            <a href="https://witcher.fandom.com/wiki/Woodland_Spirit" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/relicts/woodland_spirit.webp" alt="Woodland Spirit" class="gallery-img" loading="lazy" />
+                                <p><strong>Woodland Spirit</strong></p>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bestiary-category" id="bestiary-specters" aria-labelledby="bestiary-specters-h">
+                    <h2 id="bestiary-specters-h" class="bestiary-category__title">Specters</h2>
+                    <div class="grid gallery-grid bestiary-grid">
+                        <div class="card bestiary-beast-card" data-search-text="banshee specters.">
+                            <a href="https://witcher.fandom.com/wiki/Banshee" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/specters/banshee.webp" alt="Banshee" class="gallery-img" loading="lazy" />
+                                <p><strong>Banshee</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="barghest specters.">
+                            <a href="https://witcher.fandom.com/wiki/Barghest" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/specters/barghest.webp" alt="Barghest" class="gallery-img" loading="lazy" />
+                                <p><strong>Barghest</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="daphne wraith specters.">
+                            <a href="https://witcher.fandom.com/wiki/Daphne%27s_Wraith" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/specters/daphnes_wraith.webp" alt="Daphne's Wraith" class="gallery-img" loading="lazy" />
+                                <p><strong>Daphne's Wraith</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="devil by the well specters.">
+                            <a href="https://witcher.fandom.com/wiki/Devil_by_the_Well" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/specters/devil_by_the_well.webp" alt="Devil by the Well" class="gallery-img" loading="lazy" />
+                                <p><strong>Devil by the Well</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="ethereal hym specters.">
+                            <a href="https://witcher.fandom.com/wiki/Ethereal" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/specters/ethereal.webp" alt="Ethereal" class="gallery-img" loading="lazy" />
+                                <p><strong>Ethereal</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="jenny woods specters.">
+                            <a href="https://witcher.fandom.com/wiki/Jenny_o%27_the_Woods" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/specters/jenny_o_the_woods.webp" alt="Jenny o' the Woods" class="gallery-img" loading="lazy" />
+                                <p><strong>Jenny o' the Woods</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="longlocks specters.">
+                            <a href="https://witcher.fandom.com/wiki/Longlocks" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/specters/longlocks.webp" alt="Longlocks" class="gallery-img" loading="lazy" />
+                                <p><strong>Longlocks</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="nightwraith specters.">
+                            <a href="https://witcher.fandom.com/wiki/Nightwraith" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/specters/nightwraith.webp" alt="Nightwraith" class="gallery-img" loading="lazy" />
+                                <p><strong>Nightwraith</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="noonwraith specters.">
+                            <a href="https://witcher.fandom.com/wiki/Noonwraith" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/specters/noonwraith.webp" alt="Noonwraith" class="gallery-img" loading="lazy" />
+                                <p><strong>Noonwraith</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="penitent specters.">
+                            <a href="https://witcher.fandom.com/wiki/Penitent" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/specters/penitent.webp" alt="Penitent" class="gallery-img" loading="lazy" />
+                                <p><strong>Penitent</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="plague maiden specters.">
+                            <a href="https://witcher.fandom.com/wiki/Plague_maiden" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/specters/plague_maiden.webp" alt="Plague maiden" class="gallery-img" loading="lazy" />
+                                <p><strong>Plague maiden</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="red miasmal specters.">
+                            <a href="https://witcher.fandom.com/wiki/Red_Miasmal" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/specters/red_miasmal.webp" alt="Red Miasmal" class="gallery-img" loading="lazy" />
+                                <p><strong>Red Miasmal</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="white lady specters.">
+                            <a href="https://witcher.fandom.com/wiki/The_White_Lady" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/specters/the_white_lady.webp" alt="The White Lady" class="gallery-img" loading="lazy" />
+                                <p><strong>The White Lady</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="wraith painting specters.">
+                            <a href="https://witcher.fandom.com/wiki/The_Wraith_from_the_Painting" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/specters/wraith_from_the_painting.webp" alt="The Wraith from the Painting" class="gallery-img" loading="lazy" />
+                                <p><strong>The Wraith from the Painting</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="umbra specters.">
+                            <a href="https://witcher.fandom.com/wiki/Umbra" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/specters/umbra.webp" alt="Umbra" class="gallery-img" loading="lazy" />
+                                <p><strong>Umbra</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="wraith specters.">
+                            <a href="https://witcher.fandom.com/wiki/Wraith" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/specters/wraith.webp" alt="Wraith" class="gallery-img" loading="lazy" />
+                                <p><strong>Wraith</strong></p>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bestiary-category" id="bestiary-vampires" aria-labelledby="bestiary-vampires-h">
+                    <h2 id="bestiary-vampires-h" class="bestiary-category__title">Vampires</h2>
+                    <div class="grid gallery-grid bestiary-grid">
+                        <div class="card bestiary-beast-card" data-search-text="alp alpha vampires.">
+                            <a href="https://witcher.fandom.com/wiki/Alp" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/vampires/alp.webp" alt="Alp" class="gallery-img" loading="lazy" />
+                                <p><strong>Alp</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="bruxa vampires.">
+                            <a href="https://witcher.fandom.com/wiki/Bruxa" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/vampires/bruxa.webp" alt="Bruxa" class="gallery-img" loading="lazy" />
+                                <p><strong>Bruxa</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="dettlaff vampires.">
+                            <a href="https://witcher.fandom.com/wiki/Dettlaff_van_der_Eretein" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/vampires/dettlaff.webp" alt="Dettlaff van der Eretein" class="gallery-img" loading="lazy" />
+                                <p><strong>Dettlaff van der Eretein</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="ekimmara vampires.">
+                            <a href="https://witcher.fandom.com/wiki/Ekimmara" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/vampires/ekimmara.webp" alt="Ekimmara" class="gallery-img" loading="lazy" />
+                                <p><strong>Ekimmara</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="regis vampires.">
+                            <a href="https://witcher.fandom.com/wiki/Emiel_Regis_Rohellec_Terzieff-Godefroy" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/vampires/regis.webp" alt="Emiel Regis Rohellec Terzieff-Godefroy" class="gallery-img" loading="lazy" />
+                                <p><strong>Emiel Regis Terzieff-Godefroy</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="fleder vampires.">
+                            <a href="https://witcher.fandom.com/wiki/Fleder" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/vampires/fleder.webp" alt="Fleder" class="gallery-img" loading="lazy" />
+                                <p><strong>Fleder</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="gael vampires.">
+                            <a href="https://witcher.fandom.com/wiki/Gael" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/vampires/gael.webp" alt="Gael" class="gallery-img" loading="lazy" />
+                                <p><strong>Gael</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="garkain vampires.">
+                            <a href="https://witcher.fandom.com/wiki/Garkain" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/vampires/garkain.webp" alt="Garkain" class="gallery-img" loading="lazy" />
+                                <p><strong>Garkain</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="hubert rejk vampires.">
+                            <a href="https://witcher.fandom.com/wiki/Hubert_Rejk" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/vampires/hubert_rejk.webp" alt="Hubert Rejk" class="gallery-img" loading="lazy" />
+                                <p><strong>Hubert Rejk</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="katakan vampires.">
+                            <a href="https://witcher.fandom.com/wiki/Katakan" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/vampires/katakan.webp" alt="Katakan" class="gallery-img" loading="lazy" />
+                                <p><strong>Katakan</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="oriana vampires.">
+                            <a href="https://witcher.fandom.com/wiki/Orianna" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/vampires/oriana.webp" alt="Orianna" class="gallery-img" loading="lazy" />
+                                <p><strong>Orianna</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="protofleder vampires.">
+                            <a href="https://witcher.fandom.com/wiki/Protofleder" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/vampires/protofleder.webp" alt="Protofleder" class="gallery-img" loading="lazy" />
+                                <p><strong>Protofleder</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="sarasti vampires.">
+                            <a href="https://witcher.fandom.com/wiki/Sarasti" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/vampires/sarasti.webp" alt="Sarasti" class="gallery-img" loading="lazy" />
+                                <p><strong>Sarasti</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="bruxa corvo bianco vampires.">
+                            <a href="https://witcher.fandom.com/wiki/The_Bruxa_of_Corvo_Bianco" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/vampires/bruxa_corvo_bianco.webp" alt="The Bruxa of Corvo Bianco" class="gallery-img" loading="lazy" />
+                                <p><strong>The Bruxa of Corvo Bianco</strong></p>
+                            </a>
+                        </div>
+                        <div class="card bestiary-beast-card" data-search-text="unseen elder vampires.">
+                            <a href="https://witcher.fandom.com/wiki/Unseen_Elder" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
+                                <img src="images/bestiary/vampires/unseen_elder.webp" alt="Unseen Elder" class="gallery-img" loading="lazy" />
+                                <p><strong>Unseen Elder</strong></p>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="footer-inner">
+                    <div class="footer-row">
+                        <div class="footer-copy">
+                            <span class="footer-brand">TW</span><span class="footer-site"> DB</span>
+                            &copy; 2026 | All rights reserved
+                        </div>
+                        <div class="footer-dev">
+                            Developed &amp; Designed by
+                            <a href="https://github.com/ckagias" target="_blank" rel="noopener noreferrer"
+                                >Christoforos Kagias</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" id="back-to-top" class="bestiary-chip back-to-top-btn" title="Back to top" hidden>
+            <span class="bestiary-chip__label">Back to top</span>
+        </button>
+    </body>
+</html>

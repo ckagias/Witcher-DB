@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Home | The Witcher DB</title>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://fonts.googleapis.com/css2?family=Cinzel&amp;family=Lora&amp;display=swap"
+        />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="icon" type="image/x-icon" href="images/favicon.png">
+        <script src="js/main.js"></script>
+    </head>
+    <body>
+        <div
+            class="site-bg site-bg--home"
+        >
+            <div class="overlay"></div>
+            <div class="nav-wrap">
+                <div class="nav">
+                    <button type="button" class="menu-btn" onclick="toggleMenu()">Menu</button>
+                    <div id="nav-menu" class="nav-links">
+                        <a href="home.html" aria-current="page">Home</a>
+                        <a href="characters.html">Characters</a>
+                        <a href="gwent.html">Gwent</a>
+                        <a href="map.html">Map</a>
+                        <a href="timeline.html">Timeline</a>
+                        <a href="book.html">Books</a>
+                        <a href="schools.html">Schools</a>
+                        <a href="bestiary.html">Bestiary</a>
+                        <a href="gallery.html">Gallery</a>
+                        <a href="feedback.html">Feedback</a>
+                    </div>
+                </div>
+            </div>
+            <div class="page-inner">
+                <section class="hero" aria-label="The Witcher DB overview">
+                    <p class="hero-kicker">The Witcher DB</p>
+                    <h1 class="hero-title">
+                        Every character. Every faction. Every tale.
+                        <span class="hero-title-sub">The Continent, documented.</span>
+                    </h1>
+                    <p class="hero-lede">
+                        Browse information about people, powers, places and turning points across books, games, the
+                        Netflix series and more.
+                    </p>
+                    <div class="hero-actions" aria-label="Start here">
+                        <a class="hero-btn" href="characters.html">Browse characters</a>
+                        <a class="hero-btn hero-btn--ghost" href="gwent.html">Explore Gwent</a>
+                        <a class="hero-btn hero-btn--ghost" href="timeline.html">Open timeline</a>
+                    </div>
+                </section>
+                <div class="video-embed">
+                    <iframe
+                        src="https://www.youtube.com/embed/54dabgZJ5YA"
+                        title="The Witcher 4 cinematic reveal trailer"
+                        allow="
+                            accelerometer;
+                            autoplay;
+                            clipboard-write;
+                            encrypted-media;
+                            gyroscope;
+                            picture-in-picture;
+                            web-share;
+                        "
+                        allowfullscreen
+                    ></iframe>
+                </div>
+
+                <section class="featured" aria-label="Featured content">
+                    <div class="featured-head">
+                        <h2>Featured content</h2>
+                    </div>
+                    <div class="featured-row">
+                        <a class="feature-card" href="characters.html" aria-label="Featured: Geralt of Rivia">
+                            <img
+                                src="images/characters/games/geralt.jpg"
+                                width="400"
+                                height="260"
+                                alt="Geralt of Rivia portrait"
+                            />
+                            <div class="feature-meta">
+                                <p class="feature-eyebrow">Character</p>
+                                <h3>Geralt of Rivia</h3>
+                                <p class="feature-hook">A witcher who tries to stay neutral — and fails.</p>
+                            </div>
+                        </a>
+                        <a class="feature-card" href="gwent.html" aria-label="Featured: Gwent minigame">
+                            <img
+                                src="images/factions/nilfgaard.jpg"
+                                width="400"
+                                height="260"
+                                alt="Nilfgaardian banner scene"
+                            />
+                            <div class="feature-meta">
+                                <p class="feature-eyebrow">Gwent</p>
+                                <h3>The card game</h3>
+                                <p class="feature-hook">Decks, rows, and tavern matches across the Continent.</p>
+                            </div>
+                        </a>
+                        <a class="feature-card" href="lore.html" aria-label="Featured: Lore and concepts">
+                            <img
+                                src="images/books/last-wish.jpg"
+                                width="400"
+                                height="260"
+                                alt="The Last Wish book cover"
+                            />
+                            <div class="feature-meta">
+                                <p class="feature-eyebrow">Lore</p>
+                                <h3>Concepts of the Continent</h3>
+                                <p class="feature-hook">Conjunction, Elder Blood, Signs, trials, and more.</p>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="footer">
+                <div class="footer-inner">
+                    <div class="footer-row">
+                        <div class="footer-copy">
+                            <span class="footer-brand">TW</span><span class="footer-site"> DB</span>
+                            &copy; 2026 | All rights reserved
+                        </div>
+                        <div class="footer-dev">
+                            Developed &amp; Designed by
+                            <a href="https://github.com/ckagias" target="_blank"
+                                >Christoforos Kagias</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
