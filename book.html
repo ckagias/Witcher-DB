@@ -20,7 +20,22 @@
             <div class="overlay"></div>
             <div class="nav-wrap">
                 <div class="nav">
-                    <button type="button" class="menu-btn" onclick="toggleMenu()">Menu</button>
+                    <div class="nav-mobile-bar">
+                        <div class="nav-mobile-spacer" aria-hidden="true"></div>
+                        <span class="nav-mobile-title">The Witcher DB</span>
+                        <button
+                            type="button"
+                            class="menu-btn"
+                            onclick="toggleMenu()"
+                            aria-controls="nav-menu"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation menu"
+                        >
+                            <span class="menu-btn__bar"></span>
+                            <span class="menu-btn__bar"></span>
+                            <span class="menu-btn__bar"></span>
+                        </button>
+                    </div>
                     <div id="nav-menu" class="nav-links">
                         <a href="home.html">Home</a>
                         <a href="characters.html">Characters</a>

@@ -1193,9 +1193,51 @@ button:hover {
 
 .menu-btn {
     display: none;
-    margin-right: 0.5em;
-    border-radius: 999px;
-    padding: 0.45em 0.9em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(200, 169, 110, 0.35);
+    border-radius: 8px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.menu-btn:hover {
+    background: rgba(200, 169, 110, 0.12);
+    border-color: rgba(200, 169, 110, 0.65);
+}
+
+.menu-btn:focus-visible {
+    outline: 2px solid rgba(200, 169, 110, 0.55);
+    outline-offset: 2px;
+}
+
+.menu-btn__bar {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: #c8a96e;
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+/* Animate to × when open */
+.menu-btn.is-open .menu-btn__bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.menu-btn.is-open .menu-btn__bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+.menu-btn.is-open .menu-btn__bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 .quote-box {
@@ -1636,9 +1678,58 @@ button:hover {
     outline: none;
 }
 
-@media screen and (max-width: 720px) {
+/* Mobile-only top bar: site title (centre) + burger (right) */
+.nav-mobile-bar {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-wrap {
+        padding: 0.75em 0 0;
+        width: 100%;
+        position: relative;
+    }
+
+    .nav-mobile-bar {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 52px;
+        box-sizing: border-box;
+        padding: 0 1rem;
+    }
+
+    .nav-mobile-title {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: "Cinzel", Georgia, serif;
+        font-size: 0.92rem;
+        letter-spacing: 0.12em;
+        color: #c8a96e;
+        pointer-events: none;
+        white-space: nowrap;
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+        max-width: calc(100% - 100px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        z-index: 0;
+    }
+
+    /* Spacer so the burger sits at the right end */
+    .nav-mobile-spacer {
+        display: none;
+    }
+
     .menu-btn {
-        display: inline-block;
+        display: flex;
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 200;
+        flex-shrink: 0;
     }
 
     .video-embed,
@@ -1657,28 +1748,84 @@ button:hover {
     }
 
     #nav-menu {
-        display: none;
-        width: 100%;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: min(80vw, 300px);
         flex-direction: column;
         align-items: stretch;
+        background: rgba(10, 8, 7, 0.97);
+        border-left: 1px solid rgba(200, 169, 110, 0.3);
+        box-shadow: -8px 0 40px rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        z-index: 160;
+        padding: 5rem 0 2rem 0;
+        box-sizing: border-box;
+        overflow-y: auto;
+        display: flex;
+        transform: translateX(100%);
+        transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+        visibility: hidden;
     }
 
     #nav-menu.nav-open {
-        display: flex;
+        transform: translateX(0);
+        visibility: visible;
+    }
+
+    #nav-menu::before {
+        content: "Navigation";
+        display: block;
+        position: absolute;
+        top: 1.4rem;
+        left: 1.5rem;
+        font-family: "Cinzel", Georgia, serif;
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(200, 169, 110, 0.5);
     }
 
     .nav-links a {
         display: block;
         width: 100%;
-        text-align: center;
+        text-align: left;
+        padding: 0.85em 1.5em;
+        border-radius: 0;
+        border-bottom: 1px solid rgba(200, 169, 110, 0.1);
+        font-size: 0.95rem;
+        letter-spacing: 0.06em;
+    }
+
+    .nav-links a:last-child {
+        border-bottom: none;
+    }
+
+    .nav-links a:hover {
+        background: rgba(200, 169, 110, 0.1);
+        color: #e8d4a8;
+        text-decoration: none;
     }
 
     .nav {
-        border-radius: 1.1rem;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0;
+        overflow: visible;
+        width: 100%;
+        max-width: 100%;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-radius: 0;
     }
 }
 
-@media screen and (min-width: 721px) {
+@media screen and (min-width: 769px) {
     #nav-menu {
         display: flex;
         flex-wrap: wrap;

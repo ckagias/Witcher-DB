@@ -2,14 +2,20 @@
 function toggleMenu() {
     var menu = document.getElementById("nav-menu");
     var btn = document.querySelector(".menu-btn");
-    if (menu.className.indexOf("nav-open") !== -1) {
-        menu.className = "nav-links";
+    if (!menu) return;
+    var isOpen = menu.classList.contains("nav-open");
+    if (isOpen) {
+        menu.classList.remove("nav-open");
+        document.body.classList.remove("nav-drawer-open");
         if (btn) {
+            btn.classList.remove("is-open");
             btn.setAttribute("aria-expanded", "false");
         }
     } else {
-        menu.className = "nav-links nav-open";
+        menu.classList.add("nav-open");
+        document.body.classList.add("nav-drawer-open");
         if (btn) {
+            btn.classList.add("is-open");
             btn.setAttribute("aria-expanded", "true");
         }
     }
@@ -571,5 +577,38 @@ function switchSchool(schoolId) {
 document.addEventListener('DOMContentLoaded', function () {
     if (document.getElementById('panel-wolf')) {
         switchSchool('wolf');
+    }
+});
+
+document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+        var menu = document.getElementById("nav-menu");
+        var btn = document.querySelector(".menu-btn");
+        if (menu && menu.classList.contains("nav-open")) {
+            menu.classList.remove("nav-open");
+            document.body.classList.remove("nav-drawer-open");
+            if (btn) {
+                btn.classList.remove("is-open");
+                btn.setAttribute("aria-expanded", "false");
+                btn.focus();
+            }
+        }
+    }
+});
+
+document.addEventListener("click", function (e) {
+    var menu = document.getElementById("nav-menu");
+    var btn = document.querySelector(".menu-btn");
+    if (
+        menu &&
+        menu.classList.contains("nav-open") &&
+        !menu.contains(e.target) &&
+        btn &&
+        !btn.contains(e.target)
+    ) {
+        menu.classList.remove("nav-open");
+        document.body.classList.remove("nav-drawer-open");
+        btn.classList.remove("is-open");
+        btn.setAttribute("aria-expanded", "false");
     }
 });

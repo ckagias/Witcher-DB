@@ -11,7 +11,7 @@ A multi-page, static reference site for *The Witcher* universe — covering char
 
 ## Features
 
-- **Multi-page navigation** with a mobile-friendly menu (`Menu` button).
+- **Multi-page navigation**: full-width pill bar on wider viewports; on small screens (≤768px), a **hamburger** opens a **right-side sliding drawer** for links.
 - **Characters**: card grid with a **Game vs Netflix portrait compare slider** (implemented in `js/main.js`).
 - **Books**: searchable table (filters rows as you type).
 - **Bestiary**: searchable creature cards + **category chips** + live **category counts**.
@@ -105,7 +105,7 @@ npx serve .
 
 ## Interactions (where to look in code)
 
-- **Mobile nav menu**: `toggleMenu()` in `js/main.js`
+- **Mobile nav (drawer)**: `toggleMenu()` in `js/main.js`
 - **Characters portrait compare slider**: `initCharacterPortraitSliders()`
 - **Books live search**: `initBooksPage()`
 - **Bestiary live search + chips**: `initBestiaryPage()` + `fillBestiaryChipCounts()`
