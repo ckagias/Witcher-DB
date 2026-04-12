@@ -183,12 +183,10 @@ a:hover {
     color: rgba(232, 212, 168, 0.96);
 }
 
-
-
 .hero {
     position: relative;
-    padding: 1.2rem 1.1rem 1.25rem 1.1rem;
-    margin: 0.25rem auto 1.1rem auto;
+    padding: 0.35rem 1.1rem 1.25rem 1.1rem;
+    margin: 0 auto 1.1rem auto;
     max-width: 620px;
     text-align: center;
     border-radius: 1.25rem;
@@ -200,7 +198,7 @@ a:hover {
 }
 
 .hero-kicker {
-    margin: 0 0 0.45rem 0;
+    margin: 0 0.45rem 0;
     font-family: "Cinzel", Georgia, serif;
     font-size: 0.78rem;
     letter-spacing: 0.18em;
@@ -710,7 +708,7 @@ button:hover {
     max-width: min(98vw, 58rem);
     margin-left: auto;
     margin-right: auto;
-    padding: 1.5em 0 3em 0;
+    padding: 0.8em 0 3em 0;
     position: relative;
     z-index: 2;
 }
@@ -941,17 +939,17 @@ button:hover {
     flex-direction: column;
 }
 
-.site-bg--home        { background-image: url(../images/backgrounds/home-bg.jpg); }
-.site-bg--characters  { background-image: url(../images/backgrounds/characters-bg.jpg); }
-.site-bg--gwent       { background-image: url(../images/backgrounds/gwent-bg.jpg); }
-.site-bg--map         { background-image: url(../images/backgrounds/map-bg-2.jpg); }
-.site-bg--timeline    { background-image: url(../images/backgrounds/timeline-bg.jpg); }
-.site-bg--book        { background-image: url(../images/backgrounds/books-bg.jpg); }
-.site-bg--schools     { background-image: url(../images/backgrounds/schools-bg.jpg); }
-.site-bg--bestiary    { background-image: url(../images/backgrounds/bestiary-bg.jpg); }
-.site-bg--gallery     { background-image: url(../images/backgrounds/gallery-bg.jpg); }
-.site-bg--feedback    { background-image: url(../images/backgrounds/feedback-bg.jpg); }
-.site-bg--news        { background-image: url(../images/backgrounds/news-bg.jpg); }
+.site-bg--home        { background-image: url(../images/backgrounds/home-bg.webp); }
+.site-bg--characters  { background-image: url(../images/backgrounds/characters-bg.webp); }
+.site-bg--gwent       { background-image: url(../images/backgrounds/gwent-bg.webp); }
+.site-bg--map         { background-image: url(../images/backgrounds/map-bg-2.webp); }
+.site-bg--timeline    { background-image: url(../images/backgrounds/timeline-bg.webp); }
+.site-bg--book        { background-image: url(../images/backgrounds/books-bg.webp); }
+.site-bg--schools     { background-image: url(../images/backgrounds/schools-bg.webp); }
+.site-bg--bestiary    { background-image: url(../images/backgrounds/bestiary-bg.webp); }
+.site-bg--gallery     { background-image: url(../images/backgrounds/gallery-bg.webp); }
+.site-bg--feedback    { background-image: url(../images/backgrounds/feedback-bg.webp); }
+.site-bg--news        { background-image: url(../images/backgrounds/news-bg.webp); }
 
 /* Feedback page — centered column, same .page-inner rhythm as other pages */
 .feedback-page .feedback-lede,
@@ -2108,7 +2106,7 @@ body.login-root {
     top: 0;
     width: 100%;
     height: 100%;
-    background-image: url("../images/bg-hero.jpg");
+    background-image: url("../images/bg-hero.webp");
     background-size: cover;
     background-position: center center;
     z-index: 0;
