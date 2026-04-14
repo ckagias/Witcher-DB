@@ -115,32 +115,6 @@ a:hover {
     text-align: center;
 }
 
-/* Used on the home page cards that jump to another page */
-.card-click {
-    cursor: pointer;
-    transition:
-        transform 0.15s ease,
-        border-color 0.15s ease,
-        box-shadow 0.15s ease;
-}
-
-.card-click:hover {
-    transform: translateY(-2px);
-    border-color: rgba(232, 212, 168, 0.72);
-    box-shadow:
-        0 16px 48px rgba(0, 0, 0, 0.45),
-        0 0 0 1px rgba(200, 169, 110, 0.22),
-        0 0 22px rgba(200, 169, 110, 0.14);
-}
-
-.card-click:focus-visible {
-    outline: none;
-    border-color: rgba(232, 212, 168, 0.78);
-    box-shadow:
-        0 0 0 2px rgba(200, 169, 110, 0.35),
-        0 12px 40px rgba(0, 0, 0, 0.45);
-}
-
 /* Home: Witcher IV trailer embed */
 .video-embed {
     width: min(60%, 720px);
@@ -159,26 +133,6 @@ a:hover {
     height: auto;
     min-height: 200px;
     border: none;
-}
-
-/* Home: intro readability panel */
-.intro-panel {
-    background: rgba(12, 10, 9, 0.52);
-    border: 1px solid rgba(200, 169, 110, 0.28);
-    border-radius: 1rem;
-    padding: 0.9rem 1rem;
-    margin: 0.75rem 0 1.15rem 0;
-    max-width: 46rem;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    box-shadow:
-        0 12px 36px rgba(0, 0, 0, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.04);
-}
-
-.intro-panel p {
-    margin: 0;
-    color: rgba(232, 212, 168, 0.96);
 }
 
 .hero {
@@ -268,46 +222,15 @@ a:hover {
         0 10px 28px rgba(0, 0, 0, 0.35);
 }
 
-/* Home: quote strip */
-.quote-strip {
-    margin: 0.85rem auto 1.15rem auto;
-    padding: 1.15rem 1.1rem;
-    max-width: 620px;
-    text-align: center;
-    border-radius: 1.15rem;
-    border: none;
-    background: transparent;
-    box-shadow: none;
-}
-
-.quote-strip blockquote {
-    margin: 0;
-}
-
-.quote-strip p {
-    margin: 0;
-    font-size: clamp(1.05rem, 0.65vw + 0.95rem, 1.35rem);
-    line-height: 1.45;
-    color: rgba(232, 212, 168, 0.95);
-}
-
-.quote-strip cite {
-    display: block;
-    margin-top: 0.75rem;
-    font-style: italic;
-    color: rgba(230, 223, 211, 0.78);
-}
-
 /* Home: featured row */
 .featured-head {
     display: flex;
     align-items: flex-end;
-    justify-content: space-between;
+    justify-content: center;
     gap: 1rem;
     flex-wrap: wrap;
     margin-top: 0.25rem;
-    justify-content: center; 
-    text-align: center;      
+    text-align: center;
 }
 
 .featured-row {
@@ -906,11 +829,6 @@ button:hover {
     outline-offset: 2px;
 }
 
-.feedback-page .form-group-submit {
-    margin-top: 1.15rem;
-    margin-bottom: 0;
-}
-
 .feedback-page .form-group-submit button {
     width: 100%;
     padding: 0.65em 1em;
@@ -946,6 +864,8 @@ button:hover {
 }
 
 .feedback-page .form-group-submit {
+    margin-top: 1.15rem;
+    margin-bottom: 0;
     display: grid;
     grid-template-columns: 1fr;
     gap: 0.6rem;
@@ -1120,54 +1040,6 @@ button:hover {
     transform: translateY(-7px) rotate(-45deg);
 }
 
-.quote-box {
-    border: 1px solid rgba(200, 169, 110, 0.45);
-    padding: 1.15em;
-    margin: 1em 0;
-    background: linear-gradient(160deg, rgba(28, 22, 18, 0.92), rgba(14, 12, 10, 0.88));
-    border-radius: 1.1rem;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
-
-/* Small quote strip on the home page */
-.quote-box-compact {
-    max-width: 30rem;
-    margin: 0.5rem auto 1rem auto;
-    padding: 0.45rem 0.65rem;
-    border-radius: 0.65rem;
-}
-
-.quote-box-compact p {
-    margin: 0;
-    font-size: 0.8rem;
-    line-height: 1.35;
-    color: var(--gold-soft);
-}
-
-.quote-box-compact #quote-text {
-    margin-bottom: 0.4rem;
-}
-
-.quote-box-compact .quote-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
-
-.quote-box-compact .quote-row #quote-text {
-    flex: 1 1 160px;
-    margin: 0;
-    min-width: 0;
-}
-
-.quote-box-compact button {
-    font-size: 0.68rem;
-    padding: 0.3rem 0.55rem;
-    flex-shrink: 0;
-}
-
 .timeline-item {
     position: relative;
     border-left: 2px solid rgba(200, 169, 110, 0.55);
@@ -1275,11 +1147,6 @@ button:hover {
 
 .gallery-grid .card > p {
     margin: 0.5em 0 0 0;
-}
-
-/* Gallery lightbox (mini preview) */
-.gallery-lightbox[hidden] {
-    display: none !important;
 }
 
 .gallery-lightbox {
@@ -1614,10 +1481,6 @@ button:hover {
     width: 8%;
 }
 
-.book-page .books-table-col-publisher {
-    width: 12%;
-}
-
 .book-page .books-table-col-notes {
     width: 29%;
 }
@@ -1708,109 +1571,6 @@ button:hover {
     .comparison-table tbody td:nth-child(2),
     .comparison-table tbody td:nth-child(5) {
         display: none;
-    }
-}
-
-.book-page-below {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    margin-top: 2.25rem;
-    align-items: stretch;
-}
-
-.book-page-below .book-see-also.card {
-    border-top: 3px solid rgba(200, 169, 110, 0.55);
-}
-
-.book-page-below .card {
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-}
-
-.book-page-quote {
-    margin: 0;
-    padding: 0;
-    border: none;
-    background: transparent;
-    box-shadow: none;
-}
-
-.book-page-quote.card {
-    background: linear-gradient(145deg, rgba(32, 26, 20, 0.95), rgba(18, 14, 12, 0.88));
-    border: 1px solid rgba(200, 169, 110, 0.45);
-    border-top: 3px solid rgba(200, 169, 110, 0.55);
-    box-shadow:
-        0 12px 40px rgba(0, 0, 0, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    border-radius: 1.35rem;
-    padding: 1.15em 1.25em;
-}
-
-.book-page-quote-panel {
-    background: rgba(12, 10, 9, 0.58);
-    border: 1px solid rgba(200, 169, 110, 0.28);
-    border-radius: 1rem;
-    padding: 0.9rem 1rem;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    box-shadow:
-        0 8px 28px rgba(0, 0, 0, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.04);
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.book-page-quote-text {
-    margin: 0 0 0.65rem 0;
-    font-style: normal;
-    color: rgba(232, 212, 168, 0.96);
-    line-height: 1.55;
-}
-
-.book-page-quote-footer {
-    font-size: 0.88em;
-    color: var(--muted);
-    margin: 0;
-}
-
-.book-see-also h2 {
-    margin-top: 0;
-    font-size: 1.1em;
-}
-
-.book-see-also p {
-    margin: 0 0 0.65rem 0;
-    font-size: 0.95em;
-}
-
-.book-see-also-list {
-    margin: 0;
-    padding-left: 1.2em;
-    color: rgba(230, 223, 211, 0.92);
-    line-height: 1.5;
-}
-
-.book-see-also-list li {
-    margin-bottom: 0.4em;
-}
-
-.book-see-also-list a:hover,
-.book-see-also-list a:focus-visible {
-    color: var(--gold-soft);
-}
-
-@media screen and (min-width: 768px) {
-    .book-page-below {
-        grid-template-columns: 1fr 1fr;
-        gap: 1.75rem;
     }
 }
 
@@ -2102,10 +1862,7 @@ body.login-root {
     text-align: center;
 }
 
-.bestiary-category[hidden] {
-    display: none !important;
-}
-
+.bestiary-category[hidden],
 .bestiary-beast-card[hidden] {
     display: none !important;
 }
@@ -2274,6 +2031,7 @@ button.bestiary-chip.back-to-top-btn:focus-visible {
     outline-offset: 2px;
 }
 
+.gallery-lightbox[hidden],
 button.bestiary-chip.back-to-top-btn[hidden] {
     display: none !important;
 }
