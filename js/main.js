@@ -1,20 +1,30 @@
-// Opens or closes the mobile nav menu
+/**
+ * Toggles the mobile navigation drawer.
+ * Opens or closes the menu and updates button ARIA state.
+ */
 function toggleMenu() {
+    // Read menu/button elements used by the mobile nav.
     var menu = document.getElementById("nav-menu");
     var btn = document.querySelector(".menu-btn");
+    // Exit safely on pages that do not include this nav.
     if (!menu) return;
+    // Detect current state so we can toggle.
     var isOpen = menu.classList.contains("nav-open");
     if (isOpen) {
+        // Close menu and clear related state classes.
         menu.classList.remove("nav-open");
         document.body.classList.remove("nav-drawer-open");
         if (btn) {
+            // Sync visual and accessibility states on the button.
             btn.classList.remove("is-open");
             btn.setAttribute("aria-expanded", "false");
         }
     } else {
+        // Open menu and mark body as drawer-open.
         menu.classList.add("nav-open");
         document.body.classList.add("nav-drawer-open");
         if (btn) {
+            // Sync visual and accessibility states on the button.
             btn.classList.add("is-open");
             btn.setAttribute("aria-expanded", "true");
         }
@@ -23,10 +33,14 @@ function toggleMenu() {
 
 var CHAR_IMG_BASE = "images/characters/";
 
-// Characters page: before/after style blend (game base layer, Netflix clipped by range)
+/**
+ * Initializes portrait comparison sliders for character cards.
+ */
 function initCharacterPortraitSliders() {
+    // Setup compare mode on cards that support toggling.
     document.querySelectorAll(".char-card-wrap:not(.char-card-wrap-no-toggle)").forEach(function (card, idx) {
         var img = card.querySelector(".char-thumb-wrap img[data-img-base]");
+        // Skip if required image data is missing or card is already initialized.
         if (!img || card.getAttribute("data-compare-init") === "1") {
             return;
         }
@@ -41,6 +55,7 @@ function initCharacterPortraitSliders() {
         var netflixSrc = CHAR_IMG_BASE + "netflix/" + baseFile;
         var alt = img.getAttribute("alt") || "";
 
+        // Move thumbnail wrapper outside the link so slider controls stay interactive.
         if (thumbWrap.parentNode === link) {
             link.parentNode.insertBefore(thumbWrap, link);
         }
@@ -87,6 +102,7 @@ function initCharacterPortraitSliders() {
         range.setAttribute("aria-valuemax", "100");
         range.setAttribute("aria-valuetext", "Game portrayal");
 
+        // Keep screen-reader value text meaningful at each slider position.
         function syncAria(v) {
             var n = Number(v);
             if (n <= 5) {
@@ -98,12 +114,14 @@ function initCharacterPortraitSliders() {
             }
         }
 
+        // Update CSS reveal variable as user drags the slider.
         range.addEventListener("input", function () {
             var v = range.value;
             inner.style.setProperty("--reveal", v + "%");
             syncAria(v);
         });
 
+        // Prevent slider interactions from bubbling to surrounding clickable card elements.
         range.addEventListener("click", function (e) {
             e.stopPropagation();
         });
@@ -115,42 +133,7 @@ function initCharacterPortraitSliders() {
         thumbWrap.appendChild(label);
         thumbWrap.appendChild(range);
 
-        var hint = document.createElement("span");
-        hint.className = "char-compare-hint";
-        hint.textContent = "TW3 \u21cc Netflix";
-        thumbWrap.appendChild(hint);
-
-        var hintGone = false;
-        var hintTimer = null;
-
-        function onRangeFirstInput() {
-            removeCompareHint();
-        }
-
-        function removeCompareHint() {
-            if (hintGone) {
-                return;
-            }
-            hintGone = true;
-            if (hintTimer !== null) {
-                window.clearTimeout(hintTimer);
-                hintTimer = null;
-            }
-            range.removeEventListener("input", onRangeFirstInput);
-            if (!hint.parentNode) {
-                return;
-            }
-            hint.classList.add("char-compare-hint-out");
-            window.setTimeout(function () {
-                if (hint.parentNode) {
-                    hint.parentNode.removeChild(hint);
-                }
-            }, 320);
-        }
-
-        range.addEventListener("input", onRangeFirstInput);
-        hintTimer = window.setTimeout(removeCompareHint, 2500);
-
+        // Graceful fallback if Netflix image file does not exist.
         netflixImg.addEventListener("error", function () {
             netflixImg.style.display = "none";
             inner.style.setProperty("--reveal", "0%");
@@ -162,6 +145,7 @@ function initCharacterPortraitSliders() {
         card.setAttribute("data-compare-init", "1");
     });
 
+    // Setup non-toggle cards (single portrait mode) once.
     document.querySelectorAll(".char-card-wrap-no-toggle").forEach(function (card) {
         if (card.getAttribute("data-single-portrait-init") === "1") {
             return;
@@ -195,7 +179,10 @@ function initCharacterPortraitSliders() {
     });
 }
 
-// Books page: live search table rows (title / year / type text)
+/**
+ * Initializes live filtering for the books table.
+ * Matches typed text against each row's data-search-text value.
+ */
 function initBooksPage() {
     var section = document.getElementById("books-table-section");
     if (!section) {
@@ -204,6 +191,7 @@ function initBooksPage() {
     var searchInput = document.getElementById("book-table-search");
     var rows = section.querySelectorAll("tbody tr[data-search-text]");
 
+    // Show or hide rows based on the current query.
     function applySearch() {
         var q = searchInput ? String(searchInput.value).trim().toLowerCase() : "";
         rows.forEach(function (tr) {
@@ -217,6 +205,7 @@ function initBooksPage() {
         });
     }
 
+    // Re-filter while typing, and run once on page load.
     if (searchInput) {
         searchInput.addEventListener("input", applySearch);
     }
@@ -224,7 +213,10 @@ function initBooksPage() {
 }
 
 
-// Bestiary: filter beast cards (same pattern as books table search)
+/**
+ * Initializes bestiary filtering by text and category chips.
+ * Cards are filtered first by search, then category visibility is recalculated.
+ */
 function initBestiaryPage() {
     var section = document.getElementById("bestiary-catalog-section");
     if (!section) {
@@ -235,6 +227,7 @@ function initBestiaryPage() {
     var chipNav = document.querySelector("nav.bestiary-chip-nav");
     var activeCategoryId = null;
 
+    // Updates active chip styling and aria-current state.
     function updateChipActive() {
         if (!chipNav) {
             return;
@@ -263,6 +256,7 @@ function initBestiaryPage() {
         }
     }
 
+    // Applies text filter and keeps category blocks hidden when empty.
     function applySearch() {
         var q = searchInput ? String(searchInput.value).trim().toLowerCase() : "";
         cards.forEach(function (card) {
@@ -300,6 +294,7 @@ function initBestiaryPage() {
         }
     }
 
+    // Wire up category chip clicks.
     if (chipNav) {
         var showAllChip = chipNav.querySelector("[data-bestiary-filter=\"all\"]");
         if (showAllChip) {
@@ -325,12 +320,17 @@ function initBestiaryPage() {
         updateChipActive();
     }
 
+    // Wire text input and apply initial state.
     if (searchInput) {
         searchInput.addEventListener("input", applySearch);
     }
     applySearch();
 }
 
+/**
+ * Initializes category chip filtering for character cards.
+ * Shows cards from the selected category, or all cards when reset.
+ */
 function initCharactersPage() {
     var chipNav = document.getElementById("char-chip-nav");
     if (!chipNav) {
@@ -339,6 +339,7 @@ function initCharactersPage() {
     var cards = document.querySelectorAll(".card.char-card-wrap[data-category]");
     var activeCategoryId = null;
 
+    // Updates active chip class and aria-current for accessibility.
     function updateChipActive() {
         var allChips = chipNav.querySelectorAll(".bestiary-chip");
         var j;
@@ -364,6 +365,7 @@ function initCharactersPage() {
         }
     }
 
+    // Shows cards matching the active category id.
     function applyFilter() {
         for (var i = 0; i < cards.length; i++) {
             var card = cards[i];
@@ -401,6 +403,9 @@ function initCharactersPage() {
     applyFilter();
 }
 
+/**
+ * Populates category count badges using current bestiary card totals.
+ */
 function fillBestiaryChipCounts() {
     var counts = document.querySelectorAll("[data-count-for]");
     for (var i = 0; i < counts.length; i++) {
@@ -413,7 +418,11 @@ function fillBestiaryChipCounts() {
     }
 }
 
+/**
+ * Highlights query matches by wrapping matched text in <mark>.
+ */
 function highlightText(element, query) {
+    // Traverse text nodes so we can insert markup without rebuilding whole HTML.
     var walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
     var textNodes = [];
     var node;
@@ -425,6 +434,7 @@ function highlightText(element, query) {
         var lower = original.toLowerCase();
         var idx = lower.indexOf(query);
         if (idx !== -1) {
+            // Split the original text into before/match/after nodes.
             var before = document.createTextNode(original.substring(0, idx));
             var mark = document.createElement("mark");
             mark.textContent = original.substring(idx, idx + query.length);
@@ -437,6 +447,9 @@ function highlightText(element, query) {
     }
 }
 
+/**
+ * Removes all generated <mark> elements and restores plain text.
+ */
 function restoreText(element) {
     var marks = element.querySelectorAll("mark");
     for (var i = 0; i < marks.length; i++) {
@@ -447,7 +460,9 @@ function restoreText(element) {
     }
 }
 
-// Lore page: filter topic sections by typed query
+/**
+ * Initializes live search for lore sections with highlighting support.
+ */
 function initLorePage() {
     var loreSearchInput = document.getElementById("lore-page-search");
 
@@ -465,11 +480,13 @@ function initLorePage() {
                 restoreText(section);
 
                 if (query === "") {
+                    // Empty query means all sections should stay visible.
                     section.removeAttribute("hidden");
                     visibleCount++;
                 } else {
                     var text = section.textContent.toLowerCase();
                     if (text.indexOf(query) !== -1) {
+                        // Keep section visible and highlight matched text.
                         section.removeAttribute("hidden");
                         highlightText(section, query);
                         visibleCount++;
@@ -480,6 +497,7 @@ function initLorePage() {
             }
 
             if (noResults) {
+                // Show no-results helper only when query has no visible sections.
                 if (visibleCount === 0 && query !== "") {
                     noResults.removeAttribute("hidden");
                 } else {
@@ -490,16 +508,22 @@ function initLorePage() {
     }
 }
 
+/**
+ * Initializes login form interactions when a login page is present.
+ * Handles show/hide password and simple required-field validation.
+ */
 function initLoginPage() {
     var form = document.querySelector(".login-page form");
     var err = document.getElementById("login-error");
     var username = document.getElementById("username");
     var password = document.getElementById("password");
     var togglePw = document.getElementById("toggle-pw");
+    // Exit safely on pages without login markup.
     if (!form || !err) {
         return;
     }
     if (togglePw && password) {
+        // Toggle password visibility text + input type.
         togglePw.addEventListener("click", function () {
             if (password.type === "password") {
                 password.type = "text";
@@ -510,6 +534,7 @@ function initLoginPage() {
             }
         });
     }
+    // Validate fields locally and redirect on success.
     form.addEventListener("submit", function (e) {
         e.preventDefault();
         var u = username ? String(username.value || "").trim() : "";
@@ -530,6 +555,10 @@ var imageLightboxConfigs = [
     { lightboxId: "series-lightbox", sourceId: "series-lightbox-source", thumbSelector: ".series-poster" }
 ];
 
+/**
+ * Returns the image element for a thumbnail target.
+ * Supports either direct IMG targets or wrapper elements containing an IMG.
+ */
 function lightboxThumbImage(thumb) {
     if (thumb.tagName === "IMG") {
         return thumb;
@@ -537,6 +566,10 @@ function lightboxThumbImage(thumb) {
     return thumb.querySelector("img");
 }
 
+/**
+ * Attaches all interaction handlers for one image lightbox instance.
+ * Supports click/keyboard open, backdrop/button close, and Escape close.
+ */
 function attachImageLightbox(root, source, thumbSelector) {
     var modalImg = root.querySelector(".gallery-lightbox-img");
     var captionEl = root.querySelector(".gallery-lightbox-caption");
@@ -546,8 +579,10 @@ function attachImageLightbox(root, source, thumbSelector) {
         return;
     }
 
+    // Remember existing overflow style so we can restore page scroll on close.
     var prevBodyOverflow = "";
 
+    // Opens modal using clicked thumbnail image + caption text.
     function openModal(thumb) {
         var img = lightboxThumbImage(thumb);
         if (!img) {
@@ -560,6 +595,7 @@ function attachImageLightbox(root, source, thumbSelector) {
         if (cap && cap.tagName === "P") {
             text = String(cap.textContent || "").trim();
         } else {
+            // Fallback to alt text when no adjacent caption paragraph exists.
             text = String(img.getAttribute("alt") || "").trim();
         }
         captionEl.textContent = text;
@@ -569,11 +605,13 @@ function attachImageLightbox(root, source, thumbSelector) {
         closeBtn.focus();
     }
 
+    // Closes modal and restores original body scroll style.
     function closeModal() {
         root.setAttribute("hidden", "");
         document.body.style.overflow = prevBodyOverflow;
     }
 
+    // Register click and keyboard activation on all matching thumbnails.
     source.querySelectorAll(thumbSelector).forEach(function (thumb) {
         if (!lightboxThumbImage(thumb)) {
             return;
@@ -582,6 +620,7 @@ function attachImageLightbox(root, source, thumbSelector) {
             openModal(thumb);
         });
         thumb.addEventListener("keydown", function (e) {
+            // Enter/Space should behave like click for keyboard users.
             if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
                 openModal(thumb);
@@ -592,6 +631,7 @@ function attachImageLightbox(root, source, thumbSelector) {
     closeBtn.addEventListener("click", closeModal);
     backdrop.addEventListener("click", closeModal);
 
+    // Global Escape closes this modal while it is visible.
     document.addEventListener("keydown", function (e) {
         if (!root.hasAttribute("hidden") && e.key === "Escape") {
             closeModal();
@@ -599,6 +639,9 @@ function attachImageLightbox(root, source, thumbSelector) {
     });
 }
 
+/**
+ * Initializes all configured lightboxes present on the current page.
+ */
 function initImageLightboxes() {
     var i;
     for (i = 0; i < imageLightboxConfigs.length; i++) {
@@ -612,16 +655,23 @@ function initImageLightboxes() {
     }
 }
 
+/**
+ * Backward-compatible wrapper used by existing initializer calls.
+ */
 function initGalleryLightbox() {
     initImageLightboxes();
 }
 
+/**
+ * Initializes the back-to-top button visibility and smooth scrolling behavior.
+ */
 function initBackToTopButton() {
     var scrollBtn = document.getElementById("back-to-top");
     if (!scrollBtn) {
         return;
     }
 
+    // Reveal button only after user has scrolled down enough.
     window.addEventListener("scroll", function () {
         if (window.scrollY > 300) {
             scrollBtn.removeAttribute("hidden");
@@ -630,11 +680,13 @@ function initBackToTopButton() {
         }
     });
 
+    // Scroll smoothly to the top when the button is clicked.
     scrollBtn.addEventListener("click", function () {
         window.scrollTo({ top: 0, behavior: "smooth" });
     });
 }
 
+// Run all page initializers once DOM is ready.
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
         initLoginPage();
@@ -659,21 +711,28 @@ if (document.readyState === "loading") {
     initBackToTopButton();
 }
 
+/**
+ * Switches active school tab/panel and highlights its comparison table row.
+ * Also keeps ARIA attributes current for assistive technologies.
+ */
 function switchSchool(schoolId) {
     var panels = document.querySelectorAll('.school-panel');
     var buttons = document.querySelectorAll('.school-tab-btn');
     var rows = document.querySelectorAll('.comparison-table tbody tr');
 
+    // Reset panel visibility state.
     for (var i = 0; i < panels.length; i++) {
         panels[i].classList.remove('active');
         panels[i].setAttribute('aria-hidden', 'true');
     }
 
+    // Reset button selected state.
     for (var j = 0; j < buttons.length; j++) {
         buttons[j].classList.remove('active');
         buttons[j].setAttribute('aria-selected', 'false');
     }
 
+    // Clear previous active row highlight.
     for (var k = 0; k < rows.length; k++) {
         rows[k].classList.remove('table-row-active');
     }
@@ -681,11 +740,13 @@ function switchSchool(schoolId) {
     var activePanel = document.getElementById('panel-' + schoolId);
     var activeBtn = document.getElementById('tab-' + schoolId);
 
+    // Activate selected content panel.
     if (activePanel) {
         activePanel.classList.add('active');
         activePanel.removeAttribute('aria-hidden');
     }
 
+    // Activate selected tab button.
     if (activeBtn) {
         activeBtn.classList.add('active');
         activeBtn.setAttribute('aria-selected', 'true');
@@ -697,12 +758,14 @@ function switchSchool(schoolId) {
     }
 }
 
+// Apply default schools tab when the schools page is loaded.
 document.addEventListener('DOMContentLoaded', function () {
     if (document.getElementById('panel-wolf')) {
         switchSchool('wolf');
     }
 });
 
+// Accessibility: Escape closes the open mobile menu.
 document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") {
         var menu = document.getElementById("nav-menu");
@@ -713,12 +776,14 @@ document.addEventListener("keydown", function (e) {
             if (btn) {
                 btn.classList.remove("is-open");
                 btn.setAttribute("aria-expanded", "false");
+                // Return focus to toggle for keyboard continuity.
                 btn.focus();
             }
         }
     }
 });
 
+// Close mobile menu when user clicks outside both menu and toggle button.
 document.addEventListener("click", function (e) {
     var menu = document.getElementById("nav-menu");
     var btn = document.querySelector(".menu-btn");
@@ -736,6 +801,10 @@ document.addEventListener("click", function (e) {
     }
 });
 
+/**
+ * Switches active tabs for the series page.
+ * Updates panel visibility plus tab button ARIA selected state.
+ */
 function switchSeriesTab(tab) {
     var tabIds = ['series', 'anime', 'sirens'];
     var btns = document.querySelectorAll('.school-tab-btn');

@@ -349,26 +349,6 @@ h3 {
     overflow: visible;
 }
 
-.char-compare-hint {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0.15em;
-    z-index: 2;
-    font-size: 0.62rem;
-    letter-spacing: 0.06em;
-    text-align: center;
-    color: #c8a96e;
-    opacity: 0.42;
-    pointer-events: none;
-    background: none;
-    transition: opacity 0.32s ease;
-}
-
-.char-compare-hint.char-compare-hint-out {
-    opacity: 0;
-}
-
 .char-compare-inner {
     position: relative;
     width: 100%;
@@ -450,8 +430,7 @@ a.char-card-link::after {
 }
 
 .char-compare-range,
-.char-compare-inner,
-.char-compare-hint {
+.char-compare-inner {
     position: relative;
     z-index: 1;
 }
