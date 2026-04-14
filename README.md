@@ -1,13 +1,13 @@
 # The Witcher DB (Static Website)
 
-A multi-page, static reference site for *The Witcher* universe — covering characters, lore, books, schools, a bestiary, a timeline, a map hub, and media galleries — built with plain **HTML/CSS/JavaScript** (no framework, no build step).
+A multi-page, static reference site for *The Witcher* universe — covering characters, books, schools, a bestiary, timeline, Netflix and animated adaptations, media galleries, and feedback — built with plain **HTML/CSS/JavaScript** (no framework, no build step).
 
 > Folder: `witcher-db/`
 
 ## Demo / Preview
 
-- **Entry point**: open `home.html`
-- **Recommended**: run a local static server (see “Run locally”) so navigation, embeds, and assets behave consistently.
+- **Entry point**: open `home.html`, or visit `/` when hosted (see **Deploy**).
+- **Recommended**: run a local static server (see **Run locally**) so navigation, embeds, and assets behave consistently.
 
 ## Features
 
@@ -15,27 +15,27 @@ A multi-page, static reference site for *The Witcher* universe — covering char
 - **Characters**: card grid with a **Game vs Netflix portrait compare slider** (implemented in `js/main.js`).
 - **Books**: searchable table (filters rows as you type).
 - **Bestiary**: searchable creature cards + **category chips** + live **category counts**.
-- **Lore**: live page filter with **keyword highlighting** and a “no results” state.
-- **Gallery & Gwent**: click-to-open **image lightbox modal** (shared lightbox logic).
+- **Series**: tabbed sections for the Netflix series, *Nightmare of the Wolf*, and *Sirens of the Deep*; poster grid with **click-to-open lightbox** (shared with gallery/Gwent).
+- **Gallery & Gwent**: click-to-open **image lightbox modal** (shared lightbox logic in `js/main.js`).
 - **Schools**: accessible tab UI switching between school panels + row highlight in comparison table.
 - **Timeline**: vertical timeline layout of major events.
-- **Map**: region cards + embedded external interactive map (`witcher3map.com`).
 - **Feedback**: accessible form with client-side validation and success/reset UI.
 - **Back-to-top** button appears after scrolling (smooth scroll).
 
 ## Pages
 
-- `home.html`: landing page + featured content + YouTube embed
-- `characters.html`: major characters cards + portrait comparison slider
-- `gwent.html`: Gwent overview + factions list + lightbox image
-- `map.html`: region picker + external interactive map embed
-- `timeline.html`: timeline of major events
-- `book.html`: reading-order table + live search
-- `schools.html`: Witcher schools tabbed panels + comparison table
-- `bestiary.html`: bestiary catalog + chip filters + live search
-- `lore.html`: lore topics + live filter + text highlighting
-- `gallery.html`: screenshot gallery + lightbox
-- `feedback.html`: feedback form + validation
+| File | Description |
+|------|-------------|
+| `home.html` | Landing page, featured content, YouTube embed |
+| `characters.html` | Major characters + portrait comparison slider |
+| `gwent.html` | Gwent overview + factions + lightbox images |
+| `series.html` | On-screen Witcher: Netflix, anime, and related tabs + poster lightbox |
+| `timeline.html` | Timeline of major events |
+| `books.html` | Reading-order table + live search |
+| `schools.html` | Witcher schools tabbed panels + comparison table |
+| `bestiary.html` | Bestiary catalog + chip filters + live search |
+| `gallery.html` | Screenshot gallery + lightbox |
+| `feedback.html` | Feedback form + validation |
 
 ## Tech stack
 
@@ -48,25 +48,34 @@ A multi-page, static reference site for *The Witcher* universe — covering char
 
 ```text
 witcher-db/
-  README.md
-  home.html
-  characters.html
-  gwent.html
-  map.html
-  timeline.html
-  book.html
-  schools.html
-  bestiary.html
-  lore.html
-  gallery.html
-  feedback.html
-  css/
-    style.css
-  js/
-    main.js
+├── README.md
+├── vercel.json
+├── home.html
+├── characters.html
+├── gwent.html
+├── series.html
+├── timeline.html
+├── books.html
+├── schools.html
+├── bestiary.html
+├── gallery.html
+├── feedback.html
+├── css/
+│   └── style.css
+├── js/
+│   └── main.js
+└── images/
+    └── backgrounds/
+        └── SERIES-BG-README.txt
 ```
 
-### About images / assets (important)
+### About images / assets
+
+HTML references paths such as `images/favicon.webp`, character art under `images/characters/`, gallery shots, and per-page backgrounds. **Add matching files** under `witcher-db/images/` (or change the HTML to your paths) so icons and media load correctly. The `images/backgrounds/` folder includes a small readme for series background assets.
+
+## Deploy (Vercel)
+
+`vercel.json` maps the site root to the home page:
 
 The HTML references an `images/` folder (for example `images/favicon.png`, `images/characters/...`, `images/gallery/...`), but **this workspace snapshot currently does not include any image files**.
 
@@ -109,8 +118,8 @@ npx serve .
 - **Characters portrait compare slider**: `initCharacterPortraitSliders()`
 - **Books live search**: `initBooksPage()`
 - **Bestiary live search + chips**: `initBestiaryPage()` + `fillBestiaryChipCounts()`
-- **Lore live search + highlighting**: `initLorePage()` + `highlightText()` / `restoreText()`
-- **Gallery/Gwent lightbox**: `initImageLightboxes()` / `attachImageLightbox()`
+- **Gallery / Gwent / Series lightbox**: `initImageLightboxes()` / `attachImageLightbox()`; series posters use `#series-lightbox` and `.series-poster`
+- **Series tabs**: `switchSeriesTab()` in `js/main.js` (called from `series.html`)
 - **Back to top**: `initBackToTopButton()`
 - **Schools tabs**: `switchSchool()` + default activation on `DOMContentLoaded`
 - **Feedback form validation**: inline script inside `feedback.html`
@@ -118,7 +127,7 @@ npx serve .
 ## Customization tips
 
 - **Theme tokens** live in `css/style.css` under `:root` (e.g. `--gold`, `--text`, `--panel`).
-- **Background per page** is controlled with `site-bg--*` classes (e.g. `site-bg--home`, `site-bg--bestiary`).
+- **Background per page** is controlled with `site-bg--*` classes (e.g. `site-bg--home`, `site-bg--bestiary`, `site-bg--series`).
 - **Add new pages** by copying an existing page and keeping:
   - the shared `<link rel="stylesheet" href="css/style.css" />`
   - the shared `<script src="js/main.js"></script>` (or `defer`)
@@ -127,9 +136,8 @@ npx serve .
 ## Credits
 
 - **Developed & designed by**: [Christoforos Kagias](https://github.com/ckagias)
-- Some pages link out to community references (e.g. Witcher Wiki, Wikipedia) and external map embed (`witcher3map.com`).
+- Some pages link out to community references (e.g. Witcher Wiki, Wikipedia).
 
 ## Disclaimer
 
-This is a **educational project** for my University. *The Witcher* and all related trademarks, characters, and assets are the property of their respective owners (e.g. CD PROJEKT S.A., Andrzej Sapkowski, Netflix where applicable). This project is not affiliated with or endorsed by them.
-
+This is an **educational project** for my University. *The Witcher* and all related trademarks, characters, and assets are the property of their respective owners (e.g. CD PROJEKT S.A., Andrzej Sapkowski, Netflix where applicable). This project is not affiliated with or endorsed by them.

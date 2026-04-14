@@ -14,7 +14,7 @@
         <script src="js/main.js" defer></script>
     </head>
     <body>
-        <div class="site-bg site-bg--bestiary">
+        <div class="site-bg site-bg-bestiary">
             <div class="overlay"></div>
             <div class="nav-wrap">
                 <div class="nav">
@@ -29,18 +29,18 @@
                             aria-expanded="false"
                             aria-label="Toggle navigation menu"
                         >
-                            <span class="menu-btn__bar"></span>
-                            <span class="menu-btn__bar"></span>
-                            <span class="menu-btn__bar"></span>
+                            <span class="menu-btn-bar"></span>
+                            <span class="menu-btn-bar"></span>
+                            <span class="menu-btn-bar"></span>
                         </button>
                     </div>
                     <div id="nav-menu" class="nav-links">
                         <a href="home.html">Home</a>
                         <a href="characters.html">Characters</a>
                         <a href="gwent.html">Gwent</a>
-                        <a href="map.html">Map</a>
+                        <a href="series.html">Series</a>
                         <a href="timeline.html">Timeline</a>
-                        <a href="book.html">Books</a>
+                        <a href="books.html">Books</a>
                         <a href="schools.html">Schools</a>
                         <a href="bestiary.html" aria-current="page">Bestiary</a>
                         <a href="gallery.html">Gallery</a>
@@ -50,7 +50,7 @@
             </div>
             <div class="page-inner">
                 <h1>Bestiary</h1>
-                <p class="bestiary-taxonomy__note">
+                <p class="bestiary-taxonomy-note">
                     Creatures from
                     <a href="https://witcher.fandom.com/wiki/Category:The_Witcher_bestiary" target="_blank" rel="noopener noreferrer">The Witcher Bestiary</a>
                     on the Witcher Wiki. Filter by category below, or use the search box to filter by name, category, or keyword. Each card links to the wiki.
@@ -66,8 +66,8 @@
                     />
                 </div>
                 <nav class="bestiary-chip-nav" aria-label="Filter by creature category">
-                    <a href="#" class="bestiary-chip bestiary-chip--all bestiary-chip--active" data-bestiary-filter="all" aria-current="true">
-                        <span class="bestiary-chip__icon">
+                    <a href="#" class="bestiary-chip bestiary-chip-all bestiary-chip-active" data-bestiary-filter="all" aria-current="true">
+                        <span class="bestiary-chip-icon">
                             <img
                                 src="images/bestiary/favicons/all.webp"
                                 width="20"
@@ -77,11 +77,11 @@
                                 loading="lazy"
                             />
                         </span>
-                        <span class="bestiary-chip__label">Show all</span>
-                        <span class="bestiary-chip__count" data-count-for="bestiary-catalog-section"></span>
+                        <span class="bestiary-chip-label">Show all</span>
+                        <span class="bestiary-chip-count" data-count-for="bestiary-catalog-section"></span>
                     </a>
                     <a href="#" class="bestiary-chip" data-target="bestiary-beasts">
-                        <span class="bestiary-chip__icon">
+                        <span class="bestiary-chip-icon">
                             <img
                                 src="images/bestiary/favicons/beasts.webp"
                                 width="20"
@@ -91,11 +91,11 @@
                                 loading="lazy"
                             />
                         </span>
-                        <span class="bestiary-chip__label">Beasts</span>
-                        <span class="bestiary-chip__count" data-count-for="bestiary-beasts"></span>
+                        <span class="bestiary-chip-label">Beasts</span>
+                        <span class="bestiary-chip-count" data-count-for="bestiary-beasts"></span>
                     </a>
                     <a href="#" class="bestiary-chip" data-target="bestiary-cursed">
-                        <span class="bestiary-chip__icon">
+                        <span class="bestiary-chip-icon">
                             <img
                                 src="images/bestiary/favicons/cursed.webp"
                                 width="20"
@@ -105,11 +105,11 @@
                                 loading="lazy"
                             />
                         </span>
-                        <span class="bestiary-chip__label">Cursed ones</span>
-                        <span class="bestiary-chip__count" data-count-for="bestiary-cursed"></span>
+                        <span class="bestiary-chip-label">Cursed ones</span>
+                        <span class="bestiary-chip-count" data-count-for="bestiary-cursed"></span>
                     </a>
                     <a href="#" class="bestiary-chip" data-target="bestiary-draconids">
-                        <span class="bestiary-chip__icon">
+                        <span class="bestiary-chip-icon">
                             <img
                                 src="images/bestiary/favicons/wyvern.webp"
                                 width="20"
@@ -119,11 +119,11 @@
                                 loading="lazy"
                             />
                         </span>
-                        <span class="bestiary-chip__label">Draconids</span>
-                        <span class="bestiary-chip__count" data-count-for="bestiary-draconids"></span>
+                        <span class="bestiary-chip-label">Draconids</span>
+                        <span class="bestiary-chip-count" data-count-for="bestiary-draconids"></span>
                     </a>
                     <a href="#" class="bestiary-chip" data-target="bestiary-elementa">
-                        <span class="bestiary-chip__icon">
+                        <span class="bestiary-chip-icon">
                             <img
                                 src="images/bestiary/favicons/constructs.webp"
                                 width="20"
@@ -133,11 +133,11 @@
                                 loading="lazy"
                             />
                         </span>
-                        <span class="bestiary-chip__label">Elementa</span>
-                        <span class="bestiary-chip__count" data-count-for="bestiary-elementa"></span>
+                        <span class="bestiary-chip-label">Elementa</span>
+                        <span class="bestiary-chip-count" data-count-for="bestiary-elementa"></span>
                     </a>
                     <a href="#" class="bestiary-chip" data-target="bestiary-hybrids">
-                        <span class="bestiary-chip__icon">
+                        <span class="bestiary-chip-icon">
                             <img
                                 src="images/bestiary/favicons/wyvern.webp"
                                 width="20"
@@ -147,11 +147,11 @@
                                 loading="lazy"
                             />
                         </span>
-                        <span class="bestiary-chip__label">Hybrids</span>
-                        <span class="bestiary-chip__count" data-count-for="bestiary-hybrids"></span>
+                        <span class="bestiary-chip-label">Hybrids</span>
+                        <span class="bestiary-chip-count" data-count-for="bestiary-hybrids"></span>
                     </a>
                     <a href="#" class="bestiary-chip" data-target="bestiary-insectoids">
-                        <span class="bestiary-chip__icon">
+                        <span class="bestiary-chip-icon">
                             <img
                                 src="images/bestiary/favicons/insectoid.webp"
                                 width="20"
@@ -161,11 +161,11 @@
                                 loading="lazy"
                             />
                         </span>
-                        <span class="bestiary-chip__label">Insectoids</span>
-                        <span class="bestiary-chip__count" data-count-for="bestiary-insectoids"></span>
+                        <span class="bestiary-chip-label">Insectoids</span>
+                        <span class="bestiary-chip-count" data-count-for="bestiary-insectoids"></span>
                     </a>
                     <a href="#" class="bestiary-chip" data-target="bestiary-necrophages">
-                        <span class="bestiary-chip__icon">
+                        <span class="bestiary-chip-icon">
                             <img
                                 src="images/bestiary/favicons/necrophage.webp"
                                 width="20"
@@ -175,11 +175,11 @@
                                 loading="lazy"
                             />
                         </span>
-                        <span class="bestiary-chip__label">Necrophages</span>
-                        <span class="bestiary-chip__count" data-count-for="bestiary-necrophages"></span>
+                        <span class="bestiary-chip-label">Necrophages</span>
+                        <span class="bestiary-chip-count" data-count-for="bestiary-necrophages"></span>
                     </a>
                     <a href="#" class="bestiary-chip" data-target="bestiary-ogroids">
-                        <span class="bestiary-chip__icon">
+                        <span class="bestiary-chip-icon">
                             <img
                                 src="images/bestiary/favicons/beasts.webp"
                                 width="20"
@@ -189,11 +189,11 @@
                                 loading="lazy"
                             />
                         </span>
-                        <span class="bestiary-chip__label">Ogroids</span>
-                        <span class="bestiary-chip__count" data-count-for="bestiary-ogroids"></span>
+                        <span class="bestiary-chip-label">Ogroids</span>
+                        <span class="bestiary-chip-count" data-count-for="bestiary-ogroids"></span>
                     </a>
                     <a href="#" class="bestiary-chip" data-target="bestiary-relicts">
-                        <span class="bestiary-chip__icon">
+                        <span class="bestiary-chip-icon">
                             <img
                                 src="images/bestiary/favicons/relicts.webp"
                                 width="20"
@@ -203,11 +203,11 @@
                                 loading="lazy"
                             />
                         </span>
-                        <span class="bestiary-chip__label">Relicts</span>
-                        <span class="bestiary-chip__count" data-count-for="bestiary-relicts"></span>
+                        <span class="bestiary-chip-label">Relicts</span>
+                        <span class="bestiary-chip-count" data-count-for="bestiary-relicts"></span>
                     </a>
                     <a href="#" class="bestiary-chip" data-target="bestiary-specters">
-                        <span class="bestiary-chip__icon">
+                        <span class="bestiary-chip-icon">
                             <img
                                 src="images/bestiary/favicons/specters.webp"
                                 width="20"
@@ -217,11 +217,11 @@
                                 loading="lazy"
                             />
                         </span>
-                        <span class="bestiary-chip__label">Specters</span>
-                        <span class="bestiary-chip__count" data-count-for="bestiary-specters"></span>
+                        <span class="bestiary-chip-label">Specters</span>
+                        <span class="bestiary-chip-count" data-count-for="bestiary-specters"></span>
                     </a>
                     <a href="#" class="bestiary-chip" data-target="bestiary-vampires">
-                        <span class="bestiary-chip__icon">
+                        <span class="bestiary-chip-icon">
                             <img
                                 src="images/bestiary/favicons/vampire.webp"
                                 width="20"
@@ -231,8 +231,8 @@
                                 loading="lazy"
                             />
                         </span>
-                        <span class="bestiary-chip__label">Vampires</span>
-                        <span class="bestiary-chip__count" data-count-for="bestiary-vampires"></span>
+                        <span class="bestiary-chip-label">Vampires</span>
+                        <span class="bestiary-chip-count" data-count-for="bestiary-vampires"></span>
                     </a>
                 </nav>
                 <div id="bestiary-catalog-section" class="bestiary-catalog" aria-label="Creature catalog">
@@ -240,7 +240,7 @@
                     <p>No creatures found. Try a different name or category.</p>
                 </div>
                 <section class="bestiary-category" id="bestiary-beasts" aria-labelledby="bestiary-beasts-h">
-                    <h2 id="bestiary-beasts-h" class="bestiary-category__title">Beasts</h2>
+                    <h2 id="bestiary-beasts-h" class="bestiary-category-title">Beasts</h2>
                     <div class="grid gallery-grid bestiary-grid">
                         <div class="card bestiary-beast-card" data-search-text="bear beasts forest predator.">
                             <a href="https://witcher.fandom.com/wiki/Bear" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
@@ -282,7 +282,7 @@
                 </section>
 
                 <section class="bestiary-category" id="bestiary-cursed" aria-labelledby="bestiary-cursed-h">
-                    <h2 id="bestiary-cursed-h" class="bestiary-category__title">Cursed ones</h2>
+                    <h2 id="bestiary-cursed-h" class="bestiary-category-title">Cursed ones</h2>
                     <div class="grid gallery-grid bestiary-grid">
                         <div class="card bestiary-beast-card" data-search-text="archespore cursed plant.">
                             <a href="https://witcher.fandom.com/wiki/Archespore" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
@@ -324,7 +324,7 @@
                 </section>
 
                 <section class="bestiary-category" id="bestiary-draconids" aria-labelledby="bestiary-draconids-h">
-                    <h2 id="bestiary-draconids-h" class="bestiary-category__title">Draconids</h2>
+                    <h2 id="bestiary-draconids-h" class="bestiary-category-title">Draconids</h2>
                     <div class="grid gallery-grid bestiary-grid">
                         <div class="card bestiary-beast-card" data-search-text="basilisk draconids.">
                             <a href="https://witcher.fandom.com/wiki/Basilisk" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
@@ -390,7 +390,7 @@
                 </section>
 
                 <section class="bestiary-category" id="bestiary-elementa" aria-labelledby="bestiary-elementa-h">
-                    <h2 id="bestiary-elementa-h" class="bestiary-category__title">Elementa</h2>
+                    <h2 id="bestiary-elementa-h" class="bestiary-category-title">Elementa</h2>
                     <div class="grid gallery-grid bestiary-grid">
                         <div class="card bestiary-beast-card" data-search-text="djinn elementa.">
                             <a href="https://witcher.fandom.com/wiki/Djinn" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
@@ -468,7 +468,7 @@
                 </section>
 
                 <section class="bestiary-category" id="bestiary-hybrids" aria-labelledby="bestiary-hybrids-h">
-                    <h2 id="bestiary-hybrids-h" class="bestiary-category__title">Hybrids</h2>
+                    <h2 id="bestiary-hybrids-h" class="bestiary-category-title">Hybrids</h2>
                     <div class="grid gallery-grid bestiary-grid">
                         <div class="card bestiary-beast-card" data-search-text="archgriffin hybrids griffin subspecies.">
                             <a href="https://witcher.fandom.com/wiki/Archgriffin" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
@@ -528,7 +528,7 @@
                 </section>
 
                 <section class="bestiary-category" id="bestiary-insectoids" aria-labelledby="bestiary-insectoids-h">
-                    <h2 id="bestiary-insectoids-h" class="bestiary-category__title">Insectoids</h2>
+                    <h2 id="bestiary-insectoids-h" class="bestiary-category-title">Insectoids</h2>
                     <div class="grid gallery-grid bestiary-grid">
                         <div class="card bestiary-beast-card" data-search-text="armored arachas insectoids.">
                             <a href="https://witcher.fandom.com/wiki/Armored_arachas" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
@@ -612,7 +612,7 @@
                 </section>
 
                 <section class="bestiary-category" id="bestiary-necrophages" aria-labelledby="bestiary-necrophages-h">
-                    <h2 id="bestiary-necrophages-h" class="bestiary-category__title">Necrophages</h2>
+                    <h2 id="bestiary-necrophages-h" class="bestiary-category-title">Necrophages</h2>
                     <div class="grid gallery-grid bestiary-grid">
                         <div class="card bestiary-beast-card" data-search-text="abaya necrophages.">
                             <a href="https://witcher.fandom.com/wiki/Abaya" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
@@ -708,7 +708,7 @@
                 </section>
 
                 <section class="bestiary-category" id="bestiary-ogroids" aria-labelledby="bestiary-ogroids-h">
-                    <h2 id="bestiary-ogroids-h" class="bestiary-category__title">Ogroids</h2>
+                    <h2 id="bestiary-ogroids-h" class="bestiary-category-title">Ogroids</h2>
                     <div class="grid gallery-grid bestiary-grid">
                         <div class="card bestiary-beast-card" data-search-text="cloud giant ogroids.">
                             <a href="https://witcher.fandom.com/wiki/Cloud_Giant" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
@@ -768,7 +768,7 @@
                 </section>
 
                 <section class="bestiary-category" id="bestiary-relicts" aria-labelledby="bestiary-relicts-h">
-                    <h2 id="bestiary-relicts-h" class="bestiary-category__title">Relicts</h2>
+                    <h2 id="bestiary-relicts-h" class="bestiary-category-title">Relicts</h2>
                     <div class="grid gallery-grid bestiary-grid">
                         <div class="card bestiary-beast-card" data-search-text="chorts relicts.">
                             <a href="https://witcher.fandom.com/wiki/Chort" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
@@ -894,7 +894,7 @@
                 </section>
 
                 <section class="bestiary-category" id="bestiary-specters" aria-labelledby="bestiary-specters-h">
-                    <h2 id="bestiary-specters-h" class="bestiary-category__title">Specters</h2>
+                    <h2 id="bestiary-specters-h" class="bestiary-category-title">Specters</h2>
                     <div class="grid gallery-grid bestiary-grid">
                         <div class="card bestiary-beast-card" data-search-text="banshee specters.">
                             <a href="https://witcher.fandom.com/wiki/Banshee" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
@@ -996,7 +996,7 @@
                 </section>
 
                 <section class="bestiary-category" id="bestiary-vampires" aria-labelledby="bestiary-vampires-h">
-                    <h2 id="bestiary-vampires-h" class="bestiary-category__title">Vampires</h2>
+                    <h2 id="bestiary-vampires-h" class="bestiary-category-title">Vampires</h2>
                     <div class="grid gallery-grid bestiary-grid">
                         <div class="card bestiary-beast-card" data-search-text="alp alpha vampires.">
                             <a href="https://witcher.fandom.com/wiki/Alp" target="_blank" rel="noopener noreferrer" class="bestiary-card-link">
@@ -1113,7 +1113,7 @@
         </div>
 
         <button type="button" id="back-to-top" class="bestiary-chip back-to-top-btn" title="Back to top" hidden>
-            <span class="bestiary-chip__label">Back to top</span>
+            <span class="bestiary-chip-label">Back to top</span>
         </button>
     </body>
 </html>

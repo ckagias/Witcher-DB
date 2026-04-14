@@ -25,13 +25,7 @@ var CHAR_IMG_BASE = "images/characters/";
 
 // Characters page: before/after style blend (game base layer, Netflix clipped by range)
 function initCharacterPortraitSliders() {
-    document.querySelectorAll("button[data-portrait-toggle]").forEach(function (btn) {
-        if (btn.parentNode) {
-            btn.parentNode.removeChild(btn);
-        }
-    });
-
-    document.querySelectorAll(".char-card-wrap:not(.char-card-wrap--no-toggle)").forEach(function (card, idx) {
+    document.querySelectorAll(".char-card-wrap:not(.char-card-wrap-no-toggle)").forEach(function (card, idx) {
         var img = card.querySelector(".char-thumb-wrap img[data-img-base]");
         if (!img || card.getAttribute("data-compare-init") === "1") {
             return;
@@ -55,18 +49,18 @@ function initCharacterPortraitSliders() {
         thumbWrap.classList.add("char-compare");
 
         var inner = document.createElement("div");
-        inner.className = "char-compare__inner";
+        inner.className = "char-compare-inner";
         inner.style.setProperty("--reveal", "0%");
 
         var gameImg = document.createElement("img");
-        gameImg.className = "char-compare__game";
+        gameImg.className = "char-compare-game";
         gameImg.src = gameSrc;
         gameImg.alt = alt;
         gameImg.setAttribute("width", "280");
         gameImg.setAttribute("height", "220");
 
         var netflixImg = document.createElement("img");
-        netflixImg.className = "char-compare__netflix";
+        netflixImg.className = "char-compare-netflix";
         netflixImg.src = netflixSrc;
         netflixImg.alt = alt ? alt + " (Netflix)" : "Netflix portrayal";
         netflixImg.setAttribute("width", "280");
@@ -78,14 +72,14 @@ function initCharacterPortraitSliders() {
         var rangeId = "portrait-range-" + idx;
 
         var label = document.createElement("label");
-        label.className = "char-compare__label";
+        label.className = "char-compare-label";
         label.setAttribute("for", rangeId);
         label.textContent = "Game vs Netflix portrait";
 
         var range = document.createElement("input");
         range.type = "range";
         range.id = rangeId;
-        range.className = "char-compare__range";
+        range.className = "char-compare-range";
         range.min = "0";
         range.max = "100";
         range.value = "0";
@@ -121,6 +115,42 @@ function initCharacterPortraitSliders() {
         thumbWrap.appendChild(label);
         thumbWrap.appendChild(range);
 
+        var hint = document.createElement("span");
+        hint.className = "char-compare-hint";
+        hint.textContent = "TW3 \u21cc Netflix";
+        thumbWrap.appendChild(hint);
+
+        var hintGone = false;
+        var hintTimer = null;
+
+        function onRangeFirstInput() {
+            removeCompareHint();
+        }
+
+        function removeCompareHint() {
+            if (hintGone) {
+                return;
+            }
+            hintGone = true;
+            if (hintTimer !== null) {
+                window.clearTimeout(hintTimer);
+                hintTimer = null;
+            }
+            range.removeEventListener("input", onRangeFirstInput);
+            if (!hint.parentNode) {
+                return;
+            }
+            hint.classList.add("char-compare-hint-out");
+            window.setTimeout(function () {
+                if (hint.parentNode) {
+                    hint.parentNode.removeChild(hint);
+                }
+            }, 320);
+        }
+
+        range.addEventListener("input", onRangeFirstInput);
+        hintTimer = window.setTimeout(removeCompareHint, 2500);
+
         netflixImg.addEventListener("error", function () {
             netflixImg.style.display = "none";
             inner.style.setProperty("--reveal", "0%");
@@ -132,7 +162,7 @@ function initCharacterPortraitSliders() {
         card.setAttribute("data-compare-init", "1");
     });
 
-    document.querySelectorAll(".char-card-wrap--no-toggle").forEach(function (card) {
+    document.querySelectorAll(".char-card-wrap-no-toggle").forEach(function (card) {
         if (card.getAttribute("data-single-portrait-init") === "1") {
             return;
         }
@@ -148,11 +178,11 @@ function initCharacterPortraitSliders() {
         if (thumbWrap.parentNode === link) {
             link.parentNode.insertBefore(thumbWrap, link);
         }
-        thumbWrap.classList.add("char-compare", "char-compare--single");
+        thumbWrap.classList.add("char-compare", "char-compare-single");
         var inner = document.createElement("div");
-        inner.className = "char-compare__inner";
+        inner.className = "char-compare-inner";
         thumbWrap.removeChild(img);
-        img.classList.add("char-compare__game");
+        img.classList.add("char-compare-game");
         if (!img.getAttribute("width")) {
             img.setAttribute("width", "280");
         }
@@ -213,10 +243,10 @@ function initBestiaryPage() {
         var j;
         for (j = 0; j < allChips.length; j++) {
             var c = allChips[j];
-            c.classList.remove("bestiary-chip--active");
+            c.classList.remove("bestiary-chip-active");
             if (c.getAttribute("data-bestiary-filter") === "all") {
                 if (!activeCategoryId) {
-                    c.classList.add("bestiary-chip--active");
+                    c.classList.add("bestiary-chip-active");
                     c.setAttribute("aria-current", "true");
                 } else {
                     c.removeAttribute("aria-current");
@@ -224,7 +254,7 @@ function initBestiaryPage() {
             } else {
                 var tid = c.getAttribute("data-target");
                 if (tid && tid === activeCategoryId) {
-                    c.classList.add("bestiary-chip--active");
+                    c.classList.add("bestiary-chip-active");
                     c.setAttribute("aria-current", "true");
                 } else {
                     c.removeAttribute("aria-current");
@@ -299,6 +329,76 @@ function initBestiaryPage() {
         searchInput.addEventListener("input", applySearch);
     }
     applySearch();
+}
+
+function initCharactersPage() {
+    var chipNav = document.getElementById("char-chip-nav");
+    if (!chipNav) {
+        return;
+    }
+    var cards = document.querySelectorAll(".card.char-card-wrap[data-category]");
+    var activeCategoryId = null;
+
+    function updateChipActive() {
+        var allChips = chipNav.querySelectorAll(".bestiary-chip");
+        var j;
+        for (j = 0; j < allChips.length; j++) {
+            var c = allChips[j];
+            c.classList.remove("bestiary-chip-active");
+            if (c.getAttribute("data-char-filter") === "all") {
+                if (!activeCategoryId) {
+                    c.classList.add("bestiary-chip-active");
+                    c.setAttribute("aria-current", "true");
+                } else {
+                    c.removeAttribute("aria-current");
+                }
+            } else {
+                var tid = c.getAttribute("data-target");
+                if (tid && tid === activeCategoryId) {
+                    c.classList.add("bestiary-chip-active");
+                    c.setAttribute("aria-current", "true");
+                } else {
+                    c.removeAttribute("aria-current");
+                }
+            }
+        }
+    }
+
+    function applyFilter() {
+        for (var i = 0; i < cards.length; i++) {
+            var card = cards[i];
+            var cat = card.getAttribute("data-category") || "";
+            if (!activeCategoryId || cat === activeCategoryId) {
+                card.removeAttribute("hidden");
+            } else {
+                card.setAttribute("hidden", "");
+            }
+        }
+    }
+
+    var showAllChip = chipNav.querySelector("[data-char-filter=\"all\"]");
+    if (showAllChip) {
+        showAllChip.addEventListener("click", function (e) {
+            e.preventDefault();
+            activeCategoryId = null;
+            updateChipActive();
+            applyFilter();
+        });
+    }
+    chipNav.querySelectorAll(".bestiary-chip[data-target]").forEach(function (chip) {
+        if (chip.getAttribute("data-char-filter") === "all") {
+            return;
+        }
+        chip.addEventListener("click", function (e) {
+            e.preventDefault();
+            var target = chip.getAttribute("data-target");
+            activeCategoryId = target || null;
+            updateChipActive();
+            applyFilter();
+        });
+    });
+    updateChipActive();
+    applyFilter();
 }
 
 function fillBestiaryChipCounts() {
@@ -426,14 +526,22 @@ function initLoginPage() {
 
 var imageLightboxConfigs = [
     { lightboxId: "gallery-lightbox", sourceId: "gallery-page-grid", thumbSelector: ".gallery-img" },
-    { lightboxId: "gwent-lightbox", sourceId: "gwent-lightbox-source", thumbSelector: ".faction-hero-img" }
+    { lightboxId: "gwent-lightbox", sourceId: "gwent-lightbox-source", thumbSelector: ".faction-hero-img" },
+    { lightboxId: "series-lightbox", sourceId: "series-lightbox-source", thumbSelector: ".series-poster" }
 ];
 
+function lightboxThumbImage(thumb) {
+    if (thumb.tagName === "IMG") {
+        return thumb;
+    }
+    return thumb.querySelector("img");
+}
+
 function attachImageLightbox(root, source, thumbSelector) {
-    var modalImg = root.querySelector(".gallery-lightbox__img");
-    var captionEl = root.querySelector(".gallery-lightbox__caption");
-    var closeBtn = root.querySelector(".gallery-lightbox__close");
-    var backdrop = root.querySelector(".gallery-lightbox__backdrop");
+    var modalImg = root.querySelector(".gallery-lightbox-img");
+    var captionEl = root.querySelector(".gallery-lightbox-caption");
+    var closeBtn = root.querySelector(".gallery-lightbox-close");
+    var backdrop = root.querySelector(".gallery-lightbox-backdrop");
     if (!modalImg || !captionEl || !closeBtn || !backdrop) {
         return;
     }
@@ -441,14 +549,18 @@ function attachImageLightbox(root, source, thumbSelector) {
     var prevBodyOverflow = "";
 
     function openModal(thumb) {
-        modalImg.src = thumb.getAttribute("src") || "";
-        modalImg.alt = thumb.getAttribute("alt") || "";
-        var cap = thumb.nextElementSibling;
+        var img = lightboxThumbImage(thumb);
+        if (!img) {
+            return;
+        }
+        modalImg.src = img.getAttribute("src") || "";
+        modalImg.alt = img.getAttribute("alt") || "";
+        var cap = img.nextElementSibling;
         var text = "";
         if (cap && cap.tagName === "P") {
             text = String(cap.textContent || "").trim();
         } else {
-            text = String(thumb.getAttribute("alt") || "").trim();
+            text = String(img.getAttribute("alt") || "").trim();
         }
         captionEl.textContent = text;
         root.removeAttribute("hidden");
@@ -463,8 +575,17 @@ function attachImageLightbox(root, source, thumbSelector) {
     }
 
     source.querySelectorAll(thumbSelector).forEach(function (thumb) {
+        if (!lightboxThumbImage(thumb)) {
+            return;
+        }
         thumb.addEventListener("click", function () {
             openModal(thumb);
+        });
+        thumb.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                openModal(thumb);
+            }
         });
     });
 
@@ -518,6 +639,7 @@ if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
         initLoginPage();
         initCharacterPortraitSliders();
+        initCharactersPage();
         initBooksPage();
         initLorePage();
         initBestiaryPage();
@@ -528,6 +650,7 @@ if (document.readyState === "loading") {
 } else {
     initLoginPage();
     initCharacterPortraitSliders();
+    initCharactersPage();
     initBooksPage();
     initLorePage();
     initBestiaryPage();
@@ -552,7 +675,7 @@ function switchSchool(schoolId) {
     }
 
     for (var k = 0; k < rows.length; k++) {
-        rows[k].classList.remove('table-row--active');
+        rows[k].classList.remove('table-row-active');
     }
 
     var activePanel = document.getElementById('panel-' + schoolId);
@@ -570,7 +693,7 @@ function switchSchool(schoolId) {
 
     var activeRow = document.querySelector('.comparison-table tbody tr[data-school="' + schoolId + '"]');
     if (activeRow) {
-        activeRow.classList.add('table-row--active');
+        activeRow.classList.add('table-row-active');
     }
 }
 
@@ -612,3 +735,26 @@ document.addEventListener("click", function (e) {
         btn.setAttribute("aria-expanded", "false");
     }
 });
+
+function switchSeriesTab(tab) {
+    var tabIds = ['series', 'anime', 'sirens'];
+    var btns = document.querySelectorAll('.school-tab-btn');
+    var panels = document.querySelectorAll('.school-panel');
+    var i;
+    for (i = 0; i < btns.length; i++) {
+        btns[i].classList.remove('active');
+        btns[i].setAttribute('aria-selected', 'false');
+    }
+    for (i = 0; i < panels.length; i++) {
+        panels[i].classList.remove('active');
+    }
+    var activePanel = document.getElementById('panel-' + tab);
+    if (activePanel) {
+        activePanel.classList.add('active');
+    }
+    var tabIndex = tabIds.indexOf(tab);
+    if (tabIndex !== -1 && btns[tabIndex]) {
+        btns[tabIndex].classList.add('active');
+        btns[tabIndex].setAttribute('aria-selected', 'true');
+    }
+}
