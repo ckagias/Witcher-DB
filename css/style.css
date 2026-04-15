@@ -25,6 +25,29 @@ body {
     background-color: var(--bg-deep);
 }
 
+/* Themed custom scrollbar */
+html {
+    scrollbar-color: var(--gold) var(--bg-deep);
+    scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-deep);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold-soft);
+}
+
 h1 {
     font-family: "Cinzel", Georgia, serif;
     font-size: 1.75em;
@@ -2313,33 +2336,63 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     background: rgba(201, 168, 76, 0.15);
 }
 
-/* ── Series page ─────────────────────────────── */
+/* ── Series page (screen adaptations) ────────── */
 
-.series-hero-block {
+.series-page.page-inner > h1 + .series-lede {
+    max-width: 38rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: rgba(230, 223, 211, 0.78);
+    font-size: 0.98rem;
+    line-height: 1.55;
+}
+
+.series-screen-tabs.school-tabs {
+    max-width: min(96vw, 52rem);
+    margin-bottom: 1.75rem;
+}
+
+.series-entry {
+    max-width: 52rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.series-feature {
+    display: grid;
+    grid-template-columns: minmax(200px, 280px) minmax(0, 1fr);
+    gap: 1.75rem 2rem;
+    align-items: start;
+    padding: 1.5rem 1.65rem;
+    margin-bottom: 0;
     background: rgba(22, 18, 14, 0.88);
-    border: 1px solid rgba(200, 169, 110, 0.25);
-    border-radius: 10px;
-    padding: 16px;
-    display: flex;
-    gap: 16px;
-    margin-bottom: 20px;
-    align-items: flex-start;
+    border: 1px solid rgba(200, 169, 110, 0.22);
+    border-radius: 12px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+}
+
+.series-poster-frame {
+    position: relative;
 }
 
 .series-poster {
-    width: 80px;
-    height: 116px;
-    background: rgba(40, 32, 20, 0.8);
-    border-radius: 6px;
-    border: 1px solid rgba(200, 169, 110, 0.2);
-    flex-shrink: 0;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+    aspect-ratio: 2 / 3;
+    background: rgba(40, 32, 20, 0.85);
+    border-radius: 8px;
+    border: 1px solid rgba(200, 169, 110, 0.22);
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 .series-poster img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center top;
     display: block;
     pointer-events: none;
 }
@@ -2353,9 +2406,9 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 }
 
 #series-lightbox-source .series-poster[role="button"]:hover {
-    border-color: rgba(200, 169, 110, 0.45);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-    transform: scale(1.03);
+    border-color: rgba(200, 169, 110, 0.5);
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.4);
+    transform: translateY(-1px);
 }
 
 #series-lightbox-source .series-poster[role="button"]:focus-visible {
@@ -2368,37 +2421,133 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     border-color: rgba(200, 169, 110, 0.45);
 }
 
-.series-hero-info h2 {
+.series-feature-text h2 {
     font-family: "Cinzel", Georgia, serif;
-    font-size: 1.1em;
+    font-size: clamp(1.15rem, 2.5vw, 1.45rem);
     color: var(--gold);
-    margin: 0 0 0.4em 0;
-    border-bottom: none;
+    margin: 0 0 0.5rem 0;
     padding-bottom: 0;
+    border-bottom: none;
+    letter-spacing: 0.04em;
 }
 
-.series-hero-info p {
-    font-size: 0.85em;
-    color: rgba(230, 223, 211, 0.7);
-    line-height: 1.55;
-    margin: 0;
+.series-title-imdb {
+    color: inherit;
+    text-decoration: none;
+    transition:
+        color 0.2s ease,
+        text-shadow 0.2s ease;
 }
 
-.series-badges {
+.series-title-imdb:hover {
+    color: var(--gold-soft);
+    text-decoration: none;
+    text-decoration-thickness: 2.5px;
+    text-underline-offset: 3px;
+}
+
+.series-title-imdb:focus-visible {
+    outline: none;
+    color: var(--gold-soft);
+    text-decoration: none;
+    text-decoration-thickness: 2.5px;
+    text-underline-offset: 3px;
+    box-shadow: 0 0 0 2px rgba(200, 169, 110, 0.35);
+    border-radius: 2px;
+}
+
+.series-meta-line {
     display: flex;
-    gap: 6px;
     flex-wrap: wrap;
-    margin-bottom: 8px;
+    gap: 6px;
+    margin: 0 0 1rem 0;
+    align-items: center;
+}
+
+.series-imdb-rating {
+    margin-left: 0.45rem;
+    padding-left: 0.55rem;
+    border-left: 1px solid rgba(200, 169, 110, 0.22);
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: rgba(200, 169, 110, 0.88);
+    white-space: nowrap;
+}
+
+.series-imdb-rating-star {
+    margin-right: 0.15rem;
+    color: rgba(200, 169, 110, 0.95);
+}
+
+.series-imdb-rating-value {
+    color: rgba(230, 223, 211, 0.88);
+}
+
+.series-imdb-rating-max {
+    color: rgba(230, 223, 211, 0.45);
+    font-size: 0.68rem;
 }
 
 .series-badge {
-    font-size: 0.72em;
+    font-size: 0.7rem;
     font-family: "Cinzel", Georgia, serif;
     letter-spacing: 0.06em;
-    border: 1px solid rgba(200, 169, 110, 0.35);
+    border: 1px solid rgba(200, 169, 110, 0.32);
     border-radius: 4px;
-    padding: 2px 8px;
-    color: rgba(200, 169, 110, 0.8);
+    padding: 3px 9px;
+    color: rgba(200, 169, 110, 0.82);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.series-synopsis {
+    font-size: 0.92rem;
+    color: rgba(230, 223, 211, 0.78);
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* Change 2: desktop trailer box */
+.series-trailer-box {
+    margin-top: 1rem;
+    border: 1px solid rgba(200, 169, 110, 0.2);
+    border-radius: 8px;
+    background: rgba(13, 10, 8, 0.68);
+    padding: 0.75rem;
+}
+
+.series-trailer-title {
+    margin: 0 0 0.55rem 0;
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(200, 169, 110, 0.75);
+}
+
+.series-trailer-frame {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(200, 169, 110, 0.2);
+}
+
+.series-trailer-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.series-subsection {
+    margin-top: 1.75rem;
+}
+
+.series-subsection:first-of-type {
+    margin-top: 1.5rem;
 }
 
 .series-section-label {
@@ -2406,136 +2555,66 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     font-size: 0.72em;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(200, 169, 110, 0.7);
-    margin-bottom: 10px;
-    border-bottom: 1px solid rgba(200, 169, 110, 0.2);
-    padding-bottom: 6px;
+    color: rgba(200, 169, 110, 0.72);
+    margin: 0 0 0.65rem 0;
+    border-bottom: 1px solid rgba(200, 169, 110, 0.18);
+    padding-bottom: 0.45rem;
 }
 
-.series-season-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 20px;
-}
-
-.series-season-card {
-    background: rgba(22, 18, 14, 0.88);
-    border: 1px solid rgba(200, 169, 110, 0.18);
-    border-left: 3px solid var(--gold);
-    border-radius: 0 8px 8px 0;
-    padding: 10px 14px;
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-}
-
-.series-season-num {
-    font-family: "Cinzel", Georgia, serif;
-    font-size: 1.2em;
-    color: rgba(200, 169, 110, 0.4);
-    flex-shrink: 0;
-    width: 28px;
-}
-
-.series-season-title {
-    font-family: "Cinzel", Georgia, serif;
-    font-size: 0.88em;
-    color: var(--gold);
+.series-cast-list {
+    list-style: none;
     margin: 0;
-}
-
-.series-season-meta {
-    font-size: 0.78em;
-    color: rgba(230, 223, 211, 0.45);
-    margin: 2px 0 0 0;
-}
-
-.series-season-desc {
-    font-size: 0.82em;
-    color: rgba(230, 223, 211, 0.75);
-    margin: 5px 0 0 0;
-    line-height: 1.5;
-}
-
-.series-cast-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.series-cast-pill {
-    background: rgba(22, 18, 14, 0.88);
-    border: 1px solid rgba(200, 169, 110, 0.2);
+    padding: 0;
+    border: 1px solid rgba(200, 169, 110, 0.14);
     border-radius: 8px;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.series-cast-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(40, 32, 20, 0.8);
-    border: 1px solid rgba(200, 169, 110, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Cinzel", Georgia, serif;
-    font-size: 0.88em;
-    color: rgba(200, 169, 110, 0.5);
-    flex-shrink: 0;
-    box-sizing: border-box;
+    background: rgba(12, 10, 8, 0.35);
     overflow: hidden;
-    text-decoration: none;
 }
 
-a.series-cast-avatar {
-    cursor: pointer;
-    color: inherit;
+.series-cast-list li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.35rem 1.25rem;
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid rgba(200, 169, 110, 0.1);
 }
 
-a.series-cast-avatar:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(200, 169, 110, 0.55);
+.series-cast-list li:last-child {
+    border-bottom: none;
 }
 
-.series-cast-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    border-radius: 50%;
-}
-
-.series-cast-name {
+.series-cast-part {
     font-family: "Cinzel", Georgia, serif;
-    font-size: 0.78em;
-    color: var(--gold);
-    margin: 0;
+    font-size: 0.84rem;
+    color: var(--gold-soft);
+    letter-spacing: 0.02em;
 }
 
-.series-cast-role {
-    font-size: 0.72em;
-    color: rgba(230, 223, 211, 0.45);
-    margin: 2px 0 0 0;
+.series-cast-actor {
+    font-size: 0.8rem;
+    color: rgba(230, 223, 211, 0.72);
+    text-align: right;
+    max-width: 22rem;
+}
+
+.series-cast-list--roles .series-cast-actor {
+    text-align: right;
 }
 
 .series-note-box {
     background: rgba(200, 169, 110, 0.06);
     border: 1px solid rgba(200, 169, 110, 0.2);
     border-radius: 8px;
-    padding: 12px 14px;
-    margin-bottom: 20px;
+    padding: 14px 16px;
+    margin-bottom: 0;
 }
 
 .series-note-box p {
-    font-size: 0.85em;
-    color: rgba(230, 223, 211, 0.7);
-    line-height: 1.6;
+    font-size: 0.88rem;
+    color: rgba(230, 223, 211, 0.74);
+    line-height: 1.65;
     margin: 0;
 }
 
@@ -2544,18 +2623,71 @@ a.series-cast-avatar:focus-visible {
     font-weight: normal;
 }
 
-@media screen and (max-width: 600px) {
-    .series-cast-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+@media screen and (min-width: 721px) {
+    .series-feature {
+        align-items: stretch;
     }
 
-    .series-hero-block {
+    .series-poster-frame {
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    .series-poster {
+        flex: 1 1 auto;
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+        min-height: 0;
+        height: 100%;
+        aspect-ratio: unset;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .series-feature {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 1.35rem 1.25rem;
+    }
+
+    .series-meta-line {
+        justify-content: center;
+    }
+
+    .series-imdb-rating {
+        margin-left: 0;
+        padding-left: 0;
+        border-left: none;
+        margin-top: 0.35rem;
+    }
+
+    .series-cast-list li {
         flex-direction: column;
         align-items: center;
         text-align: center;
     }
 
-    .series-badges {
-        justify-content: center;
+    .series-cast-actor {
+        text-align: center;
+        max-width: none;
+    }
+
+    /* Hide trailers on mobile/tablet narrow screens */
+    .series-trailer-box {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .series-screen-tabs.school-tabs {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .series-screen-tabs .school-tab-btn {
+        width: 100%;
     }
 }

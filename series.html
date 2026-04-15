@@ -41,326 +41,309 @@
                 </div>
             </div>
 
-            <div id="series-lightbox-source" class="page-inner">
+            <div id="series-lightbox-source" class="page-inner series-page">
                 <h1>The Witcher on Screen</h1>
-                <p>Netflix live-action series and animated film cast, seasons, and lore notes.</p>
+                <p class="series-lede">
+                    Three adaptations on Netflix: one live-action series and two animated films.
+                </p>
 
-                <div class="school-tabs" role="tablist">
-                    <button class="school-tab-btn active" role="tab"
+                <div class="school-tabs series-screen-tabs" role="tablist" aria-label="Screen adaptations">
+                    <button id="tab-series" class="school-tab-btn active" type="button" role="tab"
                         aria-selected="true" aria-controls="panel-series"
                         onclick="switchSeriesTab('series')">
                         Netflix Series
                     </button>
-                    <button class="school-tab-btn" role="tab"
+                    <button id="tab-anime" class="school-tab-btn" type="button" role="tab"
                         aria-selected="false" aria-controls="panel-anime"
                         onclick="switchSeriesTab('anime')">
                         Nightmare of the Wolf
                     </button>
-                    <button class="school-tab-btn" role="tab"
+                    <button id="tab-sirens" class="school-tab-btn" type="button" role="tab"
                         aria-selected="false" aria-controls="panel-sirens"
                         onclick="switchSeriesTab('sirens')">
                         Sirens of the Deep
                     </button>
                 </div>
 
-                <!-- SERIES TAB -->
-                <div id="panel-series" class="school-panel active" role="tabpanel">
+                <!-- Netflix -->
+                <div id="panel-series" class="school-panel active" role="tabpanel"
+                    aria-labelledby="tab-series" aria-hidden="false">
+                    <article class="series-entry">
+                        <div class="series-feature">
+                            <div class="series-poster-frame">
+                                <div class="series-poster" role="button" tabindex="0"
+                                    aria-label="View The Witcher poster larger">
+                                    <img
+                                        src="images/series/series-poster.webp"
+                                        srcset="images/series/series-poster.webp 840w"
+                                        sizes="(max-width: 720px) min(72vw, 320px), 280px"
+                                        width="840"
+                                        height="1218"
+                                        alt="The Witcher Netflix series poster."
+                                        decoding="async"
+                                        fetchpriority="high"
+                                    />
+                                </div>
+                            </div>
+                            <div class="series-feature-text">
+                                <h2>
+                                    <a
+                                        class="series-title-imdb"
+                                        href="https://www.imdb.com/title/tt5180504/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >The Witcher</a>
+                                </h2>
+                                <p class="series-meta-line">
+                                    <span class="series-badge">2019–present</span>
+                                    <span class="series-badge">Live action</span>
+                                    <span class="series-badge">Netflix</span>
+                                    <span class="series-badge">4 seasons</span>
+                                    <span class="series-imdb-rating" title="IMDb user rating" aria-label="IMDb rating 7.8 out of 10">
+                                        <span class="series-imdb-rating-star" aria-hidden="true">★</span>
+                                        <span class="series-imdb-rating-value">7.8</span><span class="series-imdb-rating-max">/10</span>
+                                    </span>
+                                </p>
+                                <p class="series-synopsis">
+                                    Geralt of Rivia hunts monsters while fate ties him to a sorceress
+                                    and a child of prophecy. Opens in the tone of the short stories,
+                                    then moves into the saga.
+                                </p>
+                                <!-- Change 2: desktop-only trailer box -->
+                                <section class="series-trailer-box" aria-label="The Witcher trailer">
+                                    <h3 class="series-trailer-title">Official trailer</h3>
+                                    <div class="series-trailer-frame">
+                                        <iframe
+                                            src="https://www.youtube.com/embed/HK9dU6JIroU?vq=hd1080"
+                                            title="The Witcher official trailer"
+                                            loading="lazy"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            referrerpolicy="strict-origin-when-cross-origin"
+                                            allowfullscreen
+                                        ></iframe>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
 
-                    <div class="series-hero-block">
-                        <div class="series-poster" role="button" tabindex="0"
-                            aria-label="View The Witcher poster larger">
-                            <img src="images/series/series-poster.webp"
-                                alt="The Witcher Netflix series poster"
-                                width="80" height="116" />
-                        </div>
-                        <div class="series-hero-info">
-                            <h2>The Witcher</h2>
-                            <div class="series-badges">
-                                <span class="series-badge">2019–present</span>
-                                <span class="series-badge">Live action</span>
-                                <span class="series-badge">Netflix</span>
-                                <span class="series-badge">4 seasons</span>
-                            </div>
-                            <p>A live action adaptation following Geralt of Rivia, a monster
-                            hunter whose destiny becomes intertwined with a powerful sorceress
-                            and a child of prophecy. Begins with the short story collections
-                            and grows into the main saga.</p>
-                        </div>
-                    </div>
+                        <section class="series-subsection" aria-labelledby="series-cast-heading">
+                            <h3 id="series-cast-heading" class="series-section-label">Main cast</h3>
+                            <ul class="series-cast-list">
+                                <li>
+                                    <span class="series-cast-part">Geralt of Rivia</span>
+                                    <span class="series-cast-actor">Henry Cavill (S1–S3), Liam Hemsworth (S4+)</span>
+                                </li>
+                                <li>
+                                    <span class="series-cast-part">Yennefer of Vengerberg</span>
+                                    <span class="series-cast-actor">Anya Chalotra</span>
+                                </li>
+                                <li>
+                                    <span class="series-cast-part">Ciri</span>
+                                    <span class="series-cast-actor">Freya Allan</span>
+                                </li>
+                                <li>
+                                    <span class="series-cast-part">Jaskier</span>
+                                    <span class="series-cast-actor">Joey Batey</span>
+                                </li>
+                            </ul>
+                        </section>
 
-                    <h3 class="series-section-label">Seasons</h3>
-                    <div class="series-season-list">
-                        <div class="series-season-card">
-                            <span class="series-season-num">1</span>
-                            <div class="series-season-info">
-                                <p class="series-season-title">Season 1</p>
-                                <p class="series-season-meta">2019 · 8 episodes</p>
-                                <p class="series-season-desc">Three interweaving timelines
-                                following Geralt, Yennefer, and Ciri adapting the short
-                                story collections.</p>
+                        <section class="series-subsection" aria-labelledby="series-timeline-heading">
+                            <h3 id="series-timeline-heading" class="series-section-label">Timeline &amp; books</h3>
+                            <div class="series-note-box">
+                                <p>
+                                    Geralt of Rivia, a solitary monster hunter, struggles to find his place 
+                                    in a world where people often prove more wicked than beasts.
+                                </p>
                             </div>
-                        </div>
-                        <div class="series-season-card">
-                            <span class="series-season-num">2</span>
-                            <div class="series-season-info">
-                                <p class="series-season-title">Season 2</p>
-                                <p class="series-season-meta">2021 · 8 episodes</p>
-                                <p class="series-season-desc">Geralt takes Ciri to Kaer
-                                Morhen while Yennefer navigates the aftermath of the Battle of
-                                Sodden Hill.</p>
-                            </div>
-                        </div>
-                        <div class="series-season-card">
-                            <span class="series-season-num">3</span>
-                            <div class="series-season-info">
-                                <p class="series-season-title">Season 3</p>
-                                <p class="series-season-meta">2023 · 8 episodes</p>
-                                <p class="series-season-desc">Loosely based on <a href="books.html">Time of Contempt</a>. Geralt and Ciri are hunted across the Continent
-                                while political alliances fracture.</p>
-                            </div>
-                        </div>
-                        <div class="series-season-card">
-                            <span class="series-season-num">4</span>
-                            <div class="series-season-info">
-                                <p class="series-season-title">Season 4</p>
-                                <p class="series-season-meta">2025 · 8 episodes</p>
-                                <p class="series-season-desc">The story continues toward saga material drawn from
-                                <a href="books.html">Baptism of Fire</a>, with Ciri’s path and new allies such as
-                                Regis taking center stage.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h3 class="series-section-label">Main cast</h3>
-                    <div class="series-cast-grid">
-                        <div class="series-cast-pill">
-                            <a class="series-cast-avatar"
-                                href="https://www.google.com/search?q=Liam+Hemsworth+The+Witcher&tbm=isch"
-                                target="_blank" rel="noopener noreferrer"
-                                aria-label="Google Images: Liam Hemsworth as Geralt">
-                                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Liam_Hemsworth_by_Gage_Skidmore.jpg?width=72"
-                                    alt="" width="36" height="36" decoding="async" />
-                            </a>
-                            <div>
-                                <p class="series-cast-name">Geralt of Rivia</p>
-                                <p class="series-cast-role">Henry Cavill (S1–S3), Liam Hemsworth (S4+)</p>
-                            </div>
-                        </div>
-                        <div class="series-cast-pill">
-                            <a class="series-cast-avatar"
-                                href="https://www.google.com/search?q=Anya+Chalotra+Yennefer+The+Witcher&tbm=isch"
-                                target="_blank" rel="noopener noreferrer"
-                                aria-label="Google Images: Anya Chalotra as Yennefer">
-                                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Anya_Chalotra_by_Gage_Skidmore.jpg?width=72"
-                                    alt="" width="36" height="36" decoding="async" />
-                            </a>
-                            <div>
-                                <p class="series-cast-name">Yennefer</p>
-                                <p class="series-cast-role">Anya Chalotra</p>
-                            </div>
-                        </div>
-                        <div class="series-cast-pill">
-                            <a class="series-cast-avatar"
-                                href="https://www.google.com/search?q=Freya+Allan+Ciri+The+Witcher&tbm=isch"
-                                target="_blank" rel="noopener noreferrer"
-                                aria-label="Google Images: Freya Allan as Ciri">
-                                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Freya_Allan_(2019).jpg?width=72"
-                                    alt="" width="36" height="36" decoding="async" />
-                            </a>
-                            <div>
-                                <p class="series-cast-name">Ciri</p>
-                                <p class="series-cast-role">Freya Allan</p>
-                            </div>
-                        </div>
-                        <div class="series-cast-pill">
-                            <a class="series-cast-avatar"
-                                href="https://www.google.com/search?q=Joey+Batey+Jaskier+The+Witcher&tbm=isch"
-                                target="_blank" rel="noopener noreferrer"
-                                aria-label="Google Images: Joey Batey as Jaskier">
-                                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Joey_Batey.png?width=72"
-                                    alt="" width="36" height="36" decoding="async" />
-                            </a>
-                            <div>
-                                <p class="series-cast-name">Jaskier</p>
-                                <p class="series-cast-role">Joey Batey</p>
-                            </div>
-                        </div>
-                        <div class="series-cast-pill">
-                            <a class="series-cast-avatar"
-                                href="https://www.google.com/search?q=MyAnna+Buring+Tissaia+The+Witcher&tbm=isch"
-                                target="_blank" rel="noopener noreferrer"
-                                aria-label="Google Images: MyAnna Buring as Tissaia">
-                                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Myanna_Buring_at_the_Moet_BIFA_2014.jpg?width=72"
-                                    alt="" width="36" height="36" decoding="async" />
-                            </a>
-                            <div>
-                                <p class="series-cast-name">Tissaia</p>
-                                <p class="series-cast-role">MyAnna Buring</p>
-                            </div>
-                        </div>
-                        <div class="series-cast-pill">
-                            <a class="series-cast-avatar"
-                                href="https://www.google.com/search?q=Eamon+Farren+Cahir+The+Witcher&tbm=isch"
-                                target="_blank" rel="noopener noreferrer"
-                                aria-label="Google Images: Eamon Farren as Cahir">
-                                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Eamon_Farren_in_2019.png?width=72"
-                                    alt="" width="36" height="36" decoding="async" />
-                            </a>
-                            <div>
-                                <p class="series-cast-name">Cahir</p>
-                                <p class="series-cast-role">Eamon Farren</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h3 class="series-section-label">How it differs from the books</h3>
-                    <div class="series-note-box">
-                        <p>The show merges timelines that are separate in
-                        the books and compresses events significantly. Several characters
-                        are given larger roles or combined into one. The magic system leans
-                        more on chaos as raw emotion. Broadly follows the short stories in
-                        S1 and diverges more heavily from S2 onward.</p>
-                    </div>
+                        </section>
+                    </article>
                 </div>
 
-                <!-- ANIME TAB -->
-                <div id="panel-anime" class="school-panel" role="tabpanel">
+                <!-- Nightmare of the Wolf -->
+                <div id="panel-anime" class="school-panel" role="tabpanel"
+                    aria-labelledby="tab-anime" aria-hidden="true">
+                    <article class="series-entry">
+                        <div class="series-feature">
+                            <div class="series-poster-frame">
+                                <div class="series-poster" role="button" tabindex="0"
+                                    aria-label="View Nightmare of the Wolf poster larger">
+                                    <img
+                                        src="images/series/witcher-notw.webp"
+                                        srcset="images/series/witcher-notw.webp 840w"
+                                        sizes="(max-width: 720px) min(72vw, 320px), 280px"
+                                        width="840"
+                                        height="1218"
+                                        alt="The Witcher: Nightmare of the Wolf poster."
+                                        decoding="async"
+                                    />
+                                </div>
+                            </div>
+                            <div class="series-feature-text">
+                                <h2>
+                                    <a
+                                        class="series-title-imdb"
+                                        href="https://www.imdb.com/title/tt11657662/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >Nightmare of the Wolf</a>
+                                </h2>
+                                <p class="series-meta-line">
+                                    <span class="series-badge">2021</span>
+                                    <span class="series-badge">Animated film</span>
+                                    <span class="series-badge">Studio Mir</span>
+                                    <span class="series-badge">81 min</span>
+                                    <span class="series-imdb-rating" title="IMDb user rating" aria-label="IMDb rating 7.2 out of 10">
+                                        <span class="series-imdb-rating-star" aria-hidden="true">★</span>
+                                        <span class="series-imdb-rating-value">7.2</span><span class="series-imdb-rating-max">/10</span>
+                                    </span>
+                                </p>
+                                <p class="series-synopsis">
+                                    A prequel to the live-action series: a young Vesemir survives the
+                                    Trial of the Grasses and the politics that made witchers both
+                                    necessary and feared.
+                                </p>
+                                <!-- Change 2: desktop-only trailer box -->
+                                <section class="series-trailer-box" aria-label="Nightmare of the Wolf trailer">
+                                    <h3 class="series-trailer-title">Official trailer</h3>
+                                    <div class="series-trailer-frame">
+                                        <iframe
+                                            src="https://www.youtube.com/embed/J365hQpaWRw?vq=hd1080"
+                                            title="Nightmare of the Wolf official trailer"
+                                            loading="lazy"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            referrerpolicy="strict-origin-when-cross-origin"
+                                            allowfullscreen
+                                        ></iframe>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
 
-                    <div class="series-hero-block">
-                        <div class="series-poster" role="button" tabindex="0"
-                            aria-label="View Nightmare of the Wolf poster larger">
-                            <img src="images/series/witcher-notw.webp"
-                                alt="Nightmare of the Wolf animated film poster"
-                                width="80" height="116" />
-                        </div>
-                        <div class="series-hero-info">
-                            <h2>The Witcher: Nightmare of the Wolf</h2>
-                            <div class="series-badges">
-                                <span class="series-badge">2021</span>
-                                <span class="series-badge">Animated film</span>
-                                <span class="series-badge">Studio Mir</span>
-                                <span class="series-badge">81 min</span>
-                            </div>
-                            <p>A prequel following a young Vesemir — before he became the
-                            oldest witcher at Kaer Morhen. The film explores how he came to
-                            take the Trial of the Grasses and the founding of the Wolf
-                            School.</p>
-                        </div>
-                    </div>
+                        <section class="series-subsection" aria-labelledby="notw-cast-heading">
+                            <h3 id="notw-cast-heading" class="series-section-label">Main characters</h3>
+                            <ul class="series-cast-list series-cast-list--roles">
+                                <li>
+                                    <span class="series-cast-part">Vesemir</span>
+                                    <span class="series-cast-actor">Theo James</span>
+                                </li>
+                                <li>
+                                    <span class="series-cast-part">Tetra Gilcrest</span>
+                                    <span class="series-cast-actor">Lara Pulver</span>
+                                </li>
+                                <li>
+                                    <span class="series-cast-part">Deglan</span>
+                                    <span class="series-cast-actor">
+                                        Graham McTavish</span>
+                                </li>
+                            </ul>
+                        </section>
 
-                    <h3 class="series-section-label">Main characters</h3>
-                    <div class="series-cast-grid">
-                        <div class="series-cast-pill">
-                            <div class="series-cast-avatar">V</div>
-                            <div>
-                                <p class="series-cast-name">Vesemir</p>
-                                <p class="series-cast-role">Young witcher, protagonist</p>
+                        <section class="series-subsection" aria-labelledby="notw-timeline-heading">
+                            <h3 id="notw-timeline-heading" class="series-section-label">Timeline &amp; books</h3>
+                            <div class="series-note-box">
+                                <p>
+                                    Escaping from poverty to become a witcher, Vesemir slays monsters for coin 
+                                    and glory, but when a new menace rises, he must face the demons of his past.
+                                </p>
                             </div>
-                        </div>
-                        <div class="series-cast-pill">
-                            <div class="series-cast-avatar">T</div>
-                            <div>
-                                <p class="series-cast-name">Tetra Gilcrest</p>
-                                <p class="series-cast-role">Elven mage, antagonist</p>
-                            </div>
-                        </div>
-                        <div class="series-cast-pill">
-                            <div class="series-cast-avatar">I</div>
-                            <div>
-                                <p class="series-cast-name">Illyana</p>
-                                <p class="series-cast-role">Vesemir's love interest</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h3 class="series-section-label">Where it fits in the timeline</h3>
-                    <div class="series-note-box">
-                        <p>Set <strong>roughly a century before</strong> the main series.
-                        Shows the founding era of the Wolf School and the political climate
-                        that made witchers both necessary and despised. Connects directly
-                        to the backstory Vesemir tells in Season 2 of the Netflix series.</p>
-                    </div>
+                        </section>
+                    </article>
                 </div>
 
-                <!-- SIRENS TAB -->
-                <div id="panel-sirens" class="school-panel" role="tabpanel">
+                <!-- Sirens of the Deep -->
+                <div id="panel-sirens" class="school-panel" role="tabpanel"
+                    aria-labelledby="tab-sirens" aria-hidden="true">
+                    <article class="series-entry">
+                        <div class="series-feature">
+                            <div class="series-poster-frame">
+                                <div class="series-poster" role="button" tabindex="0"
+                                    aria-label="View Sirens of the Deep poster larger">
+                                    <img
+                                        src="images/series/witcher-sotd.webp"
+                                        srcset="images/series/witcher-sotd.webp 840w"
+                                        sizes="(max-width: 720px) min(72vw, 320px), 280px"
+                                        width="840"
+                                        height="1218"
+                                        alt="The Witcher: Sirens of the Deep poster."
+                                        decoding="async"
+                                    />
+                                </div>
+                            </div>
+                            <div class="series-feature-text">
+                                <h2>
+                                    <a
+                                        class="series-title-imdb"
+                                        href="https://www.imdb.com/title/tt15495150/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >Sirens of the Deep</a>
+                                </h2>
+                                <p class="series-meta-line">
+                                    <span class="series-badge">2025</span>
+                                    <span class="series-badge">Animated film</span>
+                                    <span class="series-badge">Studio Mir</span>
+                                    <span class="series-badge">87 min</span>
+                                    <span class="series-imdb-rating" title="IMDb user rating" aria-label="IMDb rating 6.1 out of 10">
+                                        <span class="series-imdb-rating-star" aria-hidden="true">★</span>
+                                        <span class="series-imdb-rating-value">6.1</span><span class="series-imdb-rating-max">/10</span>
+                                    </span>
+                                </p>
+                                <p class="series-synopsis">
+                                    On the coast, Geralt untangles killings linked to humans and the
+                                    merpeople — drawn from the short story <em>A Little Sacrifice</em>.
+                                </p>
+                                <!-- Change 2: desktop-only trailer box -->
+                                <section class="series-trailer-box" aria-label="Sirens of the Deep trailer">
+                                    <h3 class="series-trailer-title">Official trailer</h3>
+                                    <div class="series-trailer-frame">
+                                        <iframe
+                                            src="https://www.youtube.com/embed/PYzqa1CDTik?vq=hd1080"
+                                            title="Sirens of the Deep official trailer"
+                                            loading="lazy"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            referrerpolicy="strict-origin-when-cross-origin"
+                                            allowfullscreen
+                                        ></iframe>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
 
-                    <div class="series-hero-block">
-                        <div class="series-poster" role="button" tabindex="0"
-                            aria-label="View Sirens of the Deep poster larger">
-                            <img src="images/series/witcher-sotd.webp"
-                                alt="The Witcher: Sirens of the Deep animated film poster"
-                                width="80" height="116" />
-                        </div>
-                        <div class="series-hero-info">
-                            <h2>The Witcher: Sirens of the Deep</h2>
-                            <div class="series-badges">
-                                <span class="series-badge">2025</span>
-                                <span class="series-badge">Animated film</span>
-                                <span class="series-badge">Studio Mir</span>
-                                <span class="series-badge">87 min</span>
-                            </div>
-                            <p>An animated adaptation of the short story <em>A Little Sacrifice</em>
-                            from the collection Sword of Destiny. Geralt investigates a series of
-                            murders on the coast and becomes entangled in the conflict between
-                            humans and the underwater realm of the merpeople.</p>
-                        </div>
-                    </div>
+                        <section class="series-subsection" aria-labelledby="sotd-cast-heading">
+                            <h3 id="sotd-cast-heading" class="series-section-label">Main characters</h3>
+                            <ul class="series-cast-list series-cast-list--roles">
+                                <li>
+                                    <span class="series-cast-part">Geralt of Rivia</span>
+                                    <span class="series-cast-actor">Witcher for hire</span>
+                                </li>
+                                <li>
+                                    <span class="series-cast-part">Jaskier</span>
+                                    <span class="series-cast-actor">Companion</span>
+                                </li>
+                                <li>
+                                    <span class="series-cast-part">Agloval</span>
+                                    <span class="series-cast-actor">Client nobleman</span>
+                                </li>
+                                <li>
+                                    <span class="series-cast-part">Sh&rsquo;eenaz</span>
+                                    <span class="series-cast-actor">Merwoman</span>
+                                </li>
+                            </ul>
+                        </section>
 
-                    <h3 class="series-section-label">Main characters</h3>
-                    <div class="series-cast-grid">
-                        <div class="series-cast-pill">
-                            <div class="series-cast-avatar">G</div>
-                            <div>
-                                <p class="series-cast-name">Geralt of Rivia</p>
-                                <p class="series-cast-role">Protagonist, witcher</p>
+                        <section class="series-subsection" aria-labelledby="sotd-timeline-heading">
+                            <h3 id="sotd-timeline-heading" class="series-section-label">Timeline &amp; books</h3>
+                            <div class="series-note-box">
+                                <p>
+                                    Hired to probe seaside village attacks, mutant monster hunter 
+                                    Geralt unravels an age-old conflict between humans and sea people 
+                                    that threatens war between kingdoms. Aided by allies, 
+                                    he must solve the mystery before hostilities escalate.
+                                </p>
                             </div>
-                        </div>
-                        <div class="series-cast-pill">
-                            <div class="series-cast-avatar">D</div>
-                            <div>
-                                <p class="series-cast-name">Duny / Urcheon</p>
-                                <p class="series-cast-role">Cursed knight</p>
-                            </div>
-                        </div>
-                        <div class="series-cast-pill">
-                            <div class="series-cast-avatar">P</div>
-                            <div>
-                                <p class="series-cast-name">Pavetta</p>
-                                <p class="series-cast-role">Princess of Cintra</p>
-                            </div>
-                        </div>
-                        <div class="series-cast-pill">
-                            <div class="series-cast-avatar">J</div>
-                            <div>
-                                <p class="series-cast-name">Jaskier</p>
-                                <p class="series-cast-role">Bard, Geralt's companion</p>
-                            </div>
-                        </div>
-                        <div class="series-cast-pill">
-                            <div class="series-cast-avatar">A</div>
-                            <div>
-                                <p class="series-cast-name">Agloval</p>
-                                <p class="series-cast-role">Nobleman, client</p>
-                            </div>
-                        </div>
-                        <div class="series-cast-pill">
-                            <div class="series-cast-avatar">S</div>
-                            <div>
-                                <p class="series-cast-name">Sh'eenaz</p>
-                                <p class="series-cast-role">Mermaid, Agloval's love</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h3 class="series-section-label">Where it fits in the timeline</h3>
-                    <div class="series-note-box">
-                        <p>Based on <strong><em>A Little Sacrifice</em></strong> from
-                        <a href="books.html">Sword of Destiny</a> — set during Geralt's
-                        earlier years as a witcher for hire, before Ciri enters his life.
-                        The second animated film produced by Studio Mir for Netflix,
-                        continuing the anthology approach started by Nightmare of the Wolf.</p>
-                    </div>
+                        </section>
+                    </article>
                 </div>
             </div>
 

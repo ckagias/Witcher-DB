@@ -617,7 +617,9 @@ function attachImageLightbox(root, source, thumbSelector) {
         if (!img) {
             return;
         }
-        modalImg.src = img.getAttribute("src") || "";
+        // Prefer the URL the browser chose from srcset (best available resolution).
+        var chosenSrc = img.currentSrc || img.getAttribute("src") || "";
+        modalImg.src = chosenSrc;
         modalImg.alt = img.getAttribute("alt") || "";
         var cap = img.nextElementSibling;
         var text = "";
@@ -836,8 +838,12 @@ document.addEventListener("click", function (e) {
  */
 function switchSeriesTab(tab) {
     var tabIds = ['series', 'anime', 'sirens'];
-    var btns = document.querySelectorAll('.school-tab-btn');
-    var panels = document.querySelectorAll('.school-panel');
+    var wrap = document.getElementById('series-lightbox-source');
+    if (!wrap) {
+        return;
+    }
+    var btns = wrap.querySelectorAll('.school-tab-btn');
+    var panels = wrap.querySelectorAll('.school-panel');
     var i;
     for (i = 0; i < btns.length; i++) {
         btns[i].classList.remove('active');
@@ -845,10 +851,12 @@ function switchSeriesTab(tab) {
     }
     for (i = 0; i < panels.length; i++) {
         panels[i].classList.remove('active');
+        panels[i].setAttribute('aria-hidden', 'true');
     }
     var activePanel = document.getElementById('panel-' + tab);
     if (activePanel) {
         activePanel.classList.add('active');
+        activePanel.setAttribute('aria-hidden', 'false');
     }
     var tabIndex = tabIds.indexOf(tab);
     if (tabIndex !== -1 && btns[tabIndex]) {
