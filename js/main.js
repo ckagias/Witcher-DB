@@ -155,6 +155,7 @@ function initCharacterPortraitSliders() {
         if (!thumbWrap || !link) {
             return;
         }
+        var compareLabel = card.querySelector(".char-compare-label");
         var img = thumbWrap.querySelector(":scope > img");
         if (!img) {
             return;
@@ -175,6 +176,9 @@ function initCharacterPortraitSliders() {
         }
         inner.appendChild(img);
         thumbWrap.appendChild(inner);
+        if (compareLabel) {
+            thumbWrap.appendChild(compareLabel);
+        }
         card.setAttribute("data-single-portrait-init", "1");
     });
 }
