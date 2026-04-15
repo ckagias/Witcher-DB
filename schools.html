@@ -49,11 +49,11 @@
                 </div>
             </div>
 
-            <div class="page-inner">
+            <div class="page-inner schools-page">
                 <h1>Witcher Schools</h1>
-                <p>
-                    Each school forges its witchers differently — with its own methods, creed, and reputation.
-                    Select a school to view its profile, or use the comparison table to jump between them.
+                <p class="schools-lede">
+                    After the Trial, witchers are shaped by the school that raised them: different keeps, different
+                    doctrines, different reputations across the Continent.
                 </p>
 
                 <!-- Tab buttons -->
@@ -113,17 +113,6 @@
                     >
                         Viper
                     </button>
-                    <button
-                        type="button"
-                        class="school-tab-btn"
-                        role="tab"
-                        aria-selected="false"
-                        aria-controls="panel-manticore"
-                        id="tab-manticore"
-                        onclick="switchSchool('manticore')"
-                    >
-                        Manticore
-                    </button>
                 </div>
 
                 <!-- Wolf panel -->
@@ -134,16 +123,30 @@
                     aria-labelledby="tab-wolf"
                 >
                     <div class="school-profile">
-                        <div class="school-profile-header">
-                            <div class="school-emblem" aria-hidden="true">
-                                <img
-                                    src="images/schools/wolf.webp"
-                                    alt=""
-                                    width="40"
-                                    height="40"
-                                    decoding="async"
-                                />
+                        <aside class="school-infobox">
+                            <div class="school-infobox-emblem">
+                                <div class="school-emblem" aria-hidden="true">
+                                    <img
+                                        src="images/schools/wolf.webp"
+                                        alt=""
+                                        width="120"
+                                        height="120"
+                                        decoding="async"
+                                    />
+                                </div>
                             </div>
+                            <dl>
+                                <dt>Stronghold</dt>
+                                <dd>Kaer Morhen, Kaedwen</dd>
+                                <dt>Combat style</dt>
+                                <dd>Balanced, swords & signs</dd>
+                                <dt>Reputation</dt>
+                                <dd>Neutral, professional</dd>
+                                <dt>Status</dt>
+                                <dd>Near extinct, few survivors</dd>
+                            </dl>
+                        </aside>
+                        <div class="school-profile-header">
                             <div>
                                 <h2>School of the Wolf</h2>
                                 <p>The most well-known and widely respected witcher school.</p>
@@ -157,33 +160,17 @@
                             centuries ago and was never rebuilt to full strength; the brothers who remain treat it
                             more like a winter home than a fortress.
                         </p>
-                        <div class="school-meta-grid">
-                            <div class="school-meta-item">
-                                <strong>Stronghold</strong>
-                                <span>Kaer Morhen, Kaedwen</span>
-                            </div>
-                            <div class="school-meta-item">
-                                <strong>Combat style</strong>
-                                <span>Balanced — sword & Signs</span>
-                            </div>
-                            <div class="school-meta-item">
-                                <strong>Reputation</strong>
-                                <span>Neutral, professional</span>
-                            </div>
-                            <div class="school-meta-item">
-                                <strong>Status</strong>
-                                <span>Near extinct — few survivors</span>
-                            </div>
-                        </div>
                         <div class="school-known-witchers">
                             <h3>Known witchers</h3>
-                            <p>
-                                <span class="witcher-name-tag">Geralt of Rivia</span>
-                                <span class="witcher-name-tag">Vesemir</span>
-                                <span class="witcher-name-tag">Eskel</span>
-                                <span class="witcher-name-tag">Lambert</span>
-                                <span class="witcher-name-tag">Coen</span>
-                            </p>
+                            <p>Geralt of Rivia · Vesemir · Eskel · Lambert · Coen</p>
+                        </div>
+                        <blockquote class="school-quote">
+                            <p class="school-quote__text">"Evil is evil. Lesser, greater, middling, it's all the same."</p>
+                            <footer class="school-quote__footer">— Geralt of Rivia</footer>
+                        </blockquote>
+                        <div class="school-history">
+                            <span class="school-history__label">Historical note</span>
+                            <p class="school-history__text">Kaer Morhen was sacked roughly a century before the events of the games by a mob of mages and zealots who blamed witchers for corrupting children. The massacre left the school permanently understaffed, and the keep was never rebuilt to full fighting strength.</p>
                         </div>
                     </div>
                 </div>
@@ -196,16 +183,30 @@
                     aria-labelledby="tab-cat"
                 >
                     <div class="school-profile">
-                        <div class="school-profile-header">
-                            <div class="school-emblem" aria-hidden="true">
-                                <img
-                                    src="images/schools/cat.webp"
-                                    alt=""
-                                    width="40"
-                                    height="40"
-                                    decoding="async"
-                                />
+                        <aside class="school-infobox">
+                            <div class="school-infobox-emblem">
+                                <div class="school-emblem" aria-hidden="true">
+                                    <img
+                                        src="images/schools/cat.webp"
+                                        alt=""
+                                        width="120"
+                                        height="120"
+                                        decoding="async"
+                                    />
+                                </div>
                             </div>
+                            <dl>
+                                <dt>Stronghold</dt>
+                                <dd>Var Attre (ruins)</dd>
+                                <dt>Combat style</dt>
+                                <dd>Fast, light armour</dd>
+                                <dt>Reputation</dt>
+                                <dd>Feared, untrustworthy</dd>
+                                <dt>Status</dt>
+                                <dd>Largely scattered</dd>
+                            </dl>
+                        </aside>
+                        <div class="school-profile-header">
                             <div>
                                 <h2>School of the Cat</h2>
                                 <p>Fast, ruthless and morally ambiguous.</p>
@@ -219,31 +220,17 @@
                             into ruin long ago, and what remains of the school is scattered across
                             the Continent.
                         </p>
-                        <div class="school-meta-grid">
-                            <div class="school-meta-item">
-                                <strong>Stronghold</strong>
-                                <span>Var Attre (ruins)</span>
-                            </div>
-                            <div class="school-meta-item">
-                                <strong>Combat style</strong>
-                                <span>Fast, aggressive, light armour</span>
-                            </div>
-                            <div class="school-meta-item">
-                                <strong>Reputation</strong>
-                                <span>Feared, untrustworthy</span>
-                            </div>
-                            <div class="school-meta-item">
-                                <strong>Status</strong>
-                                <span>Largely scattered</span>
-                            </div>
-                        </div>
                         <div class="school-known-witchers">
                             <h3>Known witchers</h3>
-                            <p>
-                                <span class="witcher-name-tag">Gaetan</span>
-                                <span class="witcher-name-tag">Brehen</span>
-                                <span class="witcher-name-tag">Kiyan</span>
-                            </p>
+                            <p>Gaetan · Brehen · Kiyan</p>
+                        </div>
+                        <blockquote class="school-quote">
+                            <p class="school-quote__text">"We're not so different, you and I. We both kill for coin."</p>
+                            <footer class="school-quote__footer">— Gaetan</footer>
+                        </blockquote>
+                        <div class="school-history">
+                            <span class="school-history__label">Historical note</span>
+                            <p class="school-history__text">The Cat school's stronghold at Var Attre was destroyed after its witchers were implicated in a series of contract killings on human targets — a violation of the witchers' unwritten code that turned most of the Continent against them.</p>
                         </div>
                     </div>
                 </div>
@@ -256,16 +243,30 @@
                     aria-labelledby="tab-bear"
                 >
                     <div class="school-profile">
-                        <div class="school-profile-header">
-                            <div class="school-emblem" aria-hidden="true">
-                                <img
-                                    src="images/schools/bear.webp"
-                                    alt=""
-                                    width="40"
-                                    height="40"
-                                    decoding="async"
-                                />
+                        <aside class="school-infobox">
+                            <div class="school-infobox-emblem">
+                                <div class="school-emblem" aria-hidden="true">
+                                    <img
+                                        src="images/schools/bear.webp"
+                                        alt=""
+                                        width="120"
+                                        height="120"
+                                        decoding="async"
+                                    />
+                                </div>
                             </div>
+                            <dl>
+                                <dt>Stronghold</dt>
+                                <dd>Haern Caduch, Amell Mountains</dd>
+                                <dt>Combat style</dt>
+                                <dd>Heavy armour, raw power</dd>
+                                <dt>Reputation</dt>
+                                <dd>Reliable, stoic</dd>
+                                <dt>Status</dt>
+                                <dd>Active but small in number</dd>
+                            </dl>
+                        </aside>
+                        <div class="school-profile-header">
                             <div>
                                 <h2>School of the Bear</h2>
                                 <p>Heavy, enduring and built for survival.</p>
@@ -279,30 +280,17 @@
                             resistant to anything subtle. Haern Caduch, their stronghold in the
                             Amell Mountains, is one of the few witcher keeps still in active use.
                         </p>
-                        <div class="school-meta-grid">
-                            <div class="school-meta-item">
-                                <strong>Stronghold</strong>
-                                <span>Haern Caduch, Amell Mountains</span>
-                            </div>
-                            <div class="school-meta-item">
-                                <strong>Combat style</strong>
-                                <span>Heavy armour, slow power strikes</span>
-                            </div>
-                            <div class="school-meta-item">
-                                <strong>Reputation</strong>
-                                <span>Reliable, stoic</span>
-                            </div>
-                            <div class="school-meta-item">
-                                <strong>Status</strong>
-                                <span>Active but small in number</span>
-                            </div>
-                        </div>
                         <div class="school-known-witchers">
                             <h3>Known witchers</h3>
-                            <p>
-                                <span class="witcher-name-tag">Gerd</span>
-                                <span class="witcher-name-tag">Louis Merse</span>
-                            </p>
+                            <p>Gerd · Louis Merse</p>
+                        </div>
+                        <blockquote class="school-quote">
+                            <p class="school-quote__text">"We pass through life alone, better get used to it!"</p>
+                            <footer class="school-quote__footer">— Bear school adage</footer>
+                        </blockquote>
+                        <div class="school-history">
+                            <span class="school-history__label">Historical note</span>
+                            <p class="school-history__text">Bear witchers were among the last to abandon the far northern territories during the great migration southward, staying to fulfil contracts in Kovir and Poviss long after other schools had retreated. Their reputation for never breaking a contract traces back to that period.</p>
                         </div>
                     </div>
                 </div>
@@ -315,16 +303,30 @@
                     aria-labelledby="tab-griffin"
                 >
                     <div class="school-profile">
-                        <div class="school-profile-header">
-                            <div class="school-emblem" aria-hidden="true">
-                                <img
-                                    src="images/schools/griffin.webp"
-                                    alt=""
-                                    width="40"
-                                    height="40"
-                                    decoding="async"
-                                />
+                        <aside class="school-infobox">
+                            <div class="school-infobox-emblem">
+                                <div class="school-emblem" aria-hidden="true">
+                                    <img
+                                        src="images/schools/griffin.webp"
+                                        alt=""
+                                        width="120"
+                                        height="120"
+                                        decoding="async"
+                                    />
+                                </div>
                             </div>
+                            <dl>
+                                <dt>Stronghold</dt>
+                                <dd>Kaer Seren, Kovir</dd>
+                                <dt>Combat style</dt>
+                                <dd>Signs, medium armour</dd>
+                                <dt>Reputation</dt>
+                                <dd>Principled, scholarly</dd>
+                                <dt>Status</dt>
+                                <dd>Active</dd>
+                            </dl>
+                        </aside>
+                        <div class="school-profile-header">
                             <div>
                                 <h2>School of the Griffin</h2>
                                 <p>Sign-focused, scholarly and principled.</p>
@@ -337,30 +339,17 @@
                             they're known for holding to a code that other schools find impractical.
                             Whether that's admirable or naïve depends who you ask.
                         </p>
-                        <div class="school-meta-grid">
-                            <div class="school-meta-item">
-                                <strong>Stronghold</strong>
-                                <span>Kaer Seren, Kovir</span>
-                            </div>
-                            <div class="school-meta-item">
-                                <strong>Combat style</strong>
-                                <span>Sign-heavy, medium armour</span>
-                            </div>
-                            <div class="school-meta-item">
-                                <strong>Reputation</strong>
-                                <span>Principled, scholarly</span>
-                            </div>
-                            <div class="school-meta-item">
-                                <strong>Status</strong>
-                                <span>Active</span>
-                            </div>
-                        </div>
                         <div class="school-known-witchers">
                             <h3>Known witchers</h3>
-                            <p>
-                                <span class="witcher-name-tag">Erland of Larvik (founder)</span>
-                                <span class="witcher-name-tag">Coën</span>
-                            </p>
+                            <p>Erland of Larvik (founder) · Coën</p>
+                        </div>
+                        <blockquote class="school-quote">
+                            <p class="school-quote__text">"A witcher who ignores Signs is a witcher half-blind."</p>
+                            <footer class="school-quote__footer">— Erland of Larvik, founder</footer>
+                        </blockquote>
+                        <div class="school-history">
+                            <span class="school-history__label">Historical note</span>
+                            <p class="school-history__text">Founded by Erland of Larvik, the Griffin school was established in Kovir with the express philosophy that Signs were not a tool of last resort but the cornerstone of a witcher's craft — a direct ideological split from the Wolf school's balanced approach.</p>
                         </div>
                     </div>
                 </div>
@@ -373,16 +362,30 @@
                     aria-labelledby="tab-viper"
                 >
                     <div class="school-profile">
-                        <div class="school-profile-header">
-                            <div class="school-emblem" aria-hidden="true">
-                                <img
-                                    src="images/schools/viper.webp"
-                                    alt=""
-                                    width="40"
-                                    height="40"
-                                    decoding="async"
-                                />
+                        <aside class="school-infobox">
+                            <div class="school-infobox-emblem">
+                                <div class="school-emblem" aria-hidden="true">
+                                    <img
+                                        src="images/schools/viper.webp"
+                                        alt=""
+                                        width="120"
+                                        height="120"
+                                        decoding="async"
+                                    />
+                                </div>
                             </div>
+                            <dl>
+                                <dt>Stronghold</dt>
+                                <dd>Unknown</dd>
+                                <dt>Combat style</dt>
+                                <dd>Poisons, raw strength</dd>
+                                <dt>Reputation</dt>
+                                <dd>Dangerous, secretive</dd>
+                                <dt>Status</dt>
+                                <dd>Near extinct</dd>
+                            </dl>
+                        </aside>
+                        <div class="school-profile-header">
                             <div>
                                 <h2>School of the Viper</h2>
                                 <p>Secretive, poison-specialised and shrouded in mystery.</p>
@@ -396,164 +399,18 @@
                             Kingslayer, is the only member most people have heard of, and he
                             came very close to bringing down the Northern Kingdoms.
                         </p>
-                        <div class="school-meta-grid">
-                            <div class="school-meta-item">
-                                <strong>Stronghold</strong>
-                                <span>Unknown (possibly destroyed)</span>
-                            </div>
-                            <div class="school-meta-item">
-                                <strong>Combat style</strong>
-                                <span>Poisons, deception, raw strength</span>
-                            </div>
-                            <div class="school-meta-item">
-                                <strong>Reputation</strong>
-                                <span>Dangerous, secretive</span>
-                            </div>
-                            <div class="school-meta-item">
-                                <strong>Status</strong>
-                                <span>Near extinct — possibly one survivor</span>
-                            </div>
-                        </div>
                         <div class="school-known-witchers">
                             <h3>Known witchers</h3>
-                            <p>
-                                <span class="witcher-name-tag">Letho of Gulet</span>
-                                <span class="witcher-name-tag">Auckes</span>
-                                <span class="witcher-name-tag">Serrit</span>
-                            </p>
+                            <p>Letho of Gulet · Auckes · Serrit</p>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Manticore panel -->
-                <div
-                    class="school-panel school-panel-manticore"
-                    id="panel-manticore"
-                    role="tabpanel"
-                    aria-labelledby="tab-manticore"
-                >
-                    <div class="school-profile">
-                        <div class="school-profile-header">
-                            <div class="school-emblem" aria-hidden="true">
-                                <img
-                                    src="images/schools/manticore.webp"
-                                    alt=""
-                                    width="40"
-                                    height="40"
-                                    decoding="async"
-                                />
-                            </div>
-                            <div>
-                                <h2>School of the Manticore</h2>
-                                <p>Desert guardians — Zerrikanian “alqatil” bound to the Korath.</p>
-                            </div>
+                        <blockquote class="school-quote">
+                            <p class="school-quote__text">"People are fools, they deserve what they get."</p>
+                            <footer class="school-quote__footer">— Viper school adage</footer>
+                        </blockquote>
+                        <div class="school-history">
+                            <span class="school-history__label">Historical note</span>
+                            <p class="school-history__text">The Viper school's history is almost entirely undocumented. What little is known comes from Letho of Gulet, who revealed that the school was effectively destroyed by the Nilfgaardian Empire and that he operated under imperial orders during the kings' assassinations.</p>
                         </div>
-                        <p>
-                            When Iwan broke from the group that would become the Viper school, he led his
-                            followers south to the edge of the Korath desert. Zerrikania gave them two
-                            keeps — Behelt Nar and Bialsuf Alsarea — in exchange for escorting royal
-                            caravans through the sands. Manticore witchers built their craft around
-                            endurance and preparation: heavy potion use, shields of meteoritic steel and
-                            silver, and a defensive style suited to the desert's demands. The Day of Fire
-                            in 1146 wiped out most of the order along with much of the Zerrikanian court.
-                            The few survivors wintered at Behelt Nar and kept taking contracts, but the
-                            school never recovered its numbers.
-                        </p>
-                        <div class="school-meta-grid">
-                            <div class="school-meta-item">
-                                <strong>Stronghold</strong>
-                                <span>Behelt Nar & Bialsuf Alsarea (Korath desert)</span>
-                            </div>
-                            <div class="school-meta-item">
-                                <strong>Combat style</strong>
-                                <span>Potions, shields, caravan defence</span>
-                            </div>
-                            <div class="school-meta-item">
-                                <strong>Reputation</strong>
-                                <span>Mysterious to Nordlings; elite escorts</span>
-                            </div>
-                            <div class="school-meta-item">
-                                <strong>Status</strong>
-                                <span>Decimated — handful of survivors</span>
-                            </div>
-                        </div>
-                        <div class="school-known-witchers">
-                            <h3>Known witchers</h3>
-                            <p>
-                                <span class="witcher-name-tag">Iwan (founder, later Imad Asem)</span>
-                                <span class="witcher-name-tag">Merten</span>
-                                <span class="witcher-name-tag">Sorensen</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Comparison table -->
-                <div class="school-comparison">
-                    <h2>School Comparison</h2>
-                    <div class="comparison-table-wrap">
-                        <table class="comparison-table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">School</th>
-                                    <th scope="col">Stronghold</th>
-                                    <th scope="col">Combat focus</th>
-                                    <th scope="col">Armour</th>
-                                    <th scope="col">Reputation</th>
-                                    <th scope="col">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr data-school="wolf" onclick="switchSchool('wolf')" style="cursor:pointer">
-                                    <td>Wolf</td>
-                                    <td>Kaer Morhen</td>
-                                    <td>Balanced</td>
-                                    <td>Medium</td>
-                                    <td>Neutral, respected</td>
-                                    <td>Near extinct</td>
-                                </tr>
-                                <tr data-school="cat" onclick="switchSchool('cat')" style="cursor:pointer">
-                                    <td>Cat</td>
-                                    <td>Var Attre</td>
-                                    <td>Speed & aggression</td>
-                                    <td>Light</td>
-                                    <td>Feared, distrusted</td>
-                                    <td>Scattered</td>
-                                </tr>
-                                <tr data-school="bear" onclick="switchSchool('bear')" style="cursor:pointer">
-                                    <td>Bear</td>
-                                    <td>Haern Caduch</td>
-                                    <td>Power & endurance</td>
-                                    <td>Heavy</td>
-                                    <td>Stoic, reliable</td>
-                                    <td>Active</td>
-                                </tr>
-                                <tr data-school="griffin" onclick="switchSchool('griffin')" style="cursor:pointer">
-                                    <td>Griffin</td>
-                                    <td>Kaer Seren</td>
-                                    <td>Signs & swords</td>
-                                    <td>Medium</td>
-                                    <td>Principled, scholarly</td>
-                                    <td>Active</td>
-                                </tr>
-                                <tr data-school="viper" onclick="switchSchool('viper')" style="cursor:pointer">
-                                    <td>Viper</td>
-                                    <td>Unknown</td>
-                                    <td>Poison & deception</td>
-                                    <td>Light–medium</td>
-                                    <td>Secretive, dangerous</td>
-                                    <td>Near extinct</td>
-                                </tr>
-                                <tr data-school="manticore" onclick="switchSchool('manticore')" style="cursor:pointer">
-                                    <td>Manticore</td>
-                                    <td>Behelt Nar / Bialsuf Alsarea</td>
-                                    <td>Potions & defence</td>
-                                    <td>Light–medium</td>
-                                    <td>Enigmatic escorts</td>
-                                    <td>Few survivors</td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>

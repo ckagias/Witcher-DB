@@ -447,137 +447,6 @@ function fillBestiaryChipCounts() {
     }
 }
 
-/**
- * Highlights query matches by wrapping matched text in <mark>.
- */
-function highlightText(element, query) {
-    // Traverse text nodes so we can insert markup without rebuilding whole HTML.
-    var walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
-    var textNodes = [];
-    var node;
-    while ((node = walker.nextNode())) {
-        textNodes.push(node);
-    }
-    for (var i = 0; i < textNodes.length; i++) {
-        var original = textNodes[i].nodeValue;
-        var lower = original.toLowerCase();
-        var idx = lower.indexOf(query);
-        if (idx !== -1) {
-            // Split the original text into before/match/after nodes.
-            var before = document.createTextNode(original.substring(0, idx));
-            var mark = document.createElement("mark");
-            mark.textContent = original.substring(idx, idx + query.length);
-            var after = document.createTextNode(original.substring(idx + query.length));
-            var parent = textNodes[i].parentNode;
-            parent.replaceChild(after, textNodes[i]);
-            parent.insertBefore(mark, after);
-            parent.insertBefore(before, mark);
-        }
-    }
-}
-
-/**
- * Removes all generated <mark> elements and restores plain text.
- */
-function restoreText(element) {
-    var marks = element.querySelectorAll("mark");
-    for (var i = 0; i < marks.length; i++) {
-        var mark = marks[i];
-        var parent = mark.parentNode;
-        parent.replaceChild(document.createTextNode(mark.textContent), mark);
-        parent.normalize();
-    }
-}
-
-/**
- * Initializes live search for lore sections with highlighting support.
- */
-function initLorePage() {
-    var loreSearchInput = document.getElementById("lore-page-search");
-
-    if (loreSearchInput) {
-        loreSearchInput.addEventListener("input", function () {
-            var query = this.value.trim().toLowerCase();
-            var sections = document.querySelectorAll(".lore-section");
-            var noResults = document.getElementById("lore-no-results");
-            var visibleCount = 0;
-
-            for (var i = 0; i < sections.length; i++) {
-                var section = sections[i];
-
-                // Restore any previous highlights before re-checking
-                restoreText(section);
-
-                if (query === "") {
-                    // Empty query means all sections should stay visible.
-                    section.removeAttribute("hidden");
-                    visibleCount++;
-                } else {
-                    var text = section.textContent.toLowerCase();
-                    if (text.indexOf(query) !== -1) {
-                        // Keep section visible and highlight matched text.
-                        section.removeAttribute("hidden");
-                        highlightText(section, query);
-                        visibleCount++;
-                    } else {
-                        section.setAttribute("hidden", "");
-                    }
-                }
-            }
-
-            if (noResults) {
-                // Show no-results helper only when query has no visible sections.
-                if (visibleCount === 0 && query !== "") {
-                    noResults.removeAttribute("hidden");
-                } else {
-                    noResults.setAttribute("hidden", "");
-                }
-            }
-        });
-    }
-}
-
-/**
- * Initializes login form interactions when a login page is present.
- * Handles show/hide password and simple required-field validation.
- */
-function initLoginPage() {
-    var form = document.querySelector(".login-page form");
-    var err = document.getElementById("login-error");
-    var username = document.getElementById("username");
-    var password = document.getElementById("password");
-    var togglePw = document.getElementById("toggle-pw");
-    // Exit safely on pages without login markup.
-    if (!form || !err) {
-        return;
-    }
-    if (togglePw && password) {
-        // Toggle password visibility text + input type.
-        togglePw.addEventListener("click", function () {
-            if (password.type === "password") {
-                password.type = "text";
-                togglePw.textContent = "Hide";
-            } else {
-                password.type = "password";
-                togglePw.textContent = "Show";
-            }
-        });
-    }
-    // Validate fields locally and redirect on success.
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        var u = username ? String(username.value || "").trim() : "";
-        var p = password ? String(password.value || "").trim() : "";
-        if (!u || !p) {
-            err.textContent = "Please fill in all fields.";
-            err.style.display = "block";
-            return;
-        }
-        err.style.display = "none";
-        window.location.href = "home.html";
-    });
-}
-
 var imageLightboxConfigs = [
     { lightboxId: "gallery-lightbox", sourceId: "gallery-page-grid", thumbSelector: ".gallery-img" },
     { lightboxId: "gwent-lightbox", sourceId: "gwent-lightbox-source", thumbSelector: ".faction-hero-img" },
@@ -687,13 +556,6 @@ function initImageLightboxes() {
 }
 
 /**
- * Backward-compatible wrapper used by existing initializer calls.
- */
-function initGalleryLightbox() {
-    initImageLightboxes();
-}
-
-/**
  * Initializes the back-to-top button visibility and smooth scrolling behavior.
  */
 function initBackToTopButton() {
@@ -720,36 +582,30 @@ function initBackToTopButton() {
 // Run all page initializers once DOM is ready.
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
-        initLoginPage();
         initCharacterPortraitSliders();
         initCharactersPage();
         initBooksPage();
-        initLorePage();
         initBestiaryPage();
         fillBestiaryChipCounts();
-        initGalleryLightbox();
+        initImageLightboxes();
         initBackToTopButton();
     });
 } else {
-    initLoginPage();
     initCharacterPortraitSliders();
     initCharactersPage();
     initBooksPage();
-    initLorePage();
     initBestiaryPage();
     fillBestiaryChipCounts();
-    initGalleryLightbox();
+    initImageLightboxes();
     initBackToTopButton();
 }
 
 /**
- * Switches active school tab/panel and highlights its comparison table row.
- * Also keeps ARIA attributes current for assistive technologies.
+ * Switches active school tab/panel. Keeps ARIA attributes current for assistive technologies.
  */
 function switchSchool(schoolId) {
     var panels = document.querySelectorAll('.school-panel');
     var buttons = document.querySelectorAll('.school-tab-btn');
-    var rows = document.querySelectorAll('.comparison-table tbody tr');
 
     // Reset panel visibility state.
     for (var i = 0; i < panels.length; i++) {
@@ -761,11 +617,6 @@ function switchSchool(schoolId) {
     for (var j = 0; j < buttons.length; j++) {
         buttons[j].classList.remove('active');
         buttons[j].setAttribute('aria-selected', 'false');
-    }
-
-    // Clear previous active row highlight.
-    for (var k = 0; k < rows.length; k++) {
-        rows[k].classList.remove('table-row-active');
     }
 
     var activePanel = document.getElementById('panel-' + schoolId);
@@ -781,11 +632,6 @@ function switchSchool(schoolId) {
     if (activeBtn) {
         activeBtn.classList.add('active');
         activeBtn.setAttribute('aria-selected', 'true');
-    }
-
-    var activeRow = document.querySelector('.comparison-table tbody tr[data-school="' + schoolId + '"]');
-    if (activeRow) {
-        activeRow.classList.add('table-row-active');
     }
 }
 
