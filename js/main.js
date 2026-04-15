@@ -604,8 +604,8 @@ if (document.readyState === "loading") {
  * Switches active school tab/panel. Keeps ARIA attributes current for assistive technologies.
  */
 function switchSchool(schoolId) {
-    var panels = document.querySelectorAll('.school-panel');
-    var buttons = document.querySelectorAll('.school-tab-btn');
+    var panels = document.querySelectorAll('.tab-panel');
+    var buttons = document.querySelectorAll('.tab-btn');
 
     // Reset panel visibility state.
     for (var i = 0; i < panels.length; i++) {
@@ -688,8 +688,8 @@ function switchSeriesTab(tab) {
     if (!wrap) {
         return;
     }
-    var btns = wrap.querySelectorAll('.school-tab-btn');
-    var panels = wrap.querySelectorAll('.school-panel');
+    var btns = wrap.querySelectorAll('.tab-btn');
+    var panels = wrap.querySelectorAll('.tab-panel');
     var i;
     for (i = 0; i < btns.length; i++) {
         btns[i].classList.remove('active');

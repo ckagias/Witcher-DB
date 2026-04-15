@@ -1832,7 +1832,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     clear: both;
 }
 
-.school-tabs {
+.tabs {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -1844,11 +1844,11 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     margin-right: auto;
 }
 
-.schools-page .school-tabs {
+.schools-page .tabs {
     margin-bottom: 1rem;
 }
 
-.school-tab-btn {
+.tab-btn {
     flex: 0 1 auto;
     display: flex;
     align-items: center;
@@ -1870,25 +1870,25 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-.school-tab-btn:hover {
+.tab-btn:hover {
     background: transparent;
     border-bottom-color: rgba(201, 168, 76, 0.45);
     color: var(--gold-soft);
 }
 
-.school-tab-btn.active {
+.tab-btn.active {
     background: transparent;
     border-bottom: 2px solid var(--school-accent, #c9a84c);
     color: var(--gold-soft);
     font-weight: 600;
 }
 
-.school-panel {
+.tab-panel {
     display: none;
     opacity: 0;
 }
 
-.school-panel.active {
+.tab-panel.active {
     display: block;
     opacity: 1;
     animation: schoolFadeIn 0.25s ease forwards;
@@ -1989,11 +1989,11 @@ button.bestiary-chip.back-to-top-btn[hidden] {
         gap: 0.65rem;
     }
 
-    .school-tabs {
+    .tabs {
         gap: 0.35rem;
     }
 
-    .school-tab-btn {
+    .tab-btn {
         min-width: 4rem;
         font-size: 0.78rem;
         padding: 0.45rem 0.6rem;
@@ -2079,38 +2079,38 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 
 /* ── Per-school accent colours ───────────────── */
 
-.school-panel-wolf {
+.tab-panel--wolf {
     --school-accent: #a8a9ad;
 }
-.school-panel-wolf .school-emblem {
+.tab-panel--wolf .school-emblem {
     border-color: #a8a9ad;
 }
 
-.school-panel-cat {
+.tab-panel--cat {
     --school-accent: #d4820a;
 }
-.school-panel-cat .school-emblem {
+.tab-panel--cat .school-emblem {
     border-color: #d4820a;
 }
 
-.school-panel-bear {
+.tab-panel--bear {
     --school-accent: #8b5e3c;
 }
-.school-panel-bear .school-emblem {
+.tab-panel--bear .school-emblem {
     border-color: #8b5e3c;
 }
 
-.school-panel-griffin {
+.tab-panel--griffin {
     --school-accent: #4a7fa5;
 }
-.school-panel-griffin .school-emblem {
+.tab-panel--griffin .school-emblem {
     border-color: #4a7fa5;
 }
 
-.school-panel-viper {
+.tab-panel--viper {
     --school-accent: #4a7a4a;
 }
-.school-panel-viper .school-emblem {
+.tab-panel--viper .school-emblem {
     border-color: #4a7a4a;
 }
 
@@ -2138,7 +2138,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     line-height: 1.55;
 }
 
-.series-screen-tabs.school-tabs {
+.tabs.tabs--series {
     max-width: min(96vw, 52rem);
     margin-bottom: 1.75rem;
 }
@@ -2472,12 +2472,12 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 }
 
 @media screen and (max-width: 480px) {
-    .series-screen-tabs.school-tabs {
+    .tabs.tabs--series {
         flex-direction: column;
         align-items: stretch;
     }
 
-    .series-screen-tabs .school-tab-btn {
+    .tabs--series .tab-btn {
         width: 100%;
     }
 }
