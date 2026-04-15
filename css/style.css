@@ -461,6 +461,8 @@ a.char-card-link::after {
     margin: 0;
 }
 
+.char-card-wrap:hover,
+.char-card-wrap:focus-visible,
 .char-card-wrap:has(.char-card-link:hover),
 .char-card-wrap:has(.char-card-link:focus-visible) {
     transform: translateY(-2px);
@@ -470,6 +472,11 @@ a.char-card-link::after {
         0 0 0 2px rgba(200, 169, 110, 0.42),
         0 0 36px rgba(200, 169, 110, 0.32),
         inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.char-card-wrap:focus-visible {
+    outline: 2px solid rgba(200, 169, 110, 0.8);
+    outline-offset: 2px;
 }
 
 .char-thumb-wrap {

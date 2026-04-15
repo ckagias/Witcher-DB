@@ -405,6 +405,31 @@ function initCharactersPage() {
     });
     updateChipActive();
     applyFilter();
+
+    // Make the full card area clickable: navigate to the char-card-link href
+    // when clicking anywhere on the card that isn't an interactive element.
+    document.querySelectorAll(".card.char-card-wrap").forEach(function (card) {
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("role", "link");
+        var link = card.querySelector(".char-card-link");
+        if (!link) {
+            return;
+        }
+        card.addEventListener("click", function (e) {
+            // Let native links, buttons, inputs, and sliders handle their own events.
+            var t = e.target;
+            if (t.tagName === "A" || t.tagName === "BUTTON" || t.tagName === "INPUT") {
+                return;
+            }
+            window.open(link.href, link.target || "_self", "noopener,noreferrer");
+        });
+        card.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                window.open(link.href, link.target || "_self", "noopener,noreferrer");
+            }
+        });
+    });
 }
 
 /**
