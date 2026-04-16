@@ -1134,6 +1134,11 @@ button:hover {
         border-color 0.2s ease;
 }
 
+.gallery-img:hover {
+    border-color: var(--gold);
+    transform: scale(1.02);
+}
+
 /* Gallery page: natural card heights, even inset around thumbnails */
 .gallery-grid {
     align-items: flex-start;
@@ -1219,6 +1224,59 @@ button:hover {
 .gallery-lightbox-close:focus-visible {
     outline: none;
     box-shadow: 0 0 0 2px rgba(200, 169, 110, 0.45);
+}
+
+.gallery-lightbox-prev,
+.gallery-lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 2.35rem;
+    height: 2.35rem;
+    padding: 0;
+    border-radius: 0.55rem;
+    border: 1px solid rgba(200, 169, 110, 0.45);
+    background: rgba(18, 14, 12, 0.92);
+    color: var(--gold-soft);
+    font-size: 1.65rem;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.gallery-lightbox-prev {
+    left: 0.45rem;
+}
+
+.gallery-lightbox-next {
+    right: 0.45rem;
+}
+
+.gallery-lightbox-prev:hover,
+.gallery-lightbox-next:hover {
+    background: rgba(28, 22, 18, 0.98);
+    border-color: rgba(232, 212, 168, 0.55);
+    color: var(--text);
+}
+
+.gallery-lightbox-prev:focus-visible,
+.gallery-lightbox-next:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(200, 169, 110, 0.45);
+}
+
+@media screen and (max-width: 520px) {
+    .gallery-lightbox-prev,
+    .gallery-lightbox-next {
+        width: 2.15rem;
+        height: 2.15rem;
+        font-size: 1.45rem;
+    }
 }
 
 .gallery-lightbox-img {

@@ -329,6 +329,55 @@ function initBestiaryPage() {
         searchInput.addEventListener("input", applySearch);
     }
     applySearch();
+
+    // Bestiary cards: image opens lightbox; rest of card opens wiki.
+    cards.forEach(function (card) {
+        var link = card.querySelector(".bestiary-card-link");
+        if (!link) {
+            return;
+        }
+
+        // Keep the image out of the link to avoid accidental navigation.
+        var img = link.querySelector("img.gallery-img");
+        if (img && img.parentNode === link) {
+            link.parentNode.insertBefore(img, link);
+        }
+
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("role", "link");
+
+        function shouldIgnoreCardClick(target) {
+            if (!target) {
+                return false;
+            }
+            // Let interactive descendants handle activation.
+            if (target.tagName === "A" || target.tagName === "BUTTON" || target.tagName === "INPUT") {
+                return true;
+            }
+            // Image opens the lightbox.
+            if (target.closest && target.closest(".gallery-img")) {
+                return true;
+            }
+            return false;
+        }
+
+        card.addEventListener("click", function (e) {
+            if (shouldIgnoreCardClick(e.target)) {
+                return;
+            }
+            window.open(link.href, link.target || "_self", "noopener,noreferrer");
+        });
+
+        card.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+                if (shouldIgnoreCardClick(e.target)) {
+                    return;
+                }
+                e.preventDefault();
+                window.open(link.href, link.target || "_self", "noopener,noreferrer");
+            }
+        });
+    });
 }
 
 /**
@@ -450,7 +499,8 @@ function fillBestiaryChipCounts() {
 var imageLightboxConfigs = [
     { lightboxId: "gallery-lightbox", sourceId: "gallery-page-grid", thumbSelector: ".gallery-img" },
     { lightboxId: "gwent-lightbox", sourceId: "gwent-lightbox-source", thumbSelector: ".faction-hero-img" },
-    { lightboxId: "series-lightbox", sourceId: "series-lightbox-source", thumbSelector: ".series-poster" }
+    { lightboxId: "series-lightbox", sourceId: "series-lightbox-source", thumbSelector: ".series-poster" },
+    { lightboxId: "bestiary-lightbox", sourceId: "bestiary-catalog-section", thumbSelector: ".gallery-img" }
 ];
 
 /**
@@ -473,6 +523,8 @@ function attachImageLightbox(root, source, thumbSelector) {
     var captionEl = root.querySelector(".gallery-lightbox-caption");
     var closeBtn = root.querySelector(".gallery-lightbox-close");
     var backdrop = root.querySelector(".gallery-lightbox-backdrop");
+    var prevBtn = root.querySelector(".gallery-lightbox-prev");
+    var nextBtn = root.querySelector(".gallery-lightbox-next");
     if (!modalImg || !captionEl || !closeBtn || !backdrop) {
         return;
     }
@@ -480,12 +532,23 @@ function attachImageLightbox(root, source, thumbSelector) {
     // Remember existing overflow style so we can restore page scroll on close.
     var prevBodyOverflow = "";
 
+    // Thumbs list for optional prev/next navigation.
+    var thumbs = [];
+    source.querySelectorAll(thumbSelector).forEach(function (thumb) {
+        if (lightboxThumbImage(thumb)) {
+            thumbs.push(thumb);
+        }
+    });
+    var canNavigate = Boolean(prevBtn && nextBtn && thumbs.length > 1);
+    var activeIndex = -1;
+
     // Opens modal using clicked thumbnail image + caption text.
-    function openModal(thumb) {
+    function openModal(thumb, options) {
         var img = lightboxThumbImage(thumb);
         if (!img) {
             return;
         }
+        activeIndex = thumbs.indexOf(thumb);
         // Prefer the URL the browser chose from srcset (best available resolution).
         var chosenSrc = img.currentSrc || img.getAttribute("src") || "";
         modalImg.src = chosenSrc;
@@ -502,7 +565,10 @@ function attachImageLightbox(root, source, thumbSelector) {
         root.removeAttribute("hidden");
         prevBodyOverflow = document.body.style.overflow;
         document.body.style.overflow = "hidden";
-        closeBtn.focus();
+        var shouldFocus = !options || options.focus !== false;
+        if (shouldFocus) {
+            closeBtn.focus();
+        }
     }
 
     // Closes modal and restores original body scroll style.
@@ -511,18 +577,40 @@ function attachImageLightbox(root, source, thumbSelector) {
         document.body.style.overflow = prevBodyOverflow;
     }
 
+    function step(delta) {
+        if (!canNavigate || thumbs.length === 0) {
+            return;
+        }
+        var idx = activeIndex;
+        if (idx < 0) {
+            idx = 0;
+        }
+        var nextIndex = (idx + delta + thumbs.length) % thumbs.length;
+        openModal(thumbs[nextIndex], { focus: false });
+    }
+
     // Register click and keyboard activation on all matching thumbnails.
     source.querySelectorAll(thumbSelector).forEach(function (thumb) {
         if (!lightboxThumbImage(thumb)) {
             return;
         }
-        thumb.addEventListener("click", function () {
+        thumb.addEventListener("click", function (e) {
+            // Stop bubbling to surrounding clickable cards/links.
+            if (e && e.stopPropagation) {
+                e.stopPropagation();
+            }
+            if (e && e.preventDefault) {
+                e.preventDefault();
+            }
             openModal(thumb);
         });
         thumb.addEventListener("keydown", function (e) {
             // Enter/Space should behave like click for keyboard users.
             if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
+                if (e && e.stopPropagation) {
+                    e.stopPropagation();
+                }
                 openModal(thumb);
             }
         });
@@ -530,11 +618,40 @@ function attachImageLightbox(root, source, thumbSelector) {
 
     closeBtn.addEventListener("click", closeModal);
     backdrop.addEventListener("click", closeModal);
+    if (prevBtn) {
+        prevBtn.addEventListener("click", function (e) {
+            if (e && e.stopPropagation) {
+                e.stopPropagation();
+            }
+            step(-1);
+        });
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener("click", function (e) {
+            if (e && e.stopPropagation) {
+                e.stopPropagation();
+            }
+            step(1);
+        });
+    }
 
-    // Global Escape closes this modal while it is visible.
+    // Keyboard: Escape closes; arrows step when enabled.
     document.addEventListener("keydown", function (e) {
-        if (!root.hasAttribute("hidden") && e.key === "Escape") {
+        if (root.hasAttribute("hidden")) {
+            return;
+        }
+        if (e.key === "Escape") {
             closeModal();
+            return;
+        }
+        if (canNavigate && e.key === "ArrowLeft") {
+            e.preventDefault();
+            step(-1);
+            return;
+        }
+        if (canNavigate && e.key === "ArrowRight") {
+            e.preventDefault();
+            step(1);
         }
     });
 }
