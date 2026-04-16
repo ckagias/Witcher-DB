@@ -200,7 +200,6 @@ a:hover {
 .hero-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.55rem;
     margin-top: 0.95rem;
     justify-content: center;
 }
