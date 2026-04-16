@@ -563,9 +563,13 @@ function attachImageLightbox(root, source, thumbSelector) {
             text = String(img.getAttribute("alt") || "").trim();
         }
         captionEl.textContent = text;
+        // Only capture the previous overflow the first time the lightbox opens.
+        var wasHidden = root.hasAttribute("hidden");
         root.removeAttribute("hidden");
-        prevBodyOverflow = document.body.style.overflow;
-        document.body.style.overflow = "hidden";
+        if (wasHidden) {
+            prevBodyOverflow = document.body.style.overflow;
+            document.body.style.overflow = "hidden";
+        }
         var shouldFocus = !options || options.focus !== false;
         if (shouldFocus) {
             closeBtn.focus();
@@ -576,6 +580,7 @@ function attachImageLightbox(root, source, thumbSelector) {
     function closeModal() {
         root.setAttribute("hidden", "");
         document.body.style.overflow = prevBodyOverflow;
+        prevBodyOverflow = "";
     }
 
     function step(delta) {
