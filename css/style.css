@@ -1134,11 +1134,6 @@ button:hover {
         border-color 0.2s ease;
 }
 
-.gallery-img:hover {
-    border-color: var(--gold);
-    transform: scale(1.02);
-}
-
 /* Gallery page: natural card heights, even inset around thumbnails */
 .gallery-grid {
     align-items: flex-start;
