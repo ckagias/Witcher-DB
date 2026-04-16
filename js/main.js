@@ -490,7 +490,8 @@ var imageLightboxConfigs = [
     { lightboxId: "series-lightbox", sourceId: "series-lightbox-source", thumbSelector: ".series-poster" },
     { lightboxId: "bestiary-lightbox", sourceId: "bestiary-catalog-section", thumbSelector: ".gallery-img" },
     { lightboxId: "books-lightbox", sourceId: "books-table-section", thumbSelector: ".book-thumb" },
-    { lightboxId: "schools-lightbox", sourceId: "schools-lightbox-source", thumbSelector: ".school-thumb" }
+    { lightboxId: "schools-lightbox", sourceId: "schools-lightbox-source", thumbSelector: ".school-thumb" },
+    { lightboxId: "games-lightbox", sourceId: "games-page", thumbSelector: ".game-cover" }
 ];
 
 // Returns the image element for a thumbnail target.
