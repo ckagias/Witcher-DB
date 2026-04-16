@@ -1053,7 +1053,7 @@ button:hover {
     position: relative;
     border-left: 2px solid rgba(200, 169, 110, 0.55);
     padding-left: 1em;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     border-radius: 0 0.65rem 0.65rem 0;
     background: rgba(12, 10, 9, 0.35);
     padding-top: 0.5em;
