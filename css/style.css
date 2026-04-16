@@ -256,11 +256,15 @@ a:hover {
     text-align: center;
 }
 
+.featured-head h2 {
+    width: 100%;
+}
+
 .featured-row {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-    margin-top: 0.65rem;
+    margin-top: 0.25rem;
 }
 
 .feature-card {
