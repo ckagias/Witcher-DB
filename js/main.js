@@ -1,7 +1,4 @@
-/**
- * Toggles the mobile navigation drawer.
- * Opens or closes the menu and updates button ARIA state.
- */
+// Toggle the mobile nav drawer and sync the menu button (open/closed + aria-expanded).
 function toggleMenu() {
     // Read menu/button elements used by the mobile nav.
     var menu = document.getElementById("nav-menu");
@@ -33,9 +30,7 @@ function toggleMenu() {
 
 var CHAR_IMG_BASE = "images/characters/";
 
-/**
- * Initializes portrait comparison sliders for character cards.
- */
+// Add game vs Netflix portrait sliders on character cards (or single portrait when toggles are off).
 function initCharacterPortraitSliders() {
     // Setup compare mode on cards that support toggling.
     document.querySelectorAll(".char-card-wrap:not(.char-card-wrap-no-toggle)").forEach(function (card, idx) {
@@ -185,10 +180,7 @@ function initCharacterPortraitSliders() {
     });
 }
 
-/**
- * Initializes live filtering for the books table.
- * Matches typed text against each row's data-search-text value.
- */
+// Books page: show or hide table rows as the user types in the search box.
 function initBooksPage() {
     var section = document.getElementById("books-table-section");
     if (!section) {
@@ -219,10 +211,7 @@ function initBooksPage() {
 }
 
 
-/**
- * Initializes bestiary filtering by text and category chips.
- * Cards are filtered first by search, then category visibility is recalculated.
- */
+// Bestiary: filter beasts by search text and chips; image opens lightbox, card opens wiki.
 function initBestiaryPage() {
     var section = document.getElementById("bestiary-catalog-section");
     if (!section) {
@@ -384,10 +373,7 @@ function initBestiaryPage() {
     });
 }
 
-/**
- * Initializes category chip filtering for character cards.
- * Shows cards from the selected category, or all cards when reset.
- */
+// Characters page: filter cards by category chips and make each card open its wiki link.
 function initCharactersPage() {
     var chipNav = document.getElementById("char-chip-nav");
     if (!chipNav) {
@@ -515,10 +501,7 @@ function lightboxThumbImage(thumb) {
     return thumb.querySelector("img");
 }
 
-/**
- * Attaches all interaction handlers for one image lightbox instance.
- * Supports click/keyboard open, backdrop/button close, and Escape close.
- */
+// One lightbox: thumbnails open it; backdrop, close button, and Escape close it; arrows step images.
 function attachImageLightbox(root, source, thumbSelector) {
     var modalImg = root.querySelector(".gallery-lightbox-img");
     var captionEl = root.querySelector(".gallery-lightbox-caption");
@@ -679,6 +662,190 @@ function initImageLightboxes() {
     }
 }
 
+// Feedback modal: open from hero button, trap focus, validate fields, demo submit (no server).
+function initFeedbackModal() {
+    var modal = document.getElementById("feedback-modal");
+    if (!modal) {
+        return;
+    }
+    var openBtn = document.getElementById("hero-feedback-btn");
+    if (!openBtn) {
+        return;
+    }
+
+    var closeBtn = modal.querySelector(".feedback-modal-close");
+    var backdrop = modal.querySelector(".feedback-modal-backdrop");
+    var form = document.getElementById("feedback-modal-form");
+    var submitBtn = document.getElementById("feedback-modal-submit-btn");
+    var resetBtn = document.getElementById("feedback-modal-reset-btn");
+    var statusEl = document.getElementById("feedback-modal-status");
+    var errEl = document.getElementById("feedback-modal-error");
+
+    var prevBodyOverflow = "";
+    var previouslyFocused = null;
+
+    // Returns all focusable elements inside the panel for focus trapping.
+    function getFocusable() {
+        return Array.prototype.slice.call(
+            modal.querySelectorAll(
+                'button:not([disabled]), [href], input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+            )
+        );
+    }
+
+    function openModal() {
+        previouslyFocused = document.activeElement;
+        prevBodyOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        modal.removeAttribute("hidden");
+        // Focus the first focusable element (the close button).
+        var focusable = getFocusable();
+        if (focusable.length) {
+            focusable[0].focus();
+        }
+    }
+
+    function closeModal() {
+        modal.setAttribute("hidden", "");
+        document.body.style.overflow = prevBodyOverflow;
+        prevBodyOverflow = "";
+        if (previouslyFocused && typeof previouslyFocused.focus === "function") {
+            previouslyFocused.focus();
+        }
+    }
+
+    // Focus trap: keep keyboard navigation inside the modal while open.
+    modal.addEventListener("keydown", function (e) {
+        if (modal.hasAttribute("hidden")) {
+            return;
+        }
+        if (e.key === "Escape") {
+            e.stopPropagation();
+            closeModal();
+            return;
+        }
+        if (e.key !== "Tab") {
+            return;
+        }
+        var focusable = getFocusable();
+        if (!focusable.length) {
+            return;
+        }
+        var first = focusable[0];
+        var last = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+            if (document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            }
+        } else {
+            if (document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        }
+    });
+
+    openBtn.addEventListener("click", openModal);
+    if (closeBtn) {
+        closeBtn.addEventListener("click", closeModal);
+    }
+    if (backdrop) {
+        backdrop.addEventListener("click", closeModal);
+    }
+
+    // Submit: validate, then after a short delay show success (no network request).
+    if (!form || !submitBtn) {
+        return;
+    }
+
+    function showError(msg) {
+        if (!errEl) { return; }
+        errEl.textContent = msg;
+        errEl.removeAttribute("hidden");
+    }
+
+    function clearMessages() {
+        if (errEl) { errEl.setAttribute("hidden", ""); errEl.textContent = ""; }
+        if (statusEl) { statusEl.setAttribute("hidden", ""); statusEl.textContent = ""; }
+    }
+
+    function fieldLabelFor(el) {
+        if (!el || !el.id) { return "This field"; }
+        var label = form.querySelector('label[for="' + el.id + '"]');
+        return label ? String(label.textContent || "").trim() : "This field";
+    }
+
+    // Clear custom validity on input so the browser tooltip resets.
+    var emailInput = document.getElementById("fm-email");
+    if (emailInput) {
+        emailInput.addEventListener("input", function () {
+            emailInput.setCustomValidity("");
+        });
+        emailInput.addEventListener("blur", function () {
+            emailInput.setCustomValidity("");
+            var v = String(emailInput.value || "").trim();
+            if (v && v.indexOf("@") === -1) {
+                emailInput.setCustomValidity("Email addresses need an @ symbol. Example: name@example.com");
+            }
+        });
+    }
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        clearMessages();
+        if (typeof form.reportValidity === "function" && !form.reportValidity()) {
+            var firstInvalid = form.querySelector(":invalid");
+            if (firstInvalid) {
+                showError(fieldLabelFor(firstInvalid) + ": " + (firstInvalid.validationMessage || "Please check this field."));
+                if (typeof firstInvalid.focus === "function") { firstInvalid.focus(); }
+            } else {
+                showError("Please check the highlighted fields and try again.");
+            }
+            return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending\u2026";
+
+        window.setTimeout(function () {
+            var offline = typeof navigator !== "undefined" && navigator.onLine === false;
+            if (offline) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Send message";
+                showError("You appear to be offline. Check your connection, then try again.");
+                return;
+            }
+            submitBtn.textContent = "\u2713 Sent";
+            submitBtn.setAttribute("aria-label", "Message sent");
+            if (statusEl) {
+                statusEl.innerHTML =
+                    "<strong>Message sent.</strong> Thanks for helping improve The Witcher DB. " +
+                    "If you want to send more feedback, choose <em>Send another</em>.";
+                statusEl.removeAttribute("hidden");
+            }
+            if (resetBtn) {
+                resetBtn.removeAttribute("hidden");
+                resetBtn.disabled = false;
+            }
+            submitBtn.disabled = true;
+        }, 550);
+    });
+
+    if (resetBtn) {
+        resetBtn.addEventListener("click", function () {
+            form.reset();
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Send message";
+            submitBtn.removeAttribute("aria-label");
+            resetBtn.setAttribute("hidden", "");
+            clearMessages();
+            var first = document.getElementById("fm-fullname");
+            if (first && typeof first.focus === "function") { first.focus(); }
+        });
+    }
+}
+
 // Initializes the back-to-top button visibility and smooth scrolling behavior.
 function initBackToTopButton() {
     var scrollBtn = document.getElementById("back-to-top");
@@ -702,9 +869,9 @@ function initBackToTopButton() {
 }
 
 
-// Safety: restore scrolling when returning after leaving a lightbox open.
+// When the user leaves and comes back, close stray lightboxes and unlock scroll.
 function restoreScrollAfterReturn() {
-    // If any lightbox is open, hide it (equivalent to close).
+    // Close any open gallery lightbox (same effect as its close control).
     document.querySelectorAll(".gallery-lightbox:not([hidden])").forEach(function (lb) {
         lb.setAttribute("hidden", "");
     });
@@ -725,6 +892,7 @@ if (document.readyState === "loading") {
         fillBestiaryChipCounts();
         initImageLightboxes();
         initBackToTopButton();
+        initFeedbackModal();
     });
 } else {
     initCharacterPortraitSliders();
@@ -734,14 +902,14 @@ if (document.readyState === "loading") {
     fillBestiaryChipCounts();
     initImageLightboxes();
     initBackToTopButton();
+    initFeedbackModal();
 }
 
-// Restore scroll when returning from another tab/window (covers BFCache too).
+// Run the same cleanup when the tab or window becomes active again (includes back/forward).
 window.addEventListener("pageshow", restoreScrollAfterReturn);
 window.addEventListener("focus", restoreScrollAfterReturn);
 document.addEventListener("visibilitychange", function () {
     if (!document.hidden) {
-        // Some browsers only fire visibilitychange on tab return.
         restoreScrollAfterReturn();
     }
 });
@@ -786,7 +954,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// Accessibility: Escape closes the open mobile menu.
+// Escape closes the mobile menu when it is open.
 document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") {
         var menu = document.getElementById("nav-menu");
@@ -822,10 +990,7 @@ document.addEventListener("click", function (e) {
     }
 });
 
-/**
- * Switches active tabs for the series page.
- * Updates panel visibility plus tab button ARIA selected state.
- */
+// Series page: switch tab panels (live-action, anime, sirens) and mark the active tab.
 function switchSeriesTab(tab) {
     var tabIds = ['series', 'anime', 'sirens'];
     var wrap = document.getElementById('series-lightbox-source');

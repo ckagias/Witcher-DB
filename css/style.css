@@ -245,6 +245,14 @@ a:hover {
         0 10px 28px rgba(0, 0, 0, 0.35);
 }
 
+button.hero-btn {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    margin: 0;
+    /* Do not use font: shorthand here — it would override .hero-btn typography */
+}
+
 /* Home: featured row */
 .featured-head {
     display: flex;
@@ -621,7 +629,6 @@ button:hover {
     gap: 1.25rem;
     font-size: 0.875rem;
     color: var(--muted);
-    
 }
 
 @media screen and (min-width: 768px) {
@@ -673,7 +680,7 @@ button:hover {
     text-decoration: underline;
 }
 
-/* Main column: trial — same max-width / centering as books page (was 1100px) */
+/* Main content column: centered with a comfortable max width */
 .page-inner {
     width: 96%;
     max-width: min(98vw, 58rem);
@@ -767,122 +774,7 @@ button:hover {
 .site-bg-schools     { background-image: url(../images/backgrounds/schools-bg.webp); }
 .site-bg-bestiary    { background-image: url(../images/backgrounds/bestiary-bg.webp); }
 .site-bg-gallery     { background-image: url(../images/backgrounds/gallery-bg.webp); }
-.site-bg-feedback    { background-image: url(../images/backgrounds/feedback-bg.webp); }
-
-/* Feedback page — centered column, same .page-inner rhythm as other pages */
-.feedback-page .feedback-lede,
-.feedback-page .feedback-note {
-    text-align: center;
-    max-width: 40rem;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.feedback-page .feedback-note {
-    font-size: 0.92rem;
-    color: rgba(230, 223, 211, 0.78);
-    font-style: italic;
-}
-
-.feedback-form-wrap {
-    max-width: 36rem;
-    margin: 1.5rem auto 0;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.feedback-page form {
-    border: 1px solid rgba(200, 169, 110, 0.4);
-    border-radius: 1.1rem;
-    padding: 0.95em 1.05em;
-    box-sizing: border-box;
-    background: linear-gradient(145deg, rgba(32, 26, 20, 0.92), rgba(18, 14, 12, 0.88));
-    box-shadow: 0 12px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);   
-}
-
-.feedback-page .form-group {
-    margin-bottom: 0.75rem;
-}
-
-.feedback-page .form-group:last-of-type {
-    margin-bottom: 0;
-}
-
-.feedback-page .form-group label {
-    display: block;
-    font-family: "Cinzel", Georgia, serif;
-    font-size: 0.82rem;
-    letter-spacing: 0.04em;
-    color: var(--gold);
-    margin-bottom: 0.35rem;
-}
-
-.feedback-page .form-group input,
-.feedback-page .form-group textarea {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    padding: 0.55em 0.65em;
-    font-family: "Lora", Georgia, serif;
-    font-size: 0.95rem;
-    color: var(--text);
-    background: rgba(0, 0, 0, 0.35);
-    border: 1px solid rgba(200, 169, 110, 0.35);
-    border-radius: 0.45rem;
-}
-
-.feedback-page .form-group textarea {
-    resize: vertical;
-    min-height: 5.25rem;
-}
-
-.feedback-page .form-group input:focus-visible,
-.feedback-page .form-group textarea:focus-visible {
-    outline: 1.5px solid rgba(200, 169, 110, 0.7);
-    outline-offset: 2px;
-}
-
-.feedback-page .form-group-submit button {
-    width: 100%;
-    padding: 0.65em 1em;
-    font-family: "Cinzel", Georgia, serif;
-    font-size: 0.88rem;
-    letter-spacing: 0.08em;
-    cursor: pointer;
-    background: linear-gradient(180deg, #e0c080 0%, #c9a84c 100%);
-    border: 1px solid #c9a84c;
-    border-radius: 0.45rem;
-    color: #1a1208;
-    transition: filter 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
-}
-
-.feedback-page .form-group-submit button:hover {
-    filter: brightness(1.1);
-    box-shadow: 0 0 18px rgba(200, 169, 110, 0.35), 0 4px 16px rgba(0,0,0,0.35);
-    transform: translateY(-1px);
-}
-
-.feedback-page .form-group-submit button:active {
-    transform: translateY(1px);
-}
-
-.feedback-page .form-group-submit button:focus-visible {
-    outline: 1.5px solid rgba(200, 169, 110, 0.7);
-    outline-offset: 2px;
-}
-
-.feedback-page .form-group-submit button:disabled {
-    opacity: 0.85;
-    cursor: default;
-}
-
-.feedback-page .form-group-submit {
-    margin-top: 1.15rem;
-    margin-bottom: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.6rem;
-}
+.site-bg-games       { background-image: url(../images/backgrounds/games-bg.webp); }
 
 .feedback-form-status,
 .feedback-form-error {
@@ -1064,7 +956,7 @@ button:hover {
     padding-bottom: 0.5em;
 }
 
-/* ——— Timeline page ——— */
+/* Timeline page */
 .timeline-wrap {
     position: relative;
     max-width: 700px;
@@ -1461,7 +1353,7 @@ button:hover {
     }
 }
 
-/* ——— Books page ——— */
+/* Books page */
 .books-table-section {
     width: 100%;
     margin-top: 1.25rem;
@@ -1618,7 +1510,7 @@ button:hover {
     max-width: 42rem;
 }
 
-/* ——— Books table: max-width 600px ——— */
+/* Books table (max width 600px) */
 
 @media screen and (max-width: 600px) {
     .book-page .books-table thead th:nth-child(2),
@@ -1842,7 +1734,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     display: none !important;
 }
 
-/* ── Schools page ────────────────────────────── */
+/* Schools page */
 
 /* Infobox floats right so body text wraps around it */
 .school-infobox {
@@ -2162,7 +2054,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     }
 }
 
-/* ── School history highlight ─────────────── */
+/* Schools: highlight strip for history years */
 
 .school-history {
     margin-top: 2rem;
@@ -2190,7 +2082,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     font-style: italic;
 }
 
-/* ── Per-school accent colours ───────────────── */
+/* Per-school accent colours */
 
 .tab-panel--wolf {
     --school-accent: #a8a9ad;
@@ -2227,7 +2119,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     border-color: #4a7a4a;
 }
 
-/* ── Series page (screen adaptations) ────────── */
+/* Series page (screen adaptations) */
 
 .series-page.page-inner > h1 + .series-lede,
 .schools-page.page-inner > h1 + .schools-lede {
@@ -2399,7 +2291,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     margin: 0;
 }
 
-/* Change 2: desktop trailer box */
+/* Series page: bordered panel around the trailer embed */
 .series-trailer-box {
     margin-top: 1rem;
     border: 1px solid rgba(200, 169, 110, 0.2);
@@ -2582,4 +2474,515 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     .tabs--series .tab-btn {
         width: 100%;
     }
+}
+
+/* Games page */
+
+.games-page .games-lede {
+    text-align: center;
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgba(230, 223, 211, 0.82);
+    font-size: 0.98rem;
+    line-height: 1.6;
+}
+
+/* Game entry cards: same panel feel as series-feature */
+.game-entry {
+    background: rgba(22, 18, 14, 0.88);
+    border: 1px solid rgba(200, 169, 110, 0.22);
+    border-radius: 12px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+    margin-bottom: 2.5rem;
+}
+
+.game-entry:last-child {
+    margin-bottom: 0;
+}
+
+/* Two-column layout: cover on left, info on right */
+.game-entry-inner {
+    display: grid;
+    grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
+    gap: 1.75rem 2rem;
+    align-items: start;
+    padding: 1.5rem 1.65rem;
+}
+
+.game-cover-frame {
+    position: relative;
+}
+
+.game-cover {
+    width: 100%;
+    max-height: 600px;
+    background: rgba(40, 32, 20, 0.85);
+    border-radius: 8px;
+    border: 1px solid rgba(200, 169, 110, 0.22);
+    overflow: hidden;
+    cursor: pointer;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.game-cover:hover {
+    border-color: rgba(200, 169, 110, 0.5);
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.45);
+    transform: translateY(-2px);
+}
+
+.game-cover:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(200, 169, 110, 0.55);
+    border-color: rgba(200, 169, 110, 0.55);
+}
+
+.game-cover img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    border-radius: 0;
+    pointer-events: none;
+}
+
+/* Platform tags below the cover */
+.game-platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+    justify-content: center;
+}
+
+.game-platform-tag {
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    border: 1px solid rgba(200, 169, 110, 0.28);
+    border-radius: 4px;
+    padding: 3px 8px;
+    color: rgba(200, 169, 110, 0.75);
+    background: rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+}
+
+/* Right column text */
+.game-info h2 {
+    font-family: "Cinzel", Georgia, serif;
+    font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+    color: var(--gold);
+    margin: 0 0 0.5rem 0;
+    padding-bottom: 0;
+    border-bottom: none;
+    letter-spacing: 0.04em;
+}
+
+.game-meta-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 1rem 0;
+    align-items: center;
+}
+
+.game-badge {
+    font-size: 0.7rem;
+    font-family: "Cinzel", Georgia, serif;
+    letter-spacing: 0.06em;
+    border: 1px solid rgba(200, 169, 110, 0.32);
+    border-radius: 4px;
+    padding: 3px 9px;
+    color: rgba(200, 169, 110, 0.82);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.game-rating {
+    margin-left: 0.45rem;
+    padding-left: 0.55rem;
+    border-left: 1px solid rgba(200, 169, 110, 0.22);
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: rgba(200, 169, 110, 0.88);
+    white-space: nowrap;
+}
+
+.game-rating-star {
+    margin-right: 0.15rem;
+    color: rgba(200, 169, 110, 0.95);
+}
+
+.game-rating-value {
+    color: rgba(230, 223, 211, 0.88);
+}
+
+.game-rating-label {
+    color: rgba(230, 223, 211, 0.45);
+    font-size: 0.68rem;
+    margin-left: 0.15rem;
+}
+
+.game-synopsis {
+    font-size: 0.92rem;
+    color: rgba(230, 223, 211, 0.78);
+    line-height: 1.65;
+    margin: 0 0 1.25rem 0;
+}
+
+/* Subsections inside a game entry */
+.game-subsection {
+    margin-top: 1.5rem;
+}
+
+.game-section-label {
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.72em;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(200, 169, 110, 0.72);
+    margin: 0 0 0.65rem 0;
+    border-bottom: 1px solid rgba(200, 169, 110, 0.18);
+    padding-bottom: 0.45rem;
+}
+
+/* Key facts list */
+.game-facts-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem 1.5rem;
+}
+
+.game-facts-list li {
+    font-size: 0.88rem;
+    color: rgba(230, 223, 211, 0.78);
+    line-height: 1.45;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(200, 169, 110, 0.08);
+}
+
+.game-facts-list li strong {
+    display: block;
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(200, 169, 110, 0.72);
+    margin-bottom: 0.2rem;
+}
+
+/* Stat list stacked vertically in the left column */
+.game-stats-left {
+    list-style: none;
+    margin: 0.65rem 0 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid rgba(200, 169, 110, 0.14);
+    border-radius: 6px;
+    background: rgba(12, 10, 8, 0.35);
+    overflow: hidden;
+}
+
+.game-stats-left li {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid rgba(200, 169, 110, 0.08);
+    font-size: 0.82rem;
+    color: rgba(230, 223, 211, 0.78);
+    line-height: 1.4;
+}
+
+.game-stats-left li:last-child {
+    border-bottom: none;
+}
+
+.game-stats-left li strong {
+    display: block;
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: rgba(200, 169, 110, 0.65);
+    margin-bottom: 0.15rem;
+}
+
+/* Note box (same treatment as series page) */
+.game-note-box {
+    background: rgba(200, 169, 110, 0.06);
+    border: 1px solid rgba(200, 169, 110, 0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 1.25rem;
+}
+
+.game-note-box p {
+    font-size: 0.88rem;
+    color: rgba(230, 223, 211, 0.74);
+    line-height: 1.65;
+    margin: 0;
+}
+
+.game-note-box strong {
+    color: var(--gold);
+    font-weight: normal;
+}
+
+/* Trailer embed inside a game entry */
+.game-trailer-box {
+    margin-top: 0;
+    border: 1px solid rgba(200, 169, 110, 0.2);
+    border-radius: 8px;
+    background: rgba(13, 10, 8, 0.68);
+    padding: 0.75rem;
+}
+
+.game-trailer-title {
+    margin: 0 0 0.55rem 0;
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(200, 169, 110, 0.75);
+}
+
+.game-trailer-frame {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(200, 169, 110, 0.2);
+}
+
+.game-trailer-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+@media screen and (min-width: 721px) {
+    .game-cover-frame {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .game-entry-inner {
+        grid-template-columns: 1fr;
+        padding: 1.35rem 1.25rem;
+        text-align: center;
+    }
+
+    .game-meta-line {
+        justify-content: center;
+    }
+
+    .game-rating {
+        margin-left: 0;
+        padding-left: 0;
+        border-left: none;
+        margin-top: 0.35rem;
+    }
+
+    .game-cover {
+        max-width: 100%;
+        max-height: 160px;
+    }
+
+    .game-facts-list {
+        grid-template-columns: 1fr 1fr;
+        text-align: left;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .game-facts-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Feedback modal (full-screen overlay) */
+
+.feedback-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    box-sizing: border-box;
+}
+
+.feedback-modal[hidden] {
+    display: none !important;
+}
+
+.feedback-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: rgba(0, 0, 0, 0.72);
+    cursor: pointer;
+}
+
+.feedback-modal-panel {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 34rem;
+    max-height: 92vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    background: linear-gradient(145deg, rgba(32, 26, 20, 0.98), rgba(18, 14, 12, 0.96));
+    border: 1px solid rgba(200, 169, 110, 0.42);
+    border-radius: 1.1rem;
+    padding: 1.85rem 1.75rem 1.65rem;
+    box-shadow:
+        0 20px 56px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.feedback-modal-close {
+    position: absolute;
+    top: 0.65rem;
+    right: 0.65rem;
+    width: 2.1rem;
+    height: 2.1rem;
+    padding: 0;
+    background: rgba(18, 14, 12, 0.7);
+    border: 1px solid rgba(200, 169, 110, 0.3);
+    border-radius: 50%;
+    color: rgba(230, 223, 211, 0.8);
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.feedback-modal-close:hover {
+    background: rgba(28, 22, 18, 0.98);
+    border-color: rgba(232, 212, 168, 0.55);
+}
+
+.feedback-modal-close:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(200, 169, 110, 0.45);
+}
+
+.feedback-modal-title {
+    font-family: "Cinzel", Georgia, serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    color: var(--gold-soft);
+    margin: 0 0 0.35rem 0;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid rgba(200, 169, 110, 0.2);
+    letter-spacing: 0.04em;
+}
+
+.feedback-modal-lede {
+    font-size: 0.88rem;
+    color: rgba(230, 223, 211, 0.65);
+    margin: 0.55rem 0 1.15rem 0;
+    line-height: 1.5;
+}
+
+/* Feedback modal: form fields */
+.feedback-modal .form-group {
+    margin-bottom: 0.75rem;
+}
+
+.feedback-modal .form-group:last-of-type {
+    margin-bottom: 0;
+}
+
+.feedback-modal .form-group label {
+    display: block;
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(200, 169, 110, 0.8);
+    margin-bottom: 0.35rem;
+}
+
+.feedback-modal .form-group input,
+.feedback-modal .form-group textarea {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    background: rgba(12, 10, 8, 0.55);
+    border: 1px solid rgba(200, 169, 110, 0.28);
+    border-radius: 6px;
+    color: rgba(230, 223, 211, 0.9);
+    font-family: "Lora", Georgia, serif;
+    font-size: 0.88rem;
+    padding: 0.52em 0.75em;
+}
+
+.feedback-modal .form-group textarea {
+    resize: vertical;
+    min-height: 5.25rem;
+}
+
+.feedback-modal .form-group input:focus-visible,
+.feedback-modal .form-group textarea:focus-visible {
+    outline: 1.5px solid rgba(200, 169, 110, 0.7);
+    outline-offset: 2px;
+}
+
+.feedback-modal .form-group-submit {
+    margin-top: 1.15rem;
+    margin-bottom: 0;
+    display: flex;
+    gap: 0.65rem;
+}
+
+.feedback-modal .form-group-submit button {
+    flex: 1;
+    padding: 0.65em 1em;
+    background: linear-gradient(135deg, rgba(200, 169, 110, 0.22), rgba(160, 130, 80, 0.18));
+    border: 1px solid rgba(200, 169, 110, 0.52);
+    border-radius: 7px;
+    color: var(--gold-soft);
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition:
+        filter 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.feedback-modal .form-group-submit button:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 0 18px rgba(200, 169, 110, 0.35), 0 4px 16px rgba(0,0,0,0.35);
+}
+
+.feedback-modal .form-group-submit button:focus-visible {
+    outline: 1.5px solid rgba(200, 169, 110, 0.7);
+    outline-offset: 2px;
+}
+
+.feedback-modal .form-group-submit button:disabled {
+    opacity: 0.85;
+    cursor: default;
 }

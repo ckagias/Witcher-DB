@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Games | The Witcher DB</title>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://fonts.googleapis.com/css2?family=Cinzel&amp;family=Lora&amp;display=swap"
+        />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="icon" type="image/x-icon" href="images/favicon.webp" />
+        <script src="js/main.js"></script>
+    </head>
+    <body>
+        <div class="site-bg site-bg-games">
+            <div class="overlay"></div>
+            <div class="nav-wrap">
+                <div class="nav">
+                    <div class="nav-mobile-bar">
+                        <div class="nav-mobile-spacer" aria-hidden="true"></div>
+                        <span class="nav-mobile-title">The Witcher DB</span>
+                        <button
+                            type="button"
+                            class="menu-btn"
+                            onclick="toggleMenu()"
+                            aria-controls="nav-menu"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation menu"
+                        >
+                            <span class="menu-btn-bar"></span>
+                            <span class="menu-btn-bar"></span>
+                            <span class="menu-btn-bar"></span>
+                        </button>
+                    </div>
+                    <div id="nav-menu" class="nav-links">
+                        <a href="home.html">Home</a>
+                        <a href="books.html">Books</a>
+                        <a href="series.html">Series</a>
+                        <a href="games.html" aria-current="page">Games</a>
+                        <a href="timeline.html">Timeline</a>
+                        <a href="characters.html">Characters</a>
+                        <a href="bestiary.html">Bestiary</a>
+                        <a href="schools.html">Schools</a>
+                        <a href="gwent.html">Gwent</a>
+                        <a href="gallery.html">Gallery</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-inner games-page">
+                <h1>The games</h1>
+                <p class="games-lede">
+                    CD Projekt Red's trilogy brought Sapkowski's Continent to life in a way no adaptation had managed
+                    before. Below are the three mainline entries plus the upcoming fourth chapter.
+                </p>
+
+                <!-- ═══════════════════════════════ The Witcher (2007) ═══════════════════════════════ -->
+                <div class="game-entry">
+                    <div class="game-entry-inner">
+                        <div class="game-cover-frame">
+                            <div
+                                class="game-cover"
+                                role="button"
+                                tabindex="0"
+                                aria-label="View The Witcher cover art"
+                            >
+                                <img
+                                    src="images/games/witcher_2007.webp"
+                                    alt="The Witcher (2007) cover art"
+                                    width="240"
+                                    height="200"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <div class="game-platforms">
+                                <span class="game-platform-tag">PC</span>
+                                <span class="game-platform-tag">macOS</span>
+                            </div>
+                            <ul class="game-stats-left">
+                                <li>
+                                    <strong>Main story</strong>
+                                    ~35 hours
+                                </li>
+                                <li>
+                                    <strong>Setting</strong>
+                                    Temeria
+                                </li>
+                                <li>
+                                    <strong>Engine</strong>
+                                    Aurora (modified)
+                                </li>
+                                <li>
+                                    <strong>Achievements</strong>
+                                    None (base) — 53 in Enhanced Ed.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="game-info">
+                            <h2>The Witcher</h2>
+                            <div class="game-meta-line">
+                                <span class="game-badge">2007</span>
+                                <span class="game-badge">RPG</span>
+                                <span class="game-badge">CD Projekt Red</span>
+                                <span class="game-rating">
+                                    <span class="game-rating-star">★</span>
+                                    <span class="game-rating-value">85</span>
+                                    <span class="game-rating-label">Metacritic</span>
+                                </span>
+                            </div>
+                            <p class="game-synopsis">
+                                The game that started everything. Geralt wakes up at Kaer Morhen with no memory — the
+                                classic amnesia setup that lets newcomers learn the world alongside the protagonist.
+                                What it lacked in technical polish it made up for in atmosphere: grimy taverns, moral
+                                ambiguity in every quest, and a combat system that rewarded patience over button
+                                mashing. The Enhanced Edition, released a year later, fixed most of the rough edges
+                                and remains the definitive version.
+                            </p>
+
+                            <div class="game-subsection">
+                                <p class="game-section-label">Official trailer</p>
+                                <div class="game-trailer-box">
+                                    <div class="game-trailer-frame">
+                                        <iframe
+                                            src="https://www.youtube.com/embed/fDfg1Q0gsvY?vq=hd1080"
+                                            title="The Witcher — official trailer"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen
+                                        ></iframe>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="game-note-box">
+                                <p>
+                                    <strong>Enhanced Edition (2008)</strong> — A free upgrade for all owners, it
+                                    added five hours of new content, a complete dialogue re-record, and significant
+                                    performance improvements. If you're playing today, this is the version to grab.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══════════════════════════════ The Witcher 2 (2011) ═══════════════════════════════ -->
+                <div class="game-entry">
+                    <div class="game-entry-inner">
+                        <div class="game-cover-frame">
+                            <div
+                                class="game-cover"
+                                role="button"
+                                tabindex="0"
+                                aria-label="View The Witcher 2 cover art"
+                            >
+                                <img
+                                    src="images/games/witcher_2011.webp"
+                                    alt="The Witcher 2: Assassins of Kings cover art"
+                                    width="240"
+                                    height="200"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <div class="game-platforms">
+                                <span class="game-platform-tag">PC</span>
+                                <span class="game-platform-tag">Xbox 360</span>
+                                <span class="game-platform-tag">macOS</span>
+                            </div>
+                            <ul class="game-stats-left">
+                                <li>
+                                    <strong>Main story</strong>
+                                    ~25 hours
+                                </li>
+                                <li>
+                                    <strong>Setting</strong>
+                                    Flotsam, Vergen, Loc Muinne
+                                </li>
+                                <li>
+                                    <strong>Engine</strong>
+                                    REDengine
+                                </li>
+                                <li>
+                                    <strong>Achievements</strong>
+                                    52 (PC) · 50 (Xbox 360)
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="game-info">
+                            <h2>The Witcher 2: Assassins of Kings</h2>
+                            <div class="game-meta-line">
+                                <span class="game-badge">2011</span>
+                                <span class="game-badge">RPG</span>
+                                <span class="game-badge">CD Projekt Red</span>
+                                <span class="game-rating">
+                                    <span class="game-rating-star">★</span>
+                                    <span class="game-rating-value">88</span>
+                                    <span class="game-rating-label">Metacritic</span>
+                                </span>
+                            </div>
+                            <p class="game-synopsis">
+                                A sharp step up in every direction. The REDengine debut delivered visuals that
+                                embarrassed its console-generation peers, and the story structure leaned hard into
+                                the idea that your choices actually split the experience in two. Depending on who
+                                Geralt sides with in Chapter 1, you play through a completely different Chapter 2.
+                                It's shorter than its successor but tighter — every quest feels deliberate, and the
+                                political intrigue between Temeria, the Nilfgaardian threat, and the Scoia'tael holds
+                                up remarkably well.
+                            </p>
+
+                            <div class="game-subsection">
+                                <p class="game-section-label">Official trailer</p>
+                                <div class="game-trailer-box">
+                                    <div class="game-trailer-frame">
+                                        <iframe
+                                            src="https://www.youtube.com/embed/SdiK8uaduZs?vq=hd1080"
+                                            title="The Witcher 2: Assassins of Kings — official trailer"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen
+                                        ></iframe>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="game-note-box">
+                                <p>
+                                    <strong>Enhanced Edition (2012)</strong> — Brought the game to Xbox 360 and added
+                                    several hours of new quests, an Arena mode, and the "Fallen Knights" side story.
+                                    PC owners received it free.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══════════════════════════════ The Witcher 3 (2015) ═══════════════════════════════ -->
+                <div class="game-entry">
+                    <div class="game-entry-inner">
+                        <div class="game-cover-frame">
+                            <div
+                                class="game-cover"
+                                role="button"
+                                tabindex="0"
+                                aria-label="View The Witcher 3 cover art"
+                            >
+                                <img
+                                    src="images/games/witcher_2015.webp"
+                                    alt="The Witcher 3: Wild Hunt cover art"
+                                    width="240"
+                                    height="200"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <div class="game-platforms">
+                                <span class="game-platform-tag">PC</span>
+                                <span class="game-platform-tag">PS4 / PS5</span>
+                                <span class="game-platform-tag">Xbox One / Series</span>
+                                <span class="game-platform-tag">Switch</span>
+                            </div>
+                            <ul class="game-stats-left">
+                                <li>
+                                    <strong>Main story</strong>
+                                    ~50 hours (+30 from DLCs)
+                                </li>
+                                <li>
+                                    <strong>Completionist</strong>
+                                    200+ hours
+                                </li>
+                                <li>
+                                    <strong>Setting</strong>
+                                    Velen, Novigrad, Skellige, Toussaint
+                                </li>
+                                <li>
+                                    <strong>Achievements</strong>
+                                    78 (base + DLC)
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="game-info">
+                            <h2>The Witcher 3: Wild Hunt</h2>
+                            <div class="game-meta-line">
+                                <span class="game-badge">2015</span>
+                                <span class="game-badge">Open World RPG</span>
+                                <span class="game-badge">CD Projekt Red</span>
+                                <span class="game-rating">
+                                    <span class="game-rating-star">★</span>
+                                    <span class="game-rating-value">92</span>
+                                    <span class="game-rating-label">Metacritic</span>
+                                </span>
+                            </div>
+                            <p class="game-synopsis">
+                                The definitive Witcher experience and, for many, the benchmark for open-world RPGs.
+                                Geralt's search for Ciri spans three distinct regions — the war-torn plains of
+                                Velen, the merchant city of Novigrad, and the windswept archipelago of Skellige —
+                                each with its own politics, ecology, and tone. The writing is the real achievement:
+                                side quests here have more narrative craft than most games' entire campaigns. Two
+                                major expansions followed, with Hearts of Stone widely regarded as some of the best
+                                story DLC ever made.
+                            </p>
+
+                            <div class="game-subsection">
+                                <p class="game-section-label">Official cinematic trailer</p>
+                                <div class="game-trailer-box">
+                                    <div class="game-trailer-frame">
+                                        <iframe
+                                            src="https://www.youtube.com/embed/c0i88t0Kacs"
+                                            title="The Witcher 3: Wild Hunt — A Night to Remember cinematic trailer"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen
+                                        ></iframe>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="game-note-box">
+                                <p>
+                                    <strong>Next-Gen Update (2022)</strong> — A free upgrade for PC, PS5, and Xbox
+                                    Series added ray tracing, faster loading, reworked textures, and a handful of
+                                    new quests and items inspired by the Netflix series. The Complete Edition bundles
+                                    both expansions and all free DLC.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══════════════════════════════ The Witcher 4 (TBA) ═══════════════════════════════ -->
+                <div class="game-entry">
+                    <div class="game-entry-inner">
+                        <div class="game-cover-frame">
+                            <div
+                                class="game-cover"
+                                role="button"
+                                tabindex="0"
+                                aria-label="View The Witcher 4 key art"
+                            >
+                                <img
+                                    src="images/games/witcher_2026.webp"
+                                    alt="The Witcher 4 key art"
+                                    width="240"
+                                    height="200"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <div class="game-platforms">
+                                <span class="game-platform-tag">PC</span>
+                                <span class="game-platform-tag">PS5</span>
+                                <span class="game-platform-tag">Xbox Series</span>
+                            </div>
+                            <ul class="game-stats-left">
+                                <li>
+                                    <strong>Protagonist</strong>
+                                    Ciri
+                                </li>
+                                <li>
+                                    <strong>Engine</strong>
+                                    Unreal Engine 5
+                                </li>
+                                <li>
+                                    <strong>Announced</strong>
+                                    December 2024
+                                </li>
+                                <li>
+                                    <strong>Release</strong>
+                                    Not yet announced
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="game-info">
+                            <h2>The Witcher 4</h2>
+                            <div class="game-meta-line">
+                                <span class="game-badge">TBA</span>
+                                <span class="game-badge">Open World RPG</span>
+                                <span class="game-badge">CD Projekt Red</span>
+                                <span class="game-badge">Unreal Engine 5</span>
+                            </div>
+                            <p class="game-synopsis">
+                                A new chapter, a new protagonist. Ciri takes the lead for the first time in a mainline
+                                entry, stepping into a world that has moved on from the events of the trilogy. The
+                                cinematic reveal shown at The Game Awards 2024 confirmed the premise without giving
+                                much away — which, given CDPR's track record, is probably the right call. The game
+                                marks the studio's transition to Unreal Engine 5 and the beginning of a new saga set
+                                in the same Continent, with familiar lore but fresh stakes.
+                            </p>
+
+                            <div class="game-subsection">
+                                <p class="game-section-label">Cinematic reveal — The Game Awards 2024</p>
+                                <div class="game-trailer-box">
+                                    <div class="game-trailer-frame">
+                                        <iframe
+                                            src="https://www.youtube.com/embed/54dabgZJ5YA"
+                                            title="The Witcher 4 — cinematic reveal trailer (The Game Awards 2024)"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen
+                                        ></iframe>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="game-note-box">
+                                <p>
+                                    This page will be updated as details are confirmed. For now, the reveal trailer
+                                    and Ciri's confirmed role as protagonist are the only officially announced facts.
+                                    Speculation and leaks are not included here.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="footer-inner">
+                    <div class="footer-row">
+                        <div class="footer-copy">
+                            <span class="footer-brand">TW</span
+                            ><span class="footer-site"> DB</span> © 2026 | All rights reserved
+                        </div>
+                        <div class="footer-dev">
+                            Developed &amp; Designed by
+                            <a
+                                href="https://github.com/ckagias"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                >Christoforos Kagias</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
