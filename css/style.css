@@ -1,19 +1,9 @@
 /* The Witcher DB — shared layout and theme (medieval serif + modern glass accents) */
 
-/* Colours shared by every page */
-:root {
-    --bg-deep: #070708;
-    --panel: rgba(22, 18, 14, 0.78);
-    --gold: #c8a96e;
-    --gold-soft: #e8d4a8;
-    --text: #e6dfd3;
-    --muted: #8a8075;
-    /* Accent system (currently amber). Cyan kept as backup tokens. */
-    --accent: #c8a96e;
-    --accent-hover: #e8d4a8;
-    --accent-cyan: #22d3ee;
-    --accent-cyan-hover: #67e8f9;
-    --forest: #3d5a38;
+/* Scrollbar: scrollbar-color / scrollbar-width (no vendor-only pseudo-elements). */
+html {
+    scrollbar-color: #c8a96e #070708;
+    scrollbar-width: thin;
 }
 
 body {
@@ -21,37 +11,14 @@ body {
     padding: 0;
     font-family: "Lora", Georgia, serif;
     font-size: 100%;
-    color: var(--text);
-    background-color: var(--bg-deep);
-}
-
-/* Themed custom scrollbar */
-html {
-    scrollbar-color: var(--gold) var(--bg-deep);
-    scrollbar-width: thin;
-}
-
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--bg-deep);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--gold);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--gold-soft);
+    color: #e6dfd3;
+    background-color: #070708;
 }
 
 h1 {
     font-family: "Cinzel", Georgia, serif;
     font-size: 1.75em;
-    color: var(--gold);
+    color: #c8a96e;
     letter-spacing: 0.06em;
     margin-top: 0;
 }
@@ -59,7 +26,7 @@ h1 {
 h2 {
     font-family: "Cinzel", Georgia, serif;
     font-size: 1.35em;
-    color: var(--gold);
+    color: #c8a96e;
     border-bottom: 1px solid rgba(200, 169, 110, 0.35);
     padding-bottom: 0.35em;
 }
@@ -68,16 +35,16 @@ p {
     font-family: "Lora", Georgia, serif;
     font-size: 1em;
     line-height: 1.55;
-    color: var(--text);
+    color: #e6dfd3;
 }
 
 a {
-    color: var(--gold);
+    color: #c8a96e;
     text-decoration: none;
 }
 
 a:hover {
-    color: var(--gold-soft);
+    color: #e8d4a8;
     text-decoration: underline;
 }
 
@@ -104,7 +71,6 @@ a:hover {
     justify-content: center;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
     backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
     max-width: min(96vw, 58rem);
 }
 
@@ -121,7 +87,7 @@ a:hover {
 
 .nav a:hover {
     background-color: rgba(255, 255, 255, 0.1);
-    color: var(--gold-soft);
+    color: #e8d4a8;
     text-decoration: none;
 }
 
@@ -170,14 +136,13 @@ a:hover {
     background: transparent;
     box-shadow: none;
     backdrop-filter: none;
-    -webkit-backdrop-filter: none;
 }
 
 .hero-title {
     margin: 0 0 0.55rem 0;
     font-family: "Cinzel", Georgia, serif;
     letter-spacing: 0.06em;
-    color: var(--gold-soft);
+    color: #e8d4a8;
     line-height: 1.18;
     font-size: clamp(1.65rem, 2.2vw + 1rem, 2.55rem);
 }
@@ -247,7 +212,6 @@ a:hover {
 
 button.hero-btn {
     appearance: none;
-    -webkit-appearance: none;
     cursor: pointer;
     margin: 0;
     /* Do not use font: shorthand here — it would override .hero-btn typography */
@@ -350,7 +314,7 @@ button.hero-btn {
 h3 {
     font-family: "Cinzel", Georgia, serif;
     font-size: 1.05em;
-    color: var(--gold);
+    color: #c8a96e;
     margin: 0 0 0.35em 0;
     letter-spacing: 0.04em;
 }
@@ -407,7 +371,7 @@ h3 {
 }
 
 .char-compare-netflix {
-    clip-path: inset(0 calc(100% - var(--reveal, 0%)) 0 0);
+    clip-path: inset(0 100% 0 0);
 }
 
 .char-compare-label {
@@ -415,7 +379,7 @@ h3 {
     font-size: 0.72rem;
     font-family: "Cinzel", Georgia, serif;
     letter-spacing: 0.04em;
-    color: var(--muted);
+    color: #8a8075;
     margin: 0.4em 0 0.2em 0;
 }
 
@@ -424,7 +388,7 @@ h3 {
     max-width: 100%;
     margin: 0 0 0.15em 0;
     cursor: pointer;
-    accent-color: var(--gold);
+    accent-color: #c8a96e;
 }
 
 .char-compare-range:disabled {
@@ -474,7 +438,7 @@ a.char-card-link::after {
     font-family: "Cinzel", Georgia, serif;
     font-size: 1.32rem;
     font-weight: 600;
-    color: var(--gold);
+    color: #c8a96e;
     letter-spacing: 0.04em;
     line-height: 1.2;
     margin: 0 0 0.2em 0;
@@ -485,14 +449,14 @@ a.char-card-link::after {
 .char-card-wrap article > .char-role {
     font-size: 0.9rem;
     font-style: italic;
-    color: var(--muted);
+    color: #8a8075;
     margin: 0 0 0.45em 0;
 }
 
 .char-card-wrap article > p:not(.char-role):not(.char-compare-label) {
     font-size: 0.8rem;
     line-height: 1.5;
-    color: var(--text);
+    color: #e6dfd3;
     margin: 0;
 }
 
@@ -554,13 +518,13 @@ table caption {
     padding: 0.5em 0.35em 0.65em 0.35em;
     font-family: "Cinzel", Georgia, serif;
     font-size: 0.92em;
-    color: var(--gold);
+    color: #c8a96e;
     text-align: left;
 }
 
 th {
     background-color: rgba(26, 20, 16, 0.95);
-    color: var(--gold);
+    color: #c8a96e;
     padding: 0.65em;
     font-family: "Cinzel", Georgia, serif;
     text-align: center;
@@ -586,15 +550,15 @@ textarea {
     padding: 0.55em 0.65em;
     background-color: rgba(18, 14, 12, 0.9);
     border: 1px solid rgba(200, 169, 110, 0.45);
-    color: var(--text);
+    color: #e6dfd3;
     font-family: "Lora", Georgia, serif;
     box-sizing: border-box;
     border-radius: 0.55rem;
 }
 
 button {
-    background: linear-gradient(180deg, var(--forest), #2d4428);
-    color: var(--text);
+    background: linear-gradient(180deg, #3d5a38, #2d4428);
+    color: #e6dfd3;
     padding: 0.55em 1.2em;
     border: 1px solid rgba(200, 169, 110, 0.5);
     cursor: pointer;
@@ -628,7 +592,7 @@ button:hover {
     justify-content: space-between;
     gap: 1.25rem;
     font-size: 0.875rem;
-    color: var(--muted);
+    color: #8a8075;
 }
 
 @media screen and (min-width: 768px) {
@@ -662,7 +626,7 @@ button:hover {
 }
 
 .footer-site {
-    color: var(--muted);
+    color: #8a8075;
     font-weight: 500;
 }
 
@@ -676,7 +640,7 @@ button:hover {
 }
 
 .footer-dev a:hover {
-    color: var(--accent);
+    color: #c8a96e;
     text-decoration: underline;
 }
 
@@ -891,7 +855,7 @@ button:hover {
 
 .char-role {
     font-size: 0.92em;
-    color: var(--muted);
+    color: #8a8075;
     font-style: italic;
     margin: 0 0 0.5em 0;
 }
@@ -1031,7 +995,7 @@ button:hover {
 }
 
 .gallery-img:hover {
-    border-color: var(--gold);
+    border-color: #c8a96e;
     transform: scale(1.02);
 }
 
@@ -1101,7 +1065,7 @@ button:hover {
     border-radius: 0.45rem;
     border: 1px solid rgba(200, 169, 110, 0.45);
     background: rgba(18, 14, 12, 0.92);
-    color: var(--gold-soft);
+    color: #e8d4a8;
     font-size: 1.35rem;
     line-height: 1;
     cursor: pointer;
@@ -1114,7 +1078,7 @@ button:hover {
 .gallery-lightbox-close:hover {
     background: rgba(28, 22, 18, 0.98);
     border-color: rgba(232, 212, 168, 0.55);
-    color: var(--text);
+    color: #e6dfd3;
 }
 
 .gallery-lightbox-close:focus-visible {
@@ -1134,7 +1098,7 @@ button:hover {
     border-radius: 0.55rem;
     border: 1px solid rgba(200, 169, 110, 0.45);
     background: rgba(18, 14, 12, 0.92);
-    color: var(--gold-soft);
+    color: #e8d4a8;
     font-size: 1.65rem;
     line-height: 1;
     cursor: pointer;
@@ -1157,7 +1121,7 @@ button:hover {
 .gallery-lightbox-next:hover {
     background: rgba(28, 22, 18, 0.98);
     border-color: rgba(232, 212, 168, 0.55);
-    color: var(--text);
+    color: #e6dfd3;
 }
 
 .gallery-lightbox-prev:focus-visible,
@@ -1280,7 +1244,6 @@ button:hover {
         border-left: 1px solid rgba(200, 169, 110, 0.3);
         box-shadow: -8px 0 40px rgba(0, 0, 0, 0.7);
         backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
         z-index: 160;
         padding: 5rem 0 2rem 0;
         box-sizing: border-box;
@@ -1341,7 +1304,6 @@ button:hover {
         border: none;
         box-shadow: none;
         backdrop-filter: none;
-        -webkit-backdrop-filter: none;
         border-radius: 0;
     }
 }
@@ -1364,7 +1326,7 @@ button:hover {
 .books-table-section-title {
     font-family: "Cinzel", Georgia, serif;
     font-size: 1.2em;
-    color: var(--gold);
+    color: #c8a96e;
     margin: 0 0 0.75rem 0;
     letter-spacing: 0.04em;
     border-bottom: 1px solid rgba(200, 169, 110, 0.35);
@@ -1385,7 +1347,7 @@ button:hover {
     padding: 0.55em 0.65em;
     background-color: rgba(12, 10, 9, 0.98);
     border: 1px solid rgba(200, 169, 110, 0.45);
-    color: var(--text);
+    color: #e6dfd3;
     font-family: "Lora", Georgia, serif;
     font-size: 1rem;
     border-radius: 0.55rem;
@@ -1408,7 +1370,6 @@ button:hover {
 .books-table-wrap {
     width: 100%;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
     margin-top: 0.25rem;
     margin-left: auto;
     margin-right: auto;
@@ -1488,7 +1449,7 @@ button:hover {
 }
 
 .book-thumb:hover {
-    border-color: var(--gold);
+    border-color: #c8a96e;
     transform: scale(1.02);
 }
 
@@ -1504,7 +1465,7 @@ button:hover {
 
 .books-publisher-footnote {
     font-size: 0.88em;
-    color: var(--muted);
+    color: #8a8075;
     margin: 1rem 0 0 0;
     line-height: 1.45;
     max-width: 42rem;
@@ -1553,7 +1514,7 @@ button:hover {
 .bestiary-category-title {
     font-family: "Cinzel", Georgia, serif;
     font-size: 1.15em;
-    color: var(--gold);
+    color: #c8a96e;
     margin: 1.25rem 0 0.65rem 0;
     letter-spacing: 0.04em;
     border-bottom: 1px solid rgba(200, 169, 110, 0.35);
@@ -1602,7 +1563,7 @@ button:hover {
     border: 1px solid rgba(200, 169, 110, 0.45);
     border-radius: 999px;
     background: linear-gradient(145deg, rgba(32, 26, 20, 0.92), rgba(18, 14, 12, 0.86));
-    color: var(--text);
+    color: #e6dfd3;
     font-family: "Lora", Georgia, serif;
     font-size: 0.85rem;
     text-decoration: none;
@@ -1614,20 +1575,20 @@ button:hover {
 }
 
 .bestiary-chip:hover {
-    border-color: var(--gold);
-    color: var(--gold-soft);
+    border-color: #c8a96e;
+    color: #e8d4a8;
     background: linear-gradient(145deg, rgba(42, 34, 24, 0.98), rgba(28, 22, 16, 0.95));
     text-decoration: none;
 }
 
 .bestiary-chip.bestiary-chip-active {
     border-color: rgba(200, 169, 110, 0.75);
-    color: var(--gold-soft);
+    color: #e8d4a8;
     background: linear-gradient(145deg, rgba(48, 38, 28, 0.98), rgba(32, 26, 18, 0.96));
 }
 
 .bestiary-chip.bestiary-chip-active .bestiary-chip-label {
-    color: var(--gold-soft);
+    color: #e8d4a8;
 }
 
 .bestiary-chip-icon {
@@ -1648,17 +1609,17 @@ button:hover {
     font-family: "Cinzel", Georgia, serif;
     font-size: 0.78rem;
     letter-spacing: 0.04em;
-    color: var(--gold);
+    color: #c8a96e;
 }
 
 .bestiary-chip:hover .bestiary-chip-label {
-    color: var(--gold-soft);
+    color: #e8d4a8;
 }
 
 .bestiary-chip-count {
     font-family: "Lora", Georgia, serif;
     font-size: 0.72rem;
-    color: var(--muted);
+    color: #8a8075;
     margin-left: 0.1rem;
 }
 
@@ -1743,7 +1704,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     margin: 0 0 1.25rem 1.75rem;
     width: 210px;
     border: 1px solid rgba(201, 168, 76, 0.22);
-    border-top: 3px solid var(--school-accent, #c9a84c);
+    border-top: 3px solid #c9a84c;
     border-radius: 0 0 6px 6px;
     background: rgba(0, 0, 0, 0.42);
     font-size: 0.85rem;
@@ -1767,7 +1728,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     font-size: 0.72rem;
     letter-spacing: 0.09em;
     text-transform: uppercase;
-    color: var(--school-accent, #c9a84c);
+    color: #c9a84c;
     padding: 0.6rem 0.85rem 0.15rem;
 }
 
@@ -1832,13 +1793,13 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 .tab-btn:hover {
     background: transparent;
     border-bottom-color: rgba(201, 168, 76, 0.45);
-    color: var(--gold-soft);
+    color: #e8d4a8;
 }
 
 .tab-btn.active {
     background: transparent;
-    border-bottom: 2px solid var(--school-accent, #c9a84c);
-    color: var(--gold-soft);
+    border-bottom: 2px solid #c9a84c;
+    color: #e8d4a8;
     font-weight: 600;
 }
 
@@ -1898,7 +1859,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 
 .schools-quote cite {
     font-style: normal;
-    color: var(--gold-soft);
+    color: #e8d4a8;
 }
 
 /* First letter of each school's opening lore paragraph */
@@ -1909,7 +1870,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     float: left;
     line-height: 0.82;
     margin: 0.06em 0.1em 0 0;
-    color: var(--school-accent, #c9a84c);
+    color: #c9a84c;
 }
 
 .school-layout {
@@ -1954,7 +1915,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     width: 120px;
     height: 120px;
     border-radius: 6px;
-    border: 2px solid var(--school-accent, #c9a84c);
+    border: 2px solid #c9a84c;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1974,7 +1935,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 }
 
 .school-emblem:hover {
-    border-color: var(--gold);
+    border-color: #c8a96e;
     transform: scale(1.02);
 }
 
@@ -2082,39 +2043,88 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     font-style: italic;
 }
 
-/* Per-school accent colours */
-
-.tab-panel--wolf {
-    --school-accent: #a8a9ad;
+/* Per-school accent colours (no CSS variables — validator-friendly) */
+.tab-panel--wolf .school-infobox {
+    border-top-color: #a8a9ad;
 }
+
+.tab-panel--wolf .school-infobox dt {
+    color: #a8a9ad;
+}
+
+.tab-panel--wolf .school-profile > p:first-of-type::first-letter,
+.tab-panel--wolf .school-layout__content > p:first-of-type::first-letter {
+    color: #a8a9ad;
+}
+
 .tab-panel--wolf .school-emblem {
     border-color: #a8a9ad;
 }
 
-.tab-panel--cat {
-    --school-accent: #d4820a;
+.tab-panel--cat .school-infobox {
+    border-top-color: #d4820a;
 }
+
+.tab-panel--cat .school-infobox dt {
+    color: #d4820a;
+}
+
+.tab-panel--cat .school-profile > p:first-of-type::first-letter,
+.tab-panel--cat .school-layout__content > p:first-of-type::first-letter {
+    color: #d4820a;
+}
+
 .tab-panel--cat .school-emblem {
     border-color: #d4820a;
 }
 
-.tab-panel--bear {
-    --school-accent: #8b5e3c;
+.tab-panel--bear .school-infobox {
+    border-top-color: #8b5e3c;
 }
+
+.tab-panel--bear .school-infobox dt {
+    color: #8b5e3c;
+}
+
+.tab-panel--bear .school-profile > p:first-of-type::first-letter,
+.tab-panel--bear .school-layout__content > p:first-of-type::first-letter {
+    color: #8b5e3c;
+}
+
 .tab-panel--bear .school-emblem {
     border-color: #8b5e3c;
 }
 
-.tab-panel--griffin {
-    --school-accent: #4a7fa5;
+.tab-panel--griffin .school-infobox {
+    border-top-color: #4a7fa5;
 }
+
+.tab-panel--griffin .school-infobox dt {
+    color: #4a7fa5;
+}
+
+.tab-panel--griffin .school-profile > p:first-of-type::first-letter,
+.tab-panel--griffin .school-layout__content > p:first-of-type::first-letter {
+    color: #4a7fa5;
+}
+
 .tab-panel--griffin .school-emblem {
     border-color: #4a7fa5;
 }
 
-.tab-panel--viper {
-    --school-accent: #4a7a4a;
+.tab-panel--viper .school-infobox {
+    border-top-color: #4a7a4a;
 }
+
+.tab-panel--viper .school-infobox dt {
+    color: #4a7a4a;
+}
+
+.tab-panel--viper .school-profile > p:first-of-type::first-letter,
+.tab-panel--viper .school-layout__content > p:first-of-type::first-letter {
+    color: #4a7a4a;
+}
+
 .tab-panel--viper .school-emblem {
     border-color: #4a7a4a;
 }
@@ -2208,7 +2218,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 .series-feature-text h2 {
     font-family: "Cinzel", Georgia, serif;
     font-size: clamp(1.15rem, 2.5vw, 1.45rem);
-    color: var(--gold);
+    color: #c8a96e;
     margin: 0 0 0.5rem 0;
     padding-bottom: 0;
     border-bottom: none;
@@ -2224,7 +2234,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 }
 
 .series-title-imdb:hover {
-    color: var(--gold-soft);
+    color: #e8d4a8;
     text-decoration: none;
     text-decoration-thickness: 2.5px;
     text-underline-offset: 3px;
@@ -2232,7 +2242,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 
 .series-title-imdb:focus-visible {
     outline: none;
-    color: var(--gold-soft);
+    color: #e8d4a8;
     text-decoration: none;
     text-decoration-thickness: 2.5px;
     text-underline-offset: 3px;
@@ -2372,7 +2382,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 .series-cast-part {
     font-family: "Cinzel", Georgia, serif;
     font-size: 0.84rem;
-    color: var(--gold-soft);
+    color: #e8d4a8;
     letter-spacing: 0.02em;
 }
 
@@ -2403,7 +2413,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 }
 
 .series-note-box strong {
-    color: var(--gold);
+    color: #c8a96e;
     font-weight: normal;
 }
 
@@ -2575,7 +2585,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 .game-info h2 {
     font-family: "Cinzel", Georgia, serif;
     font-size: clamp(1.15rem, 2.5vw, 1.5rem);
-    color: var(--gold);
+    color: #c8a96e;
     margin: 0 0 0.5rem 0;
     padding-bottom: 0;
     border-bottom: none;
@@ -2751,7 +2761,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 }
 
 .game-note-box strong {
-    color: var(--gold);
+    color: #c8a96e;
     font-weight: normal;
 }
 
@@ -2911,7 +2921,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 .feedback-modal-title {
     font-family: "Cinzel", Georgia, serif;
     font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-    color: var(--gold-soft);
+    color: #e8d4a8;
     margin: 0 0 0.35rem 0;
     padding-bottom: 0.55rem;
     border-bottom: 1px solid rgba(200, 169, 110, 0.2);
@@ -2982,7 +2992,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     background: linear-gradient(135deg, rgba(200, 169, 110, 0.22), rgba(160, 130, 80, 0.18));
     border: 1px solid rgba(200, 169, 110, 0.52);
     border-radius: 7px;
-    color: var(--gold-soft);
+    color: #e8d4a8;
     font-family: "Cinzel", Georgia, serif;
     font-size: 0.82rem;
     letter-spacing: 0.06em;

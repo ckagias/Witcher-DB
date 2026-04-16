@@ -61,7 +61,6 @@ function initCharacterPortraitSliders() {
 
         var inner = document.createElement("div");
         inner.className = "char-compare-inner";
-        inner.style.setProperty("--reveal", "0%");
 
         var gameImg = document.createElement("img");
         gameImg.className = "char-compare-game";
@@ -76,6 +75,7 @@ function initCharacterPortraitSliders() {
         netflixImg.alt = alt ? alt + " (Netflix)" : "Netflix portrayal";
         netflixImg.setAttribute("width", "280");
         netflixImg.setAttribute("height", "220");
+        netflixImg.style.clipPath = "inset(0 100% 0 0)";
 
         inner.appendChild(gameImg);
         inner.appendChild(netflixImg);
@@ -110,10 +110,10 @@ function initCharacterPortraitSliders() {
             }
         }
 
-        // Update CSS reveal variable as user drags the slider.
+        // Update Netflix layer clip as user drags the slider.
         range.addEventListener("input", function () {
             var v = range.value;
-            inner.style.setProperty("--reveal", v + "%");
+            netflixImg.style.clipPath = "inset(0 calc(100% - " + v + "%) 0 0)";
             syncAria(v);
         });
 
@@ -132,7 +132,7 @@ function initCharacterPortraitSliders() {
         // Graceful fallback if Netflix image file does not exist.
         netflixImg.addEventListener("error", function () {
             netflixImg.style.display = "none";
-            inner.style.setProperty("--reveal", "0%");
+            netflixImg.style.clipPath = "";
             range.setAttribute("disabled", "disabled");
             range.setAttribute("aria-disabled", "true");
             label.textContent = "Portrait (game only)";
