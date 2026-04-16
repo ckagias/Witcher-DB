@@ -501,7 +501,8 @@ var imageLightboxConfigs = [
     { lightboxId: "gwent-lightbox", sourceId: "gwent-lightbox-source", thumbSelector: ".faction-hero-img" },
     { lightboxId: "series-lightbox", sourceId: "series-lightbox-source", thumbSelector: ".series-poster" },
     { lightboxId: "bestiary-lightbox", sourceId: "bestiary-catalog-section", thumbSelector: ".gallery-img" },
-    { lightboxId: "books-lightbox", sourceId: "books-table-section", thumbSelector: ".book-thumb" }
+    { lightboxId: "books-lightbox", sourceId: "books-table-section", thumbSelector: ".book-thumb" },
+    { lightboxId: "schools-lightbox", sourceId: "schools-lightbox-source", thumbSelector: ".school-thumb" }
 ];
 
 /**

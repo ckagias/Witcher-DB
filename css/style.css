@@ -1793,7 +1793,6 @@ button:hover {
     margin: 0;
 }
 
-/* Bestiary images: fixed square container so all creatures render uniformly */
 .bestiary-grid .gallery-img {
     width: 100%;
     height: 220px;
@@ -1971,14 +1970,79 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     margin-bottom: 2rem;
 }
 
+/* Schools page: Narrative quote */
+.schools-quote {
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 2rem auto 0;
+    text-align: center;
+}
+
+.schools-quote p {
+    margin-top: 0;
+}
+
+.schools-quote p::first-letter {
+    font-family: inherit;
+    font-size: inherit;
+    float: none;
+    line-height: inherit;
+    margin: 0;
+    color: inherit;
+}
+
+.schools-quote footer {
+    margin-top: 0.85rem;
+    color: rgba(230, 223, 211, 0.85);
+    font-family: "Cinzel", Georgia, serif;
+    letter-spacing: 0.05em;
+}
+
+.schools-quote cite {
+    font-style: normal;
+    color: var(--gold-soft);
+}
+
 /* First letter of each school's opening lore paragraph */
-.school-profile > p:first-of-type::first-letter {
+.school-profile > p:first-of-type::first-letter,
+.school-layout__content > p:first-of-type::first-letter {
     font-family: 'Cinzel', serif;
     font-size: 3em;
     float: left;
     line-height: 0.82;
     margin: 0.06em 0.1em 0 0;
     color: var(--school-accent, #c9a84c);
+}
+
+.school-layout {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 2rem;
+}
+
+.school-layout__content {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    height: 100%;
+    min-width: 0;
+}
+
+.school-layout__content .school-historical-note {
+    margin-top: auto;
+}
+
+.school-layout .school-infobox {
+    float: none;
+    clear: none;
+    margin: 0;
+}
+
+.school-layout__infobox {
+    align-self: start;
 }
 
 .school-profile-header {
@@ -2000,6 +2064,10 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     justify-content: center;
     background: rgba(0, 0, 0, 0.4);
     overflow: hidden;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .school-emblem img {
@@ -2007,6 +2075,11 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     height: 100%;
     object-fit: contain;
     display: block;
+}
+
+.school-emblem:hover {
+    border-color: var(--gold);
+    transform: scale(1.02);
 }
 
 .school-profile-header h2 {
@@ -2023,18 +2096,6 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     color: #aaa;
     font-size: 0.85rem;
     font-style: italic;
-}
-
-.school-known-witchers {
-    margin-top: 1.25rem;
-}
-
-.school-known-witchers h3 {
-    font-family: 'Cinzel', serif;
-    color: #c9a84c;
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-    letter-spacing: 0.06em;
 }
 
 @media screen and (max-width: 600px) {
@@ -2062,6 +2123,15 @@ button.bestiary-chip.back-to-top-btn[hidden] {
         font-size: 0.78rem;
         padding: 0.45rem 0.6rem;
     }
+
+    .school-layout {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .school-layout__infobox {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 380px) {
@@ -2086,31 +2156,6 @@ button.bestiary-chip.back-to-top-btn[hidden] {
         font-size: 2.25em;
         line-height: 0.88;
     }
-}
-
-/* ── School quote ─────────────────────────── */
-
-.school-quote {
-    margin: 1.5rem 26.5rem 0 0;
-    padding: 0.85rem 1.1rem;
-    border-left: 3px solid rgba(201, 168, 76, 0.5);
-    background: rgba(201, 168, 76, 0.05);
-    border-radius: 0 6px 6px 0;
-}
-
-.school-quote__text {
-    margin: 0 0 0.4rem 0;
-    font-style: italic;
-    color: rgba(232, 212, 168, 0.92);
-    font-size: 0.95rem;
-    line-height: 1.55;
-}
-
-.school-quote__footer {
-    font-family: 'Cinzel', serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
-    color: rgba(201, 168, 76, 0.75);
 }
 
 /* ── School history highlight ─────────────── */
@@ -2176,17 +2221,6 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 }
 .tab-panel--viper .school-emblem {
     border-color: #4a7a4a;
-}
-
-/* ── Known witcher name pills ────────────────── */
-
-/* Known witchers listed as plain small-caps inline */
-.school-known-witchers p {
-    font-family: 'Cinzel', serif;
-    font-size: 0.82rem;
-    letter-spacing: 0.04em;
-    color: rgba(230, 223, 211, 0.78);
-    line-height: 1.8;
 }
 
 /* ── Series page (screen adaptations) ────────── */
