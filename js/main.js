@@ -52,6 +52,7 @@ function initCharacterPortraitSliders() {
 
         var baseFile = img.getAttribute("data-img-base");
         var gameSrc = img.getAttribute("src");
+        // Netflix portraits live under a predictable subfolder with matching filenames.
         var netflixSrc = CHAR_IMG_BASE + "netflix/" + baseFile;
         var alt = img.getAttribute("alt") || "";
 
@@ -168,6 +169,7 @@ function initCharacterPortraitSliders() {
         inner.className = "char-compare-inner";
         thumbWrap.removeChild(img);
         img.classList.add("char-compare-game");
+        // Ensure consistent layout even if width/height attrs are missing in HTML.
         if (!img.getAttribute("width")) {
             img.setAttribute("width", "280");
         }
@@ -365,6 +367,7 @@ function initBestiaryPage() {
             if (shouldIgnoreCardClick(e.target)) {
                 return;
             }
+            // Open the wiki in a new tab like a normal external link.
             window.open(link.href, link.target || "_self", "noopener,noreferrer");
         });
 
@@ -374,6 +377,7 @@ function initBestiaryPage() {
                     return;
                 }
                 e.preventDefault();
+                // Keyboard users: Enter/Space activates the card like a link.
                 window.open(link.href, link.target || "_self", "noopener,noreferrer");
             }
         });
@@ -455,8 +459,7 @@ function initCharactersPage() {
     updateChipActive();
     applyFilter();
 
-    // Make the full card area clickable: navigate to the char-card-link href
-    // when clicking anywhere on the card that isn't an interactive element.
+    // Make the full card clickable while preserving native control behavior.
     document.querySelectorAll(".card.char-card-wrap").forEach(function (card) {
         card.setAttribute("tabindex", "0");
         card.setAttribute("role", "link");
@@ -475,15 +478,14 @@ function initCharactersPage() {
         card.addEventListener("keydown", function (e) {
             if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
+                // Keyboard users: treat the card like a link.
                 window.open(link.href, link.target || "_self", "noopener,noreferrer");
             }
         });
     });
 }
 
-/**
- * Populates category count badges using current bestiary card totals.
- */
+// Populates category count badges using current bestiary card totals.
 function fillBestiaryChipCounts() {
     var counts = document.querySelectorAll("[data-count-for]");
     for (var i = 0; i < counts.length; i++) {
@@ -505,10 +507,7 @@ var imageLightboxConfigs = [
     { lightboxId: "schools-lightbox", sourceId: "schools-lightbox-source", thumbSelector: ".school-thumb" }
 ];
 
-/**
- * Returns the image element for a thumbnail target.
- * Supports either direct IMG targets or wrapper elements containing an IMG.
- */
+// Returns the image element for a thumbnail target.
 function lightboxThumbImage(thumb) {
     if (thumb.tagName === "IMG") {
         return thumb;
@@ -580,6 +579,7 @@ function attachImageLightbox(root, source, thumbSelector) {
     }
 
     function step(delta) {
+        // Prev/next navigation: wrap around so it never gets "stuck" at the ends.
         if (!canNavigate || thumbs.length === 0) {
             return;
         }
@@ -625,6 +625,7 @@ function attachImageLightbox(root, source, thumbSelector) {
             if (e && e.stopPropagation) {
                 e.stopPropagation();
             }
+            // Previous image (when navigation buttons exist).
             step(-1);
         });
     }
@@ -633,6 +634,7 @@ function attachImageLightbox(root, source, thumbSelector) {
             if (e && e.stopPropagation) {
                 e.stopPropagation();
             }
+            // Next image (when navigation buttons exist).
             step(1);
         });
     }
@@ -658,9 +660,7 @@ function attachImageLightbox(root, source, thumbSelector) {
     });
 }
 
-/**
- * Initializes all configured lightboxes present on the current page.
- */
+// Initializes all configured lightboxes present on the current page.
 function initImageLightboxes() {
     var i;
     for (i = 0; i < imageLightboxConfigs.length; i++) {
@@ -674,9 +674,7 @@ function initImageLightboxes() {
     }
 }
 
-/**
- * Initializes the back-to-top button visibility and smooth scrolling behavior.
- */
+// Initializes the back-to-top button visibility and smooth scrolling behavior.
 function initBackToTopButton() {
     var scrollBtn = document.getElementById("back-to-top");
     if (!scrollBtn) {
@@ -696,6 +694,20 @@ function initBackToTopButton() {
     scrollBtn.addEventListener("click", function () {
         window.scrollTo({ top: 0, behavior: "smooth" });
     });
+}
+
+
+// Safety: restore scrolling when returning after leaving a lightbox open.
+function restoreScrollAfterReturn() {
+    // If any lightbox is open, hide it (equivalent to close).
+    document.querySelectorAll(".gallery-lightbox:not([hidden])").forEach(function (lb) {
+        lb.setAttribute("hidden", "");
+    });
+
+    // If scroll is locked via inline style, clear it.
+    if (document.body && document.body.style && document.body.style.overflow === "hidden") {
+        document.body.style.overflow = "";
+    }
 }
 
 // Run all page initializers once DOM is ready.
@@ -719,9 +731,17 @@ if (document.readyState === "loading") {
     initBackToTopButton();
 }
 
-/**
- * Switches active school tab/panel. Keeps ARIA attributes current for assistive technologies.
- */
+// Restore scroll when returning from another tab/window (covers BFCache too).
+window.addEventListener("pageshow", restoreScrollAfterReturn);
+window.addEventListener("focus", restoreScrollAfterReturn);
+document.addEventListener("visibilitychange", function () {
+    if (!document.hidden) {
+        // Some browsers only fire visibilitychange on tab return.
+        restoreScrollAfterReturn();
+    }
+});
+
+// Switches active school tab/panel. Keeps ARIA attributes current for assistive technologies.
 function switchSchool(schoolId) {
     var panels = document.querySelectorAll('.tab-panel');
     var buttons = document.querySelectorAll('.tab-btn');
