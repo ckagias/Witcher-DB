@@ -1395,6 +1395,10 @@ button:hover {
     min-width: 36rem;
 }
 
+.book-page .books-table thead th {
+    background-color: rgba(0, 0, 0, 0.55);
+}
+
 .book-page .books-table-col-order {
     width: 4%;
 }
