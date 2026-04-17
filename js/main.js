@@ -1,27 +1,31 @@
-// Toggle the mobile nav drawer and sync the menu button (open/closed + aria-expanded).
-function toggleMenu() {
-    // Read menu/button elements used by the mobile nav.
+// Shared helper: close the mobile nav and sync button state.
+function closeNavMenu() {
     var menu = document.getElementById("nav-menu");
     var btn = document.querySelector(".menu-btn");
-    // Exit safely on pages that do not include this nav.
     if (!menu) return;
-    // Detect current state so we can toggle.
-    var isOpen = menu.classList.contains("nav-open");
-    if (isOpen) {
-        // Close menu and clear related state classes.
-        menu.classList.remove("nav-open");
-        document.body.classList.remove("nav-drawer-open");
-        if (btn) {
-            // Sync visual and accessibility states on the button.
-            btn.classList.remove("is-open");
-            btn.setAttribute("aria-expanded", "false");
-        }
+    // Remove the CSS classes that make the drawer visible and lock body scroll.
+    menu.classList.remove("nav-open");
+    document.body.classList.remove("nav-drawer-open");
+    if (btn) {
+        // Reset the hamburger icon and tell screen readers the menu is collapsed.
+        btn.classList.remove("is-open");
+        btn.setAttribute("aria-expanded", "false");
+    }
+}
+
+// Toggle the mobile nav drawer and sync the menu button (open/closed + aria-expanded).
+function toggleMenu() {
+    var menu = document.getElementById("nav-menu");
+    var btn = document.querySelector(".menu-btn");
+    if (!menu) return;
+    if (menu.classList.contains("nav-open")) {
+        // Menu is currently open — close it.
+        closeNavMenu();
     } else {
-        // Open menu and mark body as drawer-open.
+        // Menu is closed — slide it open and update button state.
         menu.classList.add("nav-open");
         document.body.classList.add("nav-drawer-open");
         if (btn) {
-            // Sync visual and accessibility states on the button.
             btn.classList.add("is-open");
             btn.setAttribute("aria-expanded", "true");
         }
@@ -30,12 +34,65 @@ function toggleMenu() {
 
 var CHAR_IMG_BASE = "images/characters/";
 
+// Shared helper: sync active chip class and aria-current across a chip nav.
+// filterAttr is the data-* attribute name used to identify the "show all" chip (e.g. "data-bestiary-filter").
+function updateChipActiveState(chipNav, activeCategoryId, filterAttr) {
+    if (!chipNav) { return; }
+    var allChips = chipNav.querySelectorAll(".bestiary-chip");
+    var j;
+    for (j = 0; j < allChips.length; j++) {
+        var c = allChips[j];
+        // Start each chip as inactive, then decide below whether to highlight it.
+        c.classList.remove("bestiary-chip-active");
+        if (c.getAttribute(filterAttr) === "all") {
+            // "Show all" chip: highlight it only when no specific category is selected.
+            if (!activeCategoryId) {
+                c.classList.add("bestiary-chip-active");
+                c.setAttribute("aria-current", "true");
+            } else {
+                c.removeAttribute("aria-current");
+            }
+        } else {
+            // Category chip: highlight it when it matches the currently active category.
+            var tid = c.getAttribute("data-target");
+            if (tid && tid === activeCategoryId) {
+                c.classList.add("bestiary-chip-active");
+                c.setAttribute("aria-current", "true");
+            } else {
+                c.removeAttribute("aria-current");
+            }
+        }
+    }
+}
+
+// Shared helper: switch tab panels — deactivate all, activate the chosen one.
+function switchTabPanel(scope, tabId) {
+    var btns = scope.querySelectorAll(".tab-btn");
+    var panels = scope.querySelectorAll(".tab-panel");
+    var i;
+    // Deactivate all tab buttons first.
+    for (i = 0; i < btns.length; i++) {
+        btns[i].classList.remove("active");
+        btns[i].setAttribute("aria-selected", "false");
+    }
+    // Hide all panels — the caller is responsible for activating the right button afterwards.
+    for (i = 0; i < panels.length; i++) {
+        panels[i].classList.remove("active");
+        panels[i].setAttribute("aria-hidden", "true");
+    }
+    // Show only the panel whose id matches "panel-<tabId>".
+    var activePanel = document.getElementById("panel-" + tabId);
+    if (activePanel) {
+        activePanel.classList.add("active");
+        activePanel.removeAttribute("aria-hidden");
+    }
+}
+
 // Add game vs Netflix portrait sliders on character cards (or single portrait when toggles are off).
 function initCharacterPortraitSliders() {
-    // Setup compare mode on cards that support toggling.
     document.querySelectorAll(".char-card-wrap:not(.char-card-wrap-no-toggle)").forEach(function (card, idx) {
         var img = card.querySelector(".char-thumb-wrap img[data-img-base]");
-        // Skip if required image data is missing or card is already initialized.
+        // Skip cards that have no portrait data or have already been initialized.
         if (!img || card.getAttribute("data-compare-init") === "1") {
             return;
         }
@@ -56,12 +113,15 @@ function initCharacterPortraitSliders() {
             link.parentNode.insertBefore(thumbWrap, link);
         }
 
+        // Clear the original static portrait and rebuild it as a comparison widget.
         thumbWrap.textContent = "";
         thumbWrap.classList.add("char-compare");
 
+        // Inner container holds the two stacked portrait images.
         var inner = document.createElement("div");
         inner.className = "char-compare-inner";
 
+        // Left image — the video game portrait (always fully visible).
         var gameImg = document.createElement("img");
         gameImg.className = "char-compare-game";
         gameImg.src = gameSrc;
@@ -69,17 +129,20 @@ function initCharacterPortraitSliders() {
         gameImg.setAttribute("width", "280");
         gameImg.setAttribute("height", "220");
 
+        // Right image — the Netflix portrait, initially hidden by clipping the entire image away.
         var netflixImg = document.createElement("img");
         netflixImg.className = "char-compare-netflix";
         netflixImg.src = netflixSrc;
         netflixImg.alt = alt ? alt + " (Netflix)" : "Netflix portrayal";
         netflixImg.setAttribute("width", "280");
         netflixImg.setAttribute("height", "220");
+        // clip-path starts at "inset 100% from right" = fully hidden; slider reveals it left-to-right.
         netflixImg.style.clipPath = "inset(0 100% 0 0)";
 
         inner.appendChild(gameImg);
         inner.appendChild(netflixImg);
 
+        // Give each slider a unique id so its label can point to it with "for".
         var rangeId = "portrait-range-" + idx;
 
         var label = document.createElement("label");
@@ -87,6 +150,7 @@ function initCharacterPortraitSliders() {
         label.setAttribute("for", rangeId);
         label.textContent = "Game vs Netflix portrait";
 
+        // The range input is the actual slider — 0 = full game portrait, 100 = full Netflix portrait.
         var range = document.createElement("input");
         range.type = "range";
         range.id = rangeId;
@@ -152,6 +216,7 @@ function initCharacterPortraitSliders() {
             return;
         }
         var compareLabel = card.querySelector(".char-compare-label");
+        // :scope > img targets only a direct child img, not nested ones.
         var img = thumbWrap.querySelector(":scope > img");
         if (!img) {
             return;
@@ -159,6 +224,7 @@ function initCharacterPortraitSliders() {
         if (thumbWrap.parentNode === link) {
             link.parentNode.insertBefore(thumbWrap, link);
         }
+        // Wrap the single image in the same structure as slider cards for consistent CSS layout.
         thumbWrap.classList.add("char-compare", "char-compare-single");
         var inner = document.createElement("div");
         inner.className = "char-compare-inner";
@@ -184,16 +250,19 @@ function initCharacterPortraitSliders() {
 function initBooksPage() {
     var section = document.getElementById("books-table-section");
     if (!section) {
-        return;
+        return; // Not on the books page — nothing to do.
     }
     var searchInput = document.getElementById("book-table-search");
+    // Only select rows that carry a data-search-text attribute (used as the haystack for matching).
     var rows = section.querySelectorAll("tbody tr[data-search-text]");
 
     // Show or hide rows based on the current query.
     function applySearch() {
+        // Normalise the query to lowercase so the match is case-insensitive.
         var q = searchInput ? String(searchInput.value).trim().toLowerCase() : "";
         rows.forEach(function (tr) {
             var hay = tr.getAttribute("data-search-text") || "";
+            // An empty query means "show everything"; otherwise check for a substring match.
             var ok = !q || hay.indexOf(q) !== -1;
             if (ok) {
                 tr.removeAttribute("hidden");
@@ -210,50 +279,27 @@ function initBooksPage() {
     applySearch();
 }
 
-
 // Bestiary: filter beasts by search text and chips; image opens lightbox, card opens wiki.
 function initBestiaryPage() {
     var section = document.getElementById("bestiary-catalog-section");
     if (!section) {
-        return;
+        return; // Not on the bestiary page — nothing to do.
     }
     var searchInput = document.getElementById("bestiary-search");
     var cards = section.querySelectorAll(".bestiary-beast-card[data-search-text]");
     var chipNav = document.querySelector("nav.bestiary-chip-nav");
+    // null means "show all categories"; a string means filter to that category id.
     var activeCategoryId = null;
 
-    // Updates active chip styling and aria-current state.
+    // Convenience wrapper — passes the bestiary-specific filter attribute name.
     function updateChipActive() {
-        if (!chipNav) {
-            return;
-        }
-        var allChips = chipNav.querySelectorAll(".bestiary-chip");
-        var j;
-        for (j = 0; j < allChips.length; j++) {
-            var c = allChips[j];
-            c.classList.remove("bestiary-chip-active");
-            if (c.getAttribute("data-bestiary-filter") === "all") {
-                if (!activeCategoryId) {
-                    c.classList.add("bestiary-chip-active");
-                    c.setAttribute("aria-current", "true");
-                } else {
-                    c.removeAttribute("aria-current");
-                }
-            } else {
-                var tid = c.getAttribute("data-target");
-                if (tid && tid === activeCategoryId) {
-                    c.classList.add("bestiary-chip-active");
-                    c.setAttribute("aria-current", "true");
-                } else {
-                    c.removeAttribute("aria-current");
-                }
-            }
-        }
+        updateChipActiveState(chipNav, activeCategoryId, "data-bestiary-filter");
     }
 
     // Applies text filter and keeps category blocks hidden when empty.
     function applySearch() {
         var q = searchInput ? String(searchInput.value).trim().toLowerCase() : "";
+        // First pass: show or hide individual beast cards based on the search query.
         cards.forEach(function (card) {
             var hay = card.getAttribute("data-search-text") || "";
             var ok = !q || hay.indexOf(q) !== -1;
@@ -263,12 +309,15 @@ function initBestiaryPage() {
                 card.setAttribute("hidden", "");
             }
         });
+        // Second pass: hide any category section whose cards are all hidden (avoids empty headings).
         var cats = section.querySelectorAll(".bestiary-category");
         if (activeCategoryId) {
+            // A category chip is active — hide every section except the selected one.
             cats.forEach(function (cat) {
                 if (cat.id !== activeCategoryId) {
                     cat.setAttribute("hidden", "");
                 } else {
+                    // Even the active section should hide if the search left it with no visible cards.
                     var visible = cat.querySelector(".bestiary-beast-card:not([hidden])");
                     if (visible) {
                         cat.removeAttribute("hidden");
@@ -278,6 +327,7 @@ function initBestiaryPage() {
                 }
             });
         } else {
+            // No category filter — only hide sections that the text search emptied out.
             cats.forEach(function (cat) {
                 var visible = cat.querySelector(".bestiary-beast-card:not([hidden])");
                 if (visible) {
@@ -295,6 +345,7 @@ function initBestiaryPage() {
         if (showAllChip) {
             showAllChip.addEventListener("click", function (e) {
                 e.preventDefault();
+                // Clear the active category so all sections become visible again.
                 activeCategoryId = null;
                 updateChipActive();
                 applySearch();
@@ -302,16 +353,18 @@ function initBestiaryPage() {
         }
         chipNav.querySelectorAll(".bestiary-chip[data-target]").forEach(function (chip) {
             if (chip.getAttribute("data-bestiary-filter") === "all") {
-                return;
+                return; // Already handled above.
             }
             chip.addEventListener("click", function (e) {
                 e.preventDefault();
+                // Set the active category to the section id stored on the chip.
                 var target = chip.getAttribute("data-target");
                 activeCategoryId = target || null;
                 updateChipActive();
                 applySearch();
             });
         });
+        // Sync chip styles on first load (no category selected by default).
         updateChipActive();
     }
 
@@ -321,7 +374,7 @@ function initBestiaryPage() {
     }
     applySearch();
 
-    // Bestiary cards: image opens lightbox; rest of card opens wiki.
+    // Bestiary cards: image opens lightbox | rest of card opens wiki.
     cards.forEach(function (card) {
         var link = card.querySelector(".bestiary-card-link");
         if (!link) {
@@ -360,13 +413,13 @@ function initBestiaryPage() {
             window.open(link.href, link.target || "_self", "noopener,noreferrer");
         });
 
+        // Keyboard users: Enter/Space activates the card like a link.
         card.addEventListener("keydown", function (e) {
             if (e.key === "Enter" || e.key === " ") {
                 if (shouldIgnoreCardClick(e.target)) {
                     return;
                 }
                 e.preventDefault();
-                // Keyboard users: Enter/Space activates the card like a link.
                 window.open(link.href, link.target || "_self", "noopener,noreferrer");
             }
         });
@@ -377,35 +430,15 @@ function initBestiaryPage() {
 function initCharactersPage() {
     var chipNav = document.getElementById("char-chip-nav");
     if (!chipNav) {
-        return;
+        return; // Not on the characters page — nothing to do.
     }
     var cards = document.querySelectorAll(".card.char-card-wrap[data-category]");
+    // null = show all | a string = show only cards whose data-category matches.
     var activeCategoryId = null;
 
-    // Updates active chip class and aria-current for accessibility.
+    // Convenience wrapper — passes the characters-specific filter attribute name.
     function updateChipActive() {
-        var allChips = chipNav.querySelectorAll(".bestiary-chip");
-        var j;
-        for (j = 0; j < allChips.length; j++) {
-            var c = allChips[j];
-            c.classList.remove("bestiary-chip-active");
-            if (c.getAttribute("data-char-filter") === "all") {
-                if (!activeCategoryId) {
-                    c.classList.add("bestiary-chip-active");
-                    c.setAttribute("aria-current", "true");
-                } else {
-                    c.removeAttribute("aria-current");
-                }
-            } else {
-                var tid = c.getAttribute("data-target");
-                if (tid && tid === activeCategoryId) {
-                    c.classList.add("bestiary-chip-active");
-                    c.setAttribute("aria-current", "true");
-                } else {
-                    c.removeAttribute("aria-current");
-                }
-            }
-        }
+        updateChipActiveState(chipNav, activeCategoryId, "data-char-filter");
     }
 
     // Shows cards matching the active category id.
@@ -413,6 +446,7 @@ function initCharactersPage() {
         for (var i = 0; i < cards.length; i++) {
             var card = cards[i];
             var cat = card.getAttribute("data-category") || "";
+            // Show the card if no filter is active, or if the card's category matches.
             if (!activeCategoryId || cat === activeCategoryId) {
                 card.removeAttribute("hidden");
             } else {
@@ -425,7 +459,7 @@ function initCharactersPage() {
     if (showAllChip) {
         showAllChip.addEventListener("click", function (e) {
             e.preventDefault();
-            activeCategoryId = null;
+            activeCategoryId = null; // Reset — show every character card.
             updateChipActive();
             applyFilter();
         });
@@ -442,6 +476,7 @@ function initCharactersPage() {
             applyFilter();
         });
     });
+    // Apply default state on load (no filter, all cards visible).
     updateChipActive();
     applyFilter();
 
@@ -461,10 +496,10 @@ function initCharactersPage() {
             }
             window.open(link.href, link.target || "_self", "noopener,noreferrer");
         });
+        // Keyboard users: treat the card like a link.
         card.addEventListener("keydown", function (e) {
             if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
-                // Keyboard users: treat the card like a link.
                 window.open(link.href, link.target || "_self", "noopener,noreferrer");
             }
         });
@@ -473,11 +508,13 @@ function initCharactersPage() {
 
 // Populates category count badges using current bestiary card totals.
 function fillBestiaryChipCounts() {
+    // Each badge element has data-count-for="<section-id>" pointing to its category section.
     var counts = document.querySelectorAll("[data-count-for]");
     for (var i = 0; i < counts.length; i++) {
         var sectionId = counts[i].getAttribute("data-count-for");
         var section = document.getElementById(sectionId);
         if (section) {
+            // Count the beast cards in that section and display the number in the badge.
             var cards = section.querySelectorAll(".bestiary-beast-card");
             counts[i].textContent = String(cards.length);
         }
@@ -502,7 +539,7 @@ function lightboxThumbImage(thumb) {
     return thumb.querySelector("img");
 }
 
-// One lightbox: thumbnails open it; backdrop, close button, and Escape close it; arrows step images.
+// One lightbox: thumbnails open it | backdrop, close button, and Escape close it | arrows step images.
 function attachImageLightbox(root, source, thumbSelector) {
     var modalImg = root.querySelector(".gallery-lightbox-img");
     var captionEl = root.querySelector(".gallery-lightbox-caption");
@@ -547,9 +584,9 @@ function attachImageLightbox(root, source, thumbSelector) {
             text = String(img.getAttribute("alt") || "").trim();
         }
         captionEl.textContent = text;
-        // Only capture the previous overflow the first time the lightbox opens.
         var wasHidden = root.hasAttribute("hidden");
         root.removeAttribute("hidden");
+        // Only capture the previous overflow the first time the lightbox opens.
         if (wasHidden) {
             prevBodyOverflow = document.body.style.overflow;
             document.body.style.overflow = "hidden";
@@ -567,8 +604,8 @@ function attachImageLightbox(root, source, thumbSelector) {
         prevBodyOverflow = "";
     }
 
+    // Prev/next navigation: wrap around so it never gets "stuck" at the ends.
     function step(delta) {
-        // Prev/next navigation: wrap around so it never gets "stuck" at the ends.
         if (!canNavigate || thumbs.length === 0) {
             return;
         }
@@ -610,20 +647,20 @@ function attachImageLightbox(root, source, thumbSelector) {
     closeBtn.addEventListener("click", closeModal);
     backdrop.addEventListener("click", closeModal);
     if (prevBtn) {
+        // Previous image (when navigation buttons exist).
         prevBtn.addEventListener("click", function (e) {
             if (e && e.stopPropagation) {
                 e.stopPropagation();
             }
-            // Previous image (when navigation buttons exist).
             step(-1);
         });
     }
     if (nextBtn) {
+        // Next image (when navigation buttons exist).
         nextBtn.addEventListener("click", function (e) {
             if (e && e.stopPropagation) {
                 e.stopPropagation();
             }
-            // Next image (when navigation buttons exist).
             step(1);
         });
     }
@@ -656,6 +693,7 @@ function initImageLightboxes() {
         var cfg = imageLightboxConfigs[i];
         var rootEl = document.getElementById(cfg.lightboxId);
         var sourceEl = document.getElementById(cfg.sourceId);
+        // Both the lightbox modal and its image source must exist — skip if either is absent.
         if (!rootEl || !sourceEl) {
             continue;
         }
@@ -755,7 +793,6 @@ function initFeedbackModal() {
         backdrop.addEventListener("click", closeModal);
     }
 
-    // Submit: validate, then after a short delay show success (no network request).
     if (!form || !submitBtn) {
         return;
     }
@@ -792,12 +829,15 @@ function initFeedbackModal() {
         });
     }
 
+    // Submit: validate, then after a short delay show success (no network request).
     form.addEventListener("submit", function (e) {
         e.preventDefault();
         clearMessages();
+        // Use the browser's built-in constraint validation before doing anything else.
         if (typeof form.reportValidity === "function" && !form.reportValidity()) {
             var firstInvalid = form.querySelector(":invalid");
             if (firstInvalid) {
+                // Surface the browser's own validation message alongside the field label.
                 showError(fieldLabelFor(firstInvalid) + ": " + (firstInvalid.validationMessage || "Please check this field."));
                 if (typeof firstInvalid.focus === "function") { firstInvalid.focus(); }
             } else {
@@ -806,9 +846,11 @@ function initFeedbackModal() {
             return;
         }
 
+        // Disable the button while "sending" so the user can't double-submit.
         submitBtn.disabled = true;
         submitBtn.textContent = "Sending\u2026";
 
+        // Short timeout simulates a network round-trip (there is no server call).
         window.setTimeout(function () {
             var offline = typeof navigator !== "undefined" && navigator.onLine === false;
             if (offline) {
@@ -825,6 +867,7 @@ function initFeedbackModal() {
                     "If you want to send more feedback, choose <em>Send another</em>.";
                 statusEl.removeAttribute("hidden");
             }
+            // Show the "Send another" button so the user can submit again without reloading.
             if (resetBtn) {
                 resetBtn.removeAttribute("hidden");
                 resetBtn.disabled = false;
@@ -854,7 +897,7 @@ function initBackToTopButton() {
         return;
     }
 
-    // Reveal button only after user has scrolled down enough.
+    // Only show the button once the user has scrolled past 300px — avoids it showing on short pages.
     window.addEventListener("scroll", function () {
         if (window.scrollY > 300) {
             scrollBtn.removeAttribute("hidden");
@@ -863,7 +906,6 @@ function initBackToTopButton() {
         }
     });
 
-    // Scroll smoothly to the top when the button is clicked.
     scrollBtn.addEventListener("click", function () {
         window.scrollTo({ top: 0, behavior: "smooth" });
     });
@@ -872,12 +914,10 @@ function initBackToTopButton() {
 
 // When the user leaves and comes back, close stray lightboxes and unlock scroll.
 function restoreScrollAfterReturn() {
-    // Close any open gallery lightbox (same effect as its close control).
     document.querySelectorAll(".gallery-lightbox:not([hidden])").forEach(function (lb) {
         lb.setAttribute("hidden", "");
     });
 
-    // If scroll is locked via inline style, clear it.
     if (document.body && document.body.style && document.body.style.overflow === "hidden") {
         document.body.style.overflow = "";
     }
@@ -917,31 +957,8 @@ document.addEventListener("visibilitychange", function () {
 
 // Switches active school tab/panel. Keeps ARIA attributes current for assistive technologies.
 function switchSchool(schoolId) {
-    var panels = document.querySelectorAll('.tab-panel');
-    var buttons = document.querySelectorAll('.tab-btn');
-
-    // Reset panel visibility state.
-    for (var i = 0; i < panels.length; i++) {
-        panels[i].classList.remove('active');
-        panels[i].setAttribute('aria-hidden', 'true');
-    }
-
-    // Reset button selected state.
-    for (var j = 0; j < buttons.length; j++) {
-        buttons[j].classList.remove('active');
-        buttons[j].setAttribute('aria-selected', 'false');
-    }
-
-    var activePanel = document.getElementById('panel-' + schoolId);
+    switchTabPanel(document, schoolId);
     var activeBtn = document.getElementById('tab-' + schoolId);
-
-    // Activate selected content panel.
-    if (activePanel) {
-        activePanel.classList.add('active');
-        activePanel.removeAttribute('aria-hidden');
-    }
-
-    // Activate selected tab button.
     if (activeBtn) {
         activeBtn.classList.add('active');
         activeBtn.setAttribute('aria-selected', 'true');
@@ -961,14 +978,9 @@ document.addEventListener("keydown", function (e) {
         var menu = document.getElementById("nav-menu");
         var btn = document.querySelector(".menu-btn");
         if (menu && menu.classList.contains("nav-open")) {
-            menu.classList.remove("nav-open");
-            document.body.classList.remove("nav-drawer-open");
-            if (btn) {
-                btn.classList.remove("is-open");
-                btn.setAttribute("aria-expanded", "false");
-                // Return focus to toggle for keyboard continuity.
-                btn.focus();
-            }
+            closeNavMenu();
+            // Return focus to toggle for keyboard continuity.
+            if (btn) { btn.focus(); }
         }
     }
 });
@@ -984,10 +996,7 @@ document.addEventListener("click", function (e) {
         btn &&
         !btn.contains(e.target)
     ) {
-        menu.classList.remove("nav-open");
-        document.body.classList.remove("nav-drawer-open");
-        btn.classList.remove("is-open");
-        btn.setAttribute("aria-expanded", "false");
+        closeNavMenu();
     }
 });
 
@@ -998,23 +1007,9 @@ function switchSeriesTab(tab) {
     if (!wrap) {
         return;
     }
-    var btns = wrap.querySelectorAll('.tab-btn');
-    var panels = wrap.querySelectorAll('.tab-panel');
-    var i;
-    for (i = 0; i < btns.length; i++) {
-        btns[i].classList.remove('active');
-        btns[i].setAttribute('aria-selected', 'false');
-    }
-    for (i = 0; i < panels.length; i++) {
-        panels[i].classList.remove('active');
-        panels[i].setAttribute('aria-hidden', 'true');
-    }
-    var activePanel = document.getElementById('panel-' + tab);
-    if (activePanel) {
-        activePanel.classList.add('active');
-        activePanel.setAttribute('aria-hidden', 'false');
-    }
+    switchTabPanel(wrap, tab);
     var tabIndex = tabIds.indexOf(tab);
+    var btns = wrap.querySelectorAll('.tab-btn');
     if (tabIndex !== -1 && btns[tabIndex]) {
         btns[tabIndex].classList.add('active');
         btns[tabIndex].setAttribute('aria-selected', 'true');
