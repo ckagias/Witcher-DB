@@ -1,6 +1,6 @@
-/* style.css - all the styles for the witcher db website */
+/* The Witcher DB — shared layout and theme (medieval serif + modern glass accents) */
 
-/* custom scrollbar colours to match the dark gold theme */
+/* Scrollbar: scrollbar-color / scrollbar-width (no vendor-only pseudo-elements). */
 html {
     scrollbar-color: #c8a96e #070708;
     scrollbar-width: thin;
@@ -48,7 +48,7 @@ a:hover {
     text-decoration: underline;
 }
 
-/* sticky nav wrapper so the menu stays at the top when you scroll */
+/* Keeps the menu above the dark overlay so links stay clickable */
 .nav-wrap {
     position: sticky;
     top: 0;
@@ -59,7 +59,7 @@ a:hover {
     flex-wrap: wrap;
 }
 
-/* the pill-shaped nav bar with the blurry glass effect */
+/* Rounded pill bar with blur, similar to a glass dashboard header */
 .nav {
     background-color: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.12);
@@ -92,7 +92,7 @@ a:hover {
 }
 
 .card {
-    background: linear-gradient(145deg, rgba(32, 26, 20, 0.95), rgba(18, 14, 12, 0.88));
+    background: rgba(0, 0, 0, 0.55);
     border: 1px solid rgba(200, 169, 110, 0.45);
     padding: 1.15em 1.25em;
     border-radius: 1.35rem;
@@ -105,7 +105,7 @@ a:hover {
     text-align: center;
 }
 
-/* the youtube trailer embed on the home page */
+/* Home: Witcher IV trailer embed */
 .video-embed {
     width: min(60%, 720px);
     max-width: 720px;
@@ -214,10 +214,10 @@ button.hero-btn {
     appearance: none;
     cursor: pointer;
     margin: 0;
-    /* dont use the font shorthand here or it will reset all the font styles from .hero-btn */
+    /* Do not use font: shorthand here — it would override .hero-btn typography */
 }
 
-/* featured section on the home page with the three quick-link cards */
+/* Home: featured row */
 .featured-head {
     display: flex;
     align-items: flex-end;
@@ -246,7 +246,7 @@ button.hero-btn {
     padding: 0.75rem;
     border-radius: 1.15rem;
     border: 1px solid rgba(200, 169, 110, 0.35);
-    background: linear-gradient(145deg, rgba(32, 26, 20, 0.92), rgba(18, 14, 12, 0.86));
+    background: rgba(0, 0, 0, 0.55);
     box-shadow:
         0 14px 44px rgba(0, 0, 0, 0.42),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
@@ -310,7 +310,7 @@ button.hero-btn {
         0 14px 44px rgba(0, 0, 0, 0.42);
 }
 
-/* h3 headings use the same cinzel font as h1 and h2 */
+/* Headings */
 h3 {
     font-family: "Cinzel", Georgia, serif;
     font-size: 1.05em;
@@ -319,7 +319,7 @@ h3 {
     letter-spacing: 0.04em;
 }
 
-/* character card layout - the whole card is clickable and links to the wiki */
+/* Character cards: wiki link + portrait compare (game / Netflix range) */
 .char-card-wrap {
     position: relative;
     display: flex;
@@ -339,7 +339,7 @@ h3 {
     text-align: left;
 }
 
-/* portrait compare container - the range slider reveals the netflix image on top of the game one */
+/* Game / Netflix portrait compare (range reveals Netflix layer) */
 .char-thumb-wrap.char-compare {
     position: relative;
     height: auto;
@@ -355,7 +355,6 @@ h3 {
     border-radius: 0.65rem;
     overflow: hidden;
     background: rgba(10, 8, 7, 0.6);
-    object-fit: contain;
 }
 
 .char-compare-game,
@@ -500,6 +499,17 @@ a.char-card-link::after {
     transition: opacity 0.35s ease;
 }
 
+/* Character cards: thin frame around portraits (direct img only; compare uses .char-compare-inner) */
+.char-card-wrap .char-thumb-wrap > img {
+    border: 1px solid rgba(200, 169, 110, 0.38);
+    box-sizing: border-box;
+}
+
+.char-card-wrap .char-compare-inner {
+    border: 1px solid rgba(200, 169, 110, 0.38);
+    box-sizing: border-box;
+}
+
 img {
     max-width: 100%;
     height: auto;
@@ -571,7 +581,7 @@ button:hover {
     filter: brightness(1.08);
 }
 
-/* footer at the bottom of every page */
+/* Bottom strip: copyright on the left, author link on the right on wide screens */
 .footer {
     margin-top: auto;
     position: relative;
@@ -617,7 +627,7 @@ button:hover {
     letter-spacing: 0.04em;
 }
 
-/* TW is styled gold like the wolf medallion, DB is a softer parchment colour */
+/* TW = Wolf medallion gold, DB = muted parchment */
 .footer-brand {
     color: #d4af37;
     text-shadow: 0 0 12px rgba(200, 169, 110, 0.35);
@@ -645,7 +655,7 @@ button:hover {
     text-decoration: underline;
 }
 
-/* the main content wrapper - centered on the page with a max width so it doesnt get too wide */
+/* Main content column: centered with a comfortable max width */
 .page-inner {
     width: 96%;
     max-width: min(98vw, 58rem);
@@ -656,7 +666,7 @@ button:hover {
     z-index: 2;
 }
 
-/* centre the h1 and the paragraph right after it on every page */
+/* Center page title + lead copy; width matches main column (see scoped overrides below) */
 .page-inner > h1 {
     text-align: center;
     margin-left: auto;
@@ -671,20 +681,20 @@ button:hover {
     margin-top: 0;
 }
 
-/* books page has two intro paragraphs before the table so both need centering */
+/* Books: two intro paragraphs before the table section */
 .book-page .page-inner > h1 + p + p {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* on the timeline page, match the heading width to the timeline column width */
+/* Timeline: align with .timeline-wrap (700px) */
 .page-inner:has(> .timeline-wrap) > h1,
 .page-inner:has(> .timeline-wrap) > h1 + p {
     max-width: 700px;
 }
 
-/* the big faction banner image on the gwent page */
+/* Gwent: large faction banner + lightbox thumb */
 .faction-hero-img {
     max-width: 100%;
     height: auto;
@@ -709,7 +719,7 @@ button:hover {
     margin-bottom: 0.35em;
 }
 
-/* nested list on the gwent page for the faction card breakdown */
+/* Gwent page: three-level nested list (coursework-friendly) */
 .gwent-nested-tree ul {
     margin: 0.35em 0 0.35em 0;
 }
@@ -804,7 +814,7 @@ button:hover {
     margin: 0.5em;
 }
 
-/* override flexbox with css grid only on the characters page so cards line up in 3 columns */
+/* Characters page only: CSS grid (does not affect .gallery-grid) */
 .page-inner > .grid:has(.char-card-wrap) {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -898,7 +908,7 @@ button:hover {
     transition: transform 0.25s ease, opacity 0.2s ease;
 }
 
-/* rotate the three bars into an X shape when the menu is open */
+/* Animate to × when open */
 .menu-btn.is-open .menu-btn-bar:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
 }
@@ -921,7 +931,7 @@ button:hover {
     padding-bottom: 0.5em;
 }
 
-/* timeline page - the vertical line and event markers */
+/* Timeline page */
 .timeline-wrap {
     position: relative;
     max-width: 700px;
@@ -1000,7 +1010,7 @@ button:hover {
     transform: scale(1.02);
 }
 
-/* gallery page grid - cards are allowed to be different heights */
+/* Gallery page: natural card heights, even inset around thumbnails */
 .gallery-grid {
     align-items: flex-start;
 }
@@ -1047,8 +1057,8 @@ button:hover {
     max-height: 88vh;
     padding: 0.85rem 0.85rem 0.75rem;
     box-sizing: border-box;
-    background: linear-gradient(145deg, rgba(32, 26, 20, 0.98), rgba(18, 14, 12, 0.94));
-    border: 1px solid rgba(200, 169, 110, 0.5);
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(201, 168, 76, 0.2);
     border-radius: 1rem;
     box-shadow:
         0 20px 56px rgba(0, 0, 0, 0.55),
@@ -1164,7 +1174,7 @@ button:hover {
     display: none;
 }
 
-/* the top bar that only shows on mobile with the site title and burger button */
+/* Mobile-only top bar: site title (centre) + burger (right) */
 .nav-mobile-bar {
     display: none;
 }
@@ -1173,8 +1183,7 @@ button:hover {
     .nav-wrap {
         padding: 0.75em 0 0;
         width: 100%;
-        position: sticky;
-        top: 0;
+        position: static;
     }
 
     .nav-mobile-bar {
@@ -1205,7 +1214,7 @@ button:hover {
         z-index: 0;
     }
 
-    /* hidden spacer element, the burger button is positioned fixed so we dont need this */
+    /* Spacer so the burger sits at the right end */
     .nav-mobile-spacer {
         display: none;
     }
@@ -1241,7 +1250,7 @@ button:hover {
         width: min(80vw, 300px);
         flex-direction: column;
         align-items: stretch;
-        background: rgba(10, 8, 7, 0.97);
+        background: rgba(0, 0, 0, 0.55);
         border-left: 1px solid rgba(200, 169, 110, 0.3);
         box-shadow: -8px 0 40px rgba(0, 0, 0, 0.7);
         backdrop-filter: blur(18px);
@@ -1316,7 +1325,7 @@ button:hover {
     }
 }
 
-/* books page - table with all the witcher books */
+/* Books page */
 .books-table-section {
     width: 100%;
     margin-top: 1.25rem;
@@ -1411,11 +1420,11 @@ button:hover {
 }
 
 .book-page .books-table tbody tr:nth-child(odd) {
-    background-color: rgba(18, 14, 12, 0.55);
+    background-color: rgba(0, 0, 0, 0.55);
 }
 
 .book-page .books-table tbody tr:nth-child(even) {
-    background-color: rgba(26, 22, 18, 0.4);
+    background-color: rgba(0, 0, 0, 0.55);
 }
 
 .book-page .books-table tbody tr:hover {
@@ -1463,7 +1472,7 @@ button:hover {
     cursor: help;
 }
 
-/* on small screens, hide some columns so the table still fits */
+/* Books table (max width 600px) */
 
 @media screen and (max-width: 600px) {
     .book-page .books-table thead th:nth-child(2),
@@ -1493,7 +1502,7 @@ button:hover {
     }
 }
 
-/* bestiary page - creature cards with category chips and a search bar */
+/* Bestiary catalog (wiki creatures + live search) */
 .page-inner .bestiary-chip-nav + .bestiary-catalog {
     margin-top: 1.15rem;
 }
@@ -1536,7 +1545,7 @@ button:hover {
     border-radius: 0.5rem;
 }
 
-/* the row of category filter chips above the bestiary grid */
+/* Bestiary: icon-chip category nav */
 .bestiary-chip-nav {
     display: flex;
     flex-wrap: wrap;
@@ -1554,7 +1563,7 @@ button:hover {
     padding: 0.45em 0.9em;
     border: 1px solid rgba(200, 169, 110, 0.45);
     border-radius: 999px;
-    background: linear-gradient(145deg, rgba(32, 26, 20, 0.92), rgba(18, 14, 12, 0.86));
+    background: rgba(0, 0, 0, 0.55);
     color: #e6dfd3;
     font-family: "Lora", Georgia, serif;
     font-size: 0.85rem;
@@ -1569,14 +1578,14 @@ button:hover {
 .bestiary-chip:hover {
     border-color: #c8a96e;
     color: #e8d4a8;
-    background: linear-gradient(145deg, rgba(42, 34, 24, 0.98), rgba(28, 22, 16, 0.95));
+    background: rgba(0, 0, 0, 0.7);
     text-decoration: none;
 }
 
 .bestiary-chip.bestiary-chip-active {
     border-color: rgba(200, 169, 110, 0.75);
     color: #e8d4a8;
-    background: linear-gradient(145deg, rgba(48, 38, 28, 0.98), rgba(32, 26, 18, 0.96));
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .bestiary-chip.bestiary-chip-active .bestiary-chip-label {
@@ -1626,7 +1635,7 @@ button:hover {
     box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 20px rgba(200, 169, 110, 0.12);
 }
 
-/* css grid for the beast cards - 3 columns so they dont stretch when there are only 1 or 2 left */
+/* Bestiary grid: CSS Grid locks cards to 3 columns so orphans never stretch */
 .bestiary-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1663,18 +1672,18 @@ button:hover {
     }
 }
 
-/* back to top button - fixed in the bottom right corner, reuses the chip styles */
+/* Back to top: same panel gradient as .bestiary-chip; beats global button {} */
 button.bestiary-chip.back-to-top-btn {
     position: fixed;
     bottom: 2rem;
     right: 2rem;
     z-index: 999;
-    background: linear-gradient(145deg, rgba(32, 26, 20, 0.92), rgba(18, 14, 12, 0.86));
+    background: rgba(0, 0, 0, 0.55);
 }
 
 button.bestiary-chip.back-to-top-btn:hover {
     filter: none;
-    background: linear-gradient(145deg, rgba(42, 34, 24, 0.98), rgba(28, 22, 16, 0.95));
+    background: rgba(0, 0, 0, 0.7);
 }
 
 button.bestiary-chip.back-to-top-btn:focus-visible {
@@ -1687,9 +1696,9 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     display: none !important;
 }
 
-/* schools page - one tab per witcher school with an infobox and lore text */
+/* Schools page */
 
-/* the info box floats to the right so text can wrap around it like a wikipedia article */
+/* Infobox floats right so body text wraps around it */
 .school-infobox {
     float: right;
     clear: right;
@@ -1737,7 +1746,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     border-bottom: none;
 }
 
-/* clearfix trick so the school profile box stretches to contain the floated infobox */
+/* Clearfix so .school-profile stretches past the float */
 .school-profile::after {
     content: '';
     display: table;
@@ -1819,7 +1828,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     margin-bottom: 2rem;
 }
 
-/* the quote box at the bottom of the schools page */
+/* Schools page: Narrative quote */
 .schools-quote {
     background: rgba(0, 0, 0, 0.55);
     border: 1px solid rgba(201, 168, 76, 0.2);
@@ -1854,7 +1863,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     color: #e8d4a8;
 }
 
-/* drop cap on the first letter of each school description, like in a book */
+/* First letter of each school's opening lore paragraph */
 .school-profile > p:first-of-type::first-letter,
 .school-layout__content > p:first-of-type::first-letter {
     font-family: 'Cinzel', serif;
@@ -1996,7 +2005,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     }
 }
 
-/* small highlighted strip showing the school's key historical dates */
+/* Schools: highlight strip for history years */
 
 .school-history {
     margin-top: 2rem;
@@ -2024,8 +2033,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     font-style: italic;
 }
 
-/* each school gets its own accent colour on the infobox border and drop cap
-   i couldnt use css variables because the w3c validator doesnt like them */
+/* Per-school accent colours (no CSS variables — validator-friendly) */
 .tab-panel--wolf .school-infobox {
     border-top-color: #a8a9ad;
 }
@@ -2111,7 +2119,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     border-color: #4a7a4a;
 }
 
-/* series page - the witcher tv shows and anime */
+/* Series page (screen adaptations) */
 
 .series-page.page-inner > h1 + .series-lede,
 .schools-page.page-inner > h1 + .schools-lede {
@@ -2142,7 +2150,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     align-items: start;
     padding: 1.5rem 1.65rem;
     margin-bottom: 0;
-    background: rgba(22, 18, 14, 0.88);
+    background: rgba(0, 0, 0, 0.55);
     border: 1px solid rgba(200, 169, 110, 0.22);
     border-radius: 12px;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset;
@@ -2283,7 +2291,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     margin: 0;
 }
 
-/* the bordered box that wraps the trailer embed on the series page */
+/* Series page: bordered panel around the trailer embed */
 .series-trailer-box {
     margin-top: 1rem;
     border: 1px solid rgba(200, 169, 110, 0.2);
@@ -2451,7 +2459,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
         max-width: none;
     }
 
-    /* trailers are hidden on small screens to save space */
+    /* Hide trailers on mobile/tablet narrow screens */
     .series-trailer-box {
         display: none;
     }
@@ -2468,7 +2476,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     }
 }
 
-/* games page - one entry card per witcher game */
+/* Games page */
 
 .games-page .games-lede {
     text-align: center;
@@ -2480,9 +2488,9 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     line-height: 1.6;
 }
 
-/* each game gets its own card with the same dark panel style as the series page */
+/* Game entry cards: same panel feel as series-feature */
 .game-entry {
-    background: rgba(22, 18, 14, 0.88);
+    background: rgba(0, 0, 0, 0.55);
     border: 1px solid rgba(200, 169, 110, 0.22);
     border-radius: 12px;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset;
@@ -2493,7 +2501,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     margin-bottom: 0;
 }
 
-/* two column grid inside each game card - cover image on the left, text on the right */
+/* Two-column layout: cover on left, info on right */
 .game-entry-inner {
     display: grid;
     grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
@@ -2542,7 +2550,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     pointer-events: none;
 }
 
-/* small platform tags shown below the game cover image */
+/* Platform tags below the cover */
 .game-platforms {
     display: flex;
     flex-wrap: wrap;
@@ -2563,7 +2571,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     white-space: nowrap;
 }
 
-/* the game title and info in the right column */
+/* Right column text */
 .game-info h2 {
     font-family: "Cinzel", Georgia, serif;
     font-size: clamp(1.15rem, 2.5vw, 1.5rem);
@@ -2634,7 +2642,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 }
 
 .game-rating-label {
-    color: rgba(230, 223, 211, 0.45);
+    color: rgba(230, 223, 211, 0.706);
     font-size: 0.68rem;
     margin-left: 0.15rem;
 }
@@ -2646,7 +2654,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     margin: 0 0 1.25rem 0;
 }
 
-/* subsection blocks inside a game card like the trailer or key stats */
+/* Subsections inside a game entry */
 .game-subsection {
     margin-top: 1.5rem;
 }
@@ -2662,7 +2670,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     padding-bottom: 0.45rem;
 }
 
-/* vertical stat list in the left column under the game cover */
+/* Stat list stacked vertically in the left column */
 .game-stats-left {
     list-style: none;
     margin: 0.65rem 0 0 0;
@@ -2698,7 +2706,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     margin-bottom: 0.15rem;
 }
 
-/* highlighted note box for extra context, same style as the series page note box */
+/* Note box (same treatment as series page) */
 .game-note-box {
     background: rgba(200, 169, 110, 0.06);
     border: 1px solid rgba(200, 169, 110, 0.2);
@@ -2719,7 +2727,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     font-weight: normal;
 }
 
-/* the trailer embed box inside each game entry */
+/* Trailer embed inside a game entry */
 .game-trailer-box {
     margin-top: 0;
     border: 1px solid rgba(200, 169, 110, 0.2);
@@ -2776,7 +2784,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     }
 }
 
-/* feedback modal - pops up over the whole page when you click the feedback button */
+/* Feedback modal (full-screen overlay) */
 
 .feedback-modal {
     position: fixed;
@@ -2791,6 +2799,42 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 
 .feedback-modal[hidden] {
     display: none !important;
+}
+
+@keyframes feedbackBackdropIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes feedbackPanelIn {
+    from { opacity: 0; transform: translateY(14px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+@keyframes feedbackBackdropOut {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+@keyframes feedbackPanelOut {
+    from { opacity: 1; transform: translateY(0)   scale(1); }
+    to   { opacity: 0; transform: translateY(8px) scale(0.98); }
+}
+
+.feedback-modal.is-opening .feedback-modal-backdrop {
+    animation: feedbackBackdropIn 0.2s ease forwards;
+}
+
+.feedback-modal.is-opening .feedback-modal-panel {
+    animation: feedbackPanelIn 0.22s cubic-bezier(0.2, 0, 0.3, 1) forwards;
+}
+
+.feedback-modal.is-closing .feedback-modal-backdrop {
+    animation: feedbackBackdropOut 0.18s ease forwards;
+}
+
+.feedback-modal.is-closing .feedback-modal-panel {
+    animation: feedbackPanelOut 0.18s ease forwards;
 }
 
 .feedback-modal-backdrop {
@@ -2811,10 +2855,11 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     max-height: 92vh;
     overflow-y: auto;
     box-sizing: border-box;
-    background: linear-gradient(145deg, rgba(32, 26, 20, 0.98), rgba(18, 14, 12, 0.96));
-    border: 1px solid rgba(200, 169, 110, 0.42);
+    background: rgba(10, 8, 7, 0.88);
+    border: 1px solid rgba(201, 168, 76, 0.3);
     border-radius: 1.1rem;
     padding: 1.85rem 1.75rem 1.65rem;
+    backdrop-filter: blur(12px);
     box-shadow:
         0 20px 56px rgba(0, 0, 0, 0.6),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
@@ -2864,12 +2909,12 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 
 .feedback-modal-lede {
     font-size: 0.88rem;
-    color: rgba(230, 223, 211, 0.65);
+    color: rgba(230, 223, 211, 0.78);
     margin: 0.55rem 0 1.15rem 0;
     line-height: 1.5;
 }
 
-/* form fields inside the feedback modal */
+/* Feedback modal: form fields */
 .feedback-modal .form-group {
     margin-bottom: 0.75rem;
 }
@@ -2907,6 +2952,11 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     min-height: 5.25rem;
 }
 
+.feedback-modal .form-group input::placeholder,
+.feedback-modal .form-group textarea::placeholder {
+    color: rgba(138, 128, 117, 0.7);
+}
+
 .feedback-modal .form-group input:focus-visible,
 .feedback-modal .form-group textarea:focus-visible {
     outline: 1.5px solid rgba(200, 169, 110, 0.7);
@@ -2923,10 +2973,10 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 .feedback-modal .form-group-submit button {
     flex: 1;
     padding: 0.65em 1em;
-    background: linear-gradient(135deg, rgba(200, 169, 110, 0.22), rgba(160, 130, 80, 0.18));
-    border: 1px solid rgba(200, 169, 110, 0.52);
+    background: rgba(18, 14, 12, 0.55);
+    border: 1px solid rgba(200, 169, 110, 0.4);
     border-radius: 7px;
-    color: #e8d4a8;
+    color: rgba(230, 223, 211, 0.9);
     font-family: "Cinzel", Georgia, serif;
     font-size: 0.82rem;
     letter-spacing: 0.06em;
@@ -2934,6 +2984,12 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     transition:
         filter 0.2s ease,
         box-shadow 0.2s ease;
+}
+
+.feedback-modal .form-group-submit button[type="submit"] {
+    background: linear-gradient(135deg, rgba(200, 169, 110, 0.32), rgba(160, 130, 80, 0.26));
+    border-color: rgba(200, 169, 110, 0.65);
+    color: #e8d4a8;
 }
 
 .feedback-modal .form-group-submit button:hover {

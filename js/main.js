@@ -737,7 +737,8 @@ function initFeedbackModal() {
         prevBodyOverflow = document.body.style.overflow;
         document.body.style.overflow = "hidden";
         modal.removeAttribute("hidden");
-        // Focus the first focusable element (the close button).
+        modal.classList.remove("is-closing");
+        modal.classList.add("is-opening");
         var focusable = getFocusable();
         if (focusable.length) {
             focusable[0].focus();
@@ -745,12 +746,17 @@ function initFeedbackModal() {
     }
 
     function closeModal() {
-        modal.setAttribute("hidden", "");
-        document.body.style.overflow = prevBodyOverflow;
-        prevBodyOverflow = "";
-        if (previouslyFocused && typeof previouslyFocused.focus === "function") {
-            previouslyFocused.focus();
-        }
+        modal.classList.remove("is-opening");
+        modal.classList.add("is-closing");
+        window.setTimeout(function () {
+            modal.setAttribute("hidden", "");
+            modal.classList.remove("is-closing");
+            document.body.style.overflow = prevBodyOverflow;
+            prevBodyOverflow = "";
+            if (previouslyFocused && typeof previouslyFocused.focus === "function") {
+                previouslyFocused.focus();
+            }
+        }, 180);
     }
 
     // Focus trap: keep keyboard navigation inside the modal while open.
