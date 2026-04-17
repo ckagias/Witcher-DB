@@ -1377,6 +1377,27 @@ button:hover {
     box-shadow: 0 0 0 2px rgba(200, 169, 110, 0.25);
 }
 
+.page-search-empty {
+    margin: 0 0 1rem 0;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    color: rgba(190, 178, 160, 0.95);
+    font-family: "Lora", Georgia, serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    background: rgba(12, 10, 9, 0.55);
+    border: 1px dashed rgba(200, 169, 110, 0.38);
+    border-radius: 0.55rem;
+}
+
+.page-search-empty[hidden] {
+    display: none !important;
+}
+
+.page-search-empty p {
+    margin: 0;
+}
+
 .book-page .books-table caption {
     text-align: center;
 }
@@ -1436,6 +1457,10 @@ button:hover {
 }
 
 .book-page .books-table tbody tr[hidden] {
+    display: none;
+}
+
+.book-page .books-table thead[hidden] {
     display: none;
 }
 

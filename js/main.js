@@ -224,18 +224,37 @@ function initBooksPage() {
     if (!section) { return; }
     var searchInput = document.getElementById("book-table-search");
     var rows = section.querySelectorAll("tbody tr[data-search-text]");
+    var emptyMsg = document.getElementById("books-search-empty");
+    var thead = section.querySelector("thead");
 
     function applySearch() {
         var q = searchInput ? searchInput.value.trim().toLowerCase() : "";
+        var visible = 0;
         rows.forEach(function (tr) {
             var hay = tr.getAttribute("data-search-text") || "";
             var ok = !q || hay.includes(q);
             if (ok) {
                 tr.removeAttribute("hidden");
+                visible++;
             } else {
                 tr.setAttribute("hidden", "");
             }
         });
+        var noMatches = q && visible === 0;
+        if (emptyMsg) {
+            if (noMatches) {
+                emptyMsg.removeAttribute("hidden");
+            } else {
+                emptyMsg.setAttribute("hidden", "");
+            }
+        }
+        if (thead) {
+            if (noMatches) {
+                thead.setAttribute("hidden", "");
+            } else {
+                thead.removeAttribute("hidden");
+            }
+        }
     }
 
     if (searchInput) {
@@ -291,6 +310,18 @@ function initBestiaryPage() {
                     cat.setAttribute("hidden", "");
                 }
             });
+        }
+
+        var emptyEl = document.getElementById("bestiary-empty");
+        if (emptyEl) {
+            var anyCard = section.querySelectorAll(
+                ".bestiary-category:not([hidden]) .bestiary-beast-card:not([hidden])"
+            ).length;
+            if (q && anyCard === 0) {
+                emptyEl.removeAttribute("hidden");
+            } else {
+                emptyEl.setAttribute("hidden", "");
+            }
         }
     }
 
@@ -429,6 +460,21 @@ function initCharactersPage() {
                 card.removeAttribute("hidden");
             } else {
                 card.setAttribute("hidden", "");
+            }
+        }
+
+        var emptyMsg = document.getElementById("characters-search-empty");
+        if (emptyMsg) {
+            var visible = 0;
+            for (var j = 0; j < cards.length; j++) {
+                if (!cards[j].hasAttribute("hidden")) {
+                    visible++;
+                }
+            }
+            if (q && visible === 0) {
+                emptyMsg.removeAttribute("hidden");
+            } else {
+                emptyMsg.setAttribute("hidden", "");
             }
         }
     }

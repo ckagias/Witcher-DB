@@ -237,8 +237,14 @@
                     </a>
                 </nav>
                 <div id="bestiary-catalog-section" class="bestiary-catalog" role="group" aria-label="Creature catalog">
-                <div id="bestiary-empty" class="bestiary-empty" hidden>
-                    <p>No creatures found. Try a different name or category.</p>
+                <div
+                    id="bestiary-empty"
+                    class="bestiary-empty page-search-empty"
+                    hidden
+                    role="status"
+                    aria-live="polite"
+                >
+                    <p>No creatures match your search. Try another word, another category, or clear the search.</p>
                 </div>
                 <section class="bestiary-category" id="bestiary-beasts" aria-labelledby="bestiary-beasts-h">
                     <h2 id="bestiary-beasts-h" class="bestiary-category-title">Beasts</h2>
