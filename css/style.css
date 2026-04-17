@@ -1672,8 +1672,8 @@ button:hover {
     }
 }
 
-/* Back-to-top button */
-button.bestiary-chip.back-to-top-btn {
+/* Back-to-top button  */
+#back-to-top {
     position: fixed;
     bottom: 2rem;
     right: 2rem;
@@ -1681,18 +1681,18 @@ button.bestiary-chip.back-to-top-btn {
     background: rgba(0, 0, 0, 0.55);
 }
 
-button.bestiary-chip.back-to-top-btn:hover {
+#back-to-top:hover {
     filter: none;
     background: rgba(0, 0, 0, 0.7);
 }
 
-button.bestiary-chip.back-to-top-btn:focus-visible {
+#back-to-top:focus-visible {
     outline: 2px solid rgba(200, 169, 110, 0.75);
     outline-offset: 2px;
 }
 
 .gallery-lightbox[hidden],
-button.bestiary-chip.back-to-top-btn[hidden] {
+#back-to-top[hidden] {
     display: none !important;
 }
 
@@ -1863,7 +1863,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 
 /* First letter of each school's opening lore paragraph */
 .school-profile > p:first-of-type::first-letter,
-.school-layout__content > p:first-of-type::first-letter {
+.school-layout-content > p:first-of-type::first-letter {
     font-family: 'Cinzel', serif;
     font-size: 3em;
     float: left;
@@ -1879,7 +1879,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     gap: 2rem;
 }
 
-.school-layout__content {
+.school-layout-content {
     display: flex;
     flex-direction: column;
     align-self: stretch;
@@ -1887,7 +1887,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     min-width: 0;
 }
 
-.school-layout__content .school-historical-note {
+.school-layout-content .school-history {
     margin-top: auto;
 }
 
@@ -1895,9 +1895,6 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     float: none;
     clear: none;
     margin: 0;
-}
-
-.school-layout__infobox {
     align-self: start;
 }
 
@@ -1980,7 +1977,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
         gap: 1.25rem;
     }
 
-    .school-layout__infobox {
+    .school-layout .school-infobox {
         width: 100%;
     }
 }
@@ -2003,9 +2000,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     }
 }
 
-/* ─── School history strip ───────────────────────────────────────────────────
-   Subtle dark box that holds the "key years" timeline note at the bottom of each school profile. */
-
+/* School history strip */
 .school-history {
     margin-top: 2rem;
     padding: 0.85rem 1rem;
@@ -2014,7 +2009,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     border-radius: 6px;
 }
 
-.school-history__label {
+.school-history-label {
     display: block;
     font-family: 'Cinzel', serif;
     font-size: 0.72rem;
@@ -2024,7 +2019,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
     margin-bottom: 0.4rem;
 }
 
-.school-history__text {
+.school-history-text {
     margin: 0;
     font-size: 0.88rem;
     line-height: 1.6;
@@ -2042,7 +2037,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 }
 
 .tab-panel--wolf .school-profile > p:first-of-type::first-letter,
-.tab-panel--wolf .school-layout__content > p:first-of-type::first-letter {
+.tab-panel--wolf .school-layout-content > p:first-of-type::first-letter {
     color: #a8a9ad;
 }
 
@@ -2059,7 +2054,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 }
 
 .tab-panel--cat .school-profile > p:first-of-type::first-letter,
-.tab-panel--cat .school-layout__content > p:first-of-type::first-letter {
+.tab-panel--cat .school-layout-content > p:first-of-type::first-letter {
     color: #d4820a;
 }
 
@@ -2076,7 +2071,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 }
 
 .tab-panel--bear .school-profile > p:first-of-type::first-letter,
-.tab-panel--bear .school-layout__content > p:first-of-type::first-letter {
+.tab-panel--bear .school-layout-content > p:first-of-type::first-letter {
     color: #8b5e3c;
 }
 
@@ -2093,7 +2088,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 }
 
 .tab-panel--griffin .school-profile > p:first-of-type::first-letter,
-.tab-panel--griffin .school-layout__content > p:first-of-type::first-letter {
+.tab-panel--griffin .school-layout-content > p:first-of-type::first-letter {
     color: #4a7fa5;
 }
 
@@ -2110,7 +2105,7 @@ button.bestiary-chip.back-to-top-btn[hidden] {
 }
 
 .tab-panel--viper .school-profile > p:first-of-type::first-letter,
-.tab-panel--viper .school-layout__content > p:first-of-type::first-letter {
+.tab-panel--viper .school-layout-content > p:first-of-type::first-letter {
     color: #4a7a4a;
 }
 
