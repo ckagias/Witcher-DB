@@ -542,7 +542,7 @@ function fillBestiaryChipCounts() {
 
 var imageLightboxConfigs = [
     { lightboxId: "gallery-lightbox", sourceId: "gallery-page-grid", thumbSelector: ".gallery-img" },
-    { lightboxId: "gwent-lightbox", sourceId: "gwent-lightbox-source", thumbSelector: ".faction-hero-img" },
+    { lightboxId: "gwent-lightbox", sourceId: "gwent-lightbox-source", thumbSelector: ".faction-portrait-img" },
     { lightboxId: "series-lightbox", sourceId: "series-lightbox-source", thumbSelector: ".series-poster" },
     { lightboxId: "bestiary-lightbox", sourceId: "bestiary-catalog-section", thumbSelector: ".gallery-img" },
     { lightboxId: "books-lightbox", sourceId: "books-table-section", thumbSelector: ".book-thumb" },
@@ -693,7 +693,7 @@ function initFeedbackModal() {
     if (!modal) {
         return;
     }
-    var openBtn = document.getElementById("hero-feedback-btn");
+    var openBtn = document.getElementById("intro-feedback-btn");
     if (!openBtn) {
         return;
     }
