@@ -6,6 +6,10 @@ html {
     scrollbar-width: thin;
 }
 
+main {
+    display: block;
+}
+
 /* Base typography & colour */
 body {
     margin: 0;
@@ -2144,8 +2148,8 @@ button:hover {
 
 /* Series page */
 
-.series-page.page-inner > h1 + .series-lede,
-.schools-page.page-inner > h1 + .schools-lede {
+.series-page.page-inner > h1 + .series-text,
+.schools-page.page-inner > h1 + .schools-text {
     max-width: 38rem;
     margin-left: auto;
     margin-right: auto;
@@ -2501,7 +2505,7 @@ button:hover {
 
 /* Games page */
 
-.games-page .games-lede {
+.games-page .games-text {
     text-align: center;
     max-width: 42rem;
     margin-left: auto;
@@ -2930,7 +2934,7 @@ button:hover {
     letter-spacing: 0.04em;
 }
 
-.feedback-modal-lede {
+.feedback-modal-text {
     font-size: 0.88rem;
     color: rgba(230, 223, 211, 0.78);
     margin: 0.55rem 0 1.15rem 0;
