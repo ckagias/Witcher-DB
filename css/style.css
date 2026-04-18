@@ -6,10 +6,6 @@ html {
     scrollbar-width: thin;
 }
 
-main {
-    display: block;
-}
-
 /* Base typography & colour */
 body {
     margin: 0;
@@ -504,11 +500,7 @@ a.char-card-link::after {
 }
 
 /* Character cards: thin frame around portraits */
-.char-card-wrap .char-thumb-wrap > img {
-    border: 1px solid rgba(200, 169, 110, 0.38);
-    box-sizing: border-box;
-}
-
+.char-card-wrap .char-thumb-wrap > img,
 .char-card-wrap .char-compare-inner {
     border: 1px solid rgba(200, 169, 110, 0.38);
     box-sizing: border-box;
@@ -1450,9 +1442,6 @@ button:hover {
 
 .book-page .books-table tbody tr {
     transition: background-color 0.15s ease;
-}
-
-.book-page .books-table tbody tr {
     background-color: rgba(0, 0, 0, 0.55);
 }
 
@@ -1460,10 +1449,7 @@ button:hover {
     background-color: rgba(61, 90, 56, 0.35);
 }
 
-.book-page .books-table tbody tr[hidden] {
-    display: none;
-}
-
+.book-page .books-table tbody tr[hidden],
 .book-page .books-table thead[hidden] {
     display: none;
 }
@@ -1608,17 +1594,19 @@ button:hover {
     white-space: nowrap;
 }
 
-.bestiary-chip:hover {
-    border-color: #c8a96e;
+.bestiary-chip:hover,
+.bestiary-chip.bestiary-chip-active {
     color: #e8d4a8;
     background: rgba(0, 0, 0, 0.7);
+}
+
+.bestiary-chip:hover {
+    border-color: #c8a96e;
     text-decoration: none;
 }
 
 .bestiary-chip.bestiary-chip-active {
     border-color: rgba(200, 169, 110, 0.75);
-    color: #e8d4a8;
-    background: rgba(0, 0, 0, 0.7);
 }
 
 .bestiary-chip.bestiary-chip-active .bestiary-chip-label {
