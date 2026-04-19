@@ -39,7 +39,7 @@ A multi-page, static reference site for *The Witcher* universe covering books, g
 ## Tech stack
 
 - **HTML5** (semantic structure, ARIA where it matters for nav, tabs, modals)
-- **CSS3**: single shared stylesheet `css/style.css` (`:root` tokens, glassy nav, cards, grids)
+- **CSS3**: single shared stylesheet [`css/style.css`](css/style.css) (glassy nav, cards, grids)
 - **Vanilla JS**: `js/main.js` — page initializers, shared helpers (`closeNavMenu`, `updateChipActiveState`, `switchTabPanel`), and a single lightbox setup driven by a config list
 - **Fonts**: Google Fonts (`Cinzel`, `Lora`)
 
@@ -64,7 +64,9 @@ witcher-db/
 ├── js/
 │   └── main.js
 └── images/
-    └── backgrounds/
+    ├── backgrounds/   
+    ├── characters/    
+    └── …              
 ```
 
 ### About images / assets
@@ -120,9 +122,10 @@ Install “Live Server”, right-click `home.html` → **Open with Live Server**
 
 ## Customization tips
 
-- **Theme tokens** are in `css/style.css` under `:root` (e.g. `--gold`, `--text`, `--panel`).
-- **Background per page** uses `site-bg--*` classes (e.g. `site-bg--home`, `site-bg--bestiary`, `site-bg--series`).
-- **New pages**: copy an existing page and keep the shared stylesheet link, `js/main.js` (some pages load it with `defer` — stay consistent with what you copy), and the nav block so the drawer behaves the same everywhere.
+- **Colors and typography**: edit literals in [`css/style.css`](css/style.css) (for example gold accents around `#c8a96e` / `#e8d4a8`, body text `#e6dfd3`, dark panels `#070708`).
+- **Background per page**: the outer wrapper uses **`site-bg`** plus a second class defined in `style.css`, for example `site-bg-home`, `site-bg-bestiary`, `site-bg-series`, `site-bg-book` (books), `site-bg-characters`, `site-bg-games`, `site-bg-gwent`, `site-bg-gallery`, `site-bg-schools`, `site-bg-timeline`. Each maps to a `background-image` rule in the `.site-bg-*` rules in `style.css` (search for `.site-bg-home` to jump to that block).
+- **New pages**: copy an existing page and keep the shared stylesheet link, [`js/main.js`](js/main.js), and the nav block so the drawer behaves the same everywhere.
+- **Script loading**: [`characters.html`](characters.html) and [`bestiary.html`](bestiary.html) load `js/main.js` with **`defer`**; other pages load it in `<head>` without `defer`. Behaviour is handled in `main.js` for both cases, but for new pages it is best to **match whichever pattern you copy** (or standardise on `defer` + one consistent `<script>` placement).
 - **New lightbox**: add an entry to `imageLightboxConfigs` in `js/main.js` and ensure the markup matches the expected class names inside each lightbox root (`attachImageLightbox()`).
 
 ## Credits
