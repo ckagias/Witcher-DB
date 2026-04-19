@@ -1,7 +1,7 @@
 // Closes the mobile nav drawer and resets the burger button to its default state.
 function closeNavMenu() {
-    var menu = document.getElementById("nav-menu");
-    var btn = document.querySelector(".menu-btn");
+    const menu = document.getElementById("nav-menu");
+    const btn = document.querySelector(".menu-btn");
     if (!menu) return;
     menu.classList.remove("nav-open");
     document.body.classList.remove("nav-drawer-open");
@@ -13,8 +13,8 @@ function closeNavMenu() {
 
 // Toggles the mobile nav drawer open or closed each time the burger button is tapped.
 function toggleMenu() {
-    var menu = document.getElementById("nav-menu");
-    var btn = document.querySelector(".menu-btn");
+    const menu = document.getElementById("nav-menu");
+    const btn = document.querySelector(".menu-btn");
     if (!menu) return;
     if (menu.classList.contains("nav-open")) {
         closeNavMenu();
@@ -28,16 +28,15 @@ function toggleMenu() {
     }
 }
 
-var CHAR_IMG_BASE = "images/characters/";
+const CHAR_IMG_BASE = "images/characters/";
 
 // Highlights the active filter chip and clears the highlight from all others.
 // filterAttr is the data-* attribute name used to identify the "show all" chip.
 function updateChipActiveState(chipNav, activeCategoryId, filterAttr) {
     if (!chipNav) { return; }
-    var allChips = chipNav.querySelectorAll(".bestiary-chip");
-    var j;
-    for (j = 0; j < allChips.length; j++) {
-        var c = allChips[j];
+    const allChips = chipNav.querySelectorAll(".bestiary-chip");
+    for (let j = 0; j < allChips.length; j++) {
+        const c = allChips[j];
         c.classList.remove("bestiary-chip-active");
         if (c.getAttribute(filterAttr) === "all") {
             if (!activeCategoryId) {
@@ -47,7 +46,7 @@ function updateChipActiveState(chipNav, activeCategoryId, filterAttr) {
                 c.removeAttribute("aria-current");
             }
         } else {
-            var tid = c.getAttribute("data-target");
+            const tid = c.getAttribute("data-target");
             if (tid && tid === activeCategoryId) {
                 c.classList.add("bestiary-chip-active");
                 c.setAttribute("aria-current", "true");
@@ -60,18 +59,17 @@ function updateChipActiveState(chipNav, activeCategoryId, filterAttr) {
 
 // Hides every tab panel inside `scope` then shows only the one matching `tabId`.
 function switchTabPanel(scope, tabId) {
-    var btns = scope.querySelectorAll(".tab-btn");
-    var panels = scope.querySelectorAll(".tab-panel");
-    var i;
-    for (i = 0; i < btns.length; i++) {
+    const btns = scope.querySelectorAll(".tab-btn");
+    const panels = scope.querySelectorAll(".tab-panel");
+    for (let i = 0; i < btns.length; i++) {
         btns[i].classList.remove("active");
         btns[i].setAttribute("aria-selected", "false");
     }
-    for (i = 0; i < panels.length; i++) {
+    for (let i = 0; i < panels.length; i++) {
         panels[i].classList.remove("active");
         panels[i].setAttribute("aria-hidden", "true");
     }
-    var activePanel = document.getElementById("panel-" + tabId);
+    const activePanel = document.getElementById("panel-" + tabId);
     if (activePanel) {
         activePanel.classList.add("active");
         activePanel.removeAttribute("aria-hidden");
@@ -81,20 +79,20 @@ function switchTabPanel(scope, tabId) {
 // Builds the game-vs-Netflix portrait slider on every character card that has a Netflix image.
 function initCharacterPortraitSliders() {
     document.querySelectorAll(".char-card-wrap:not(.char-card-wrap-no-toggle)").forEach(function (card, idx) {
-        var img = card.querySelector(".char-thumb-wrap img[data-img-base]");
+        const img = card.querySelector(".char-thumb-wrap img[data-img-base]");
         if (!img || card.getAttribute("data-compare-init") === "1") {
             return;
         }
-        var thumbWrap = card.querySelector(".char-thumb-wrap");
-        var link = card.querySelector(".char-card-link");
+        const thumbWrap = card.querySelector(".char-thumb-wrap");
+        const link = card.querySelector(".char-card-link");
         if (!thumbWrap || !link) {
             return;
         }
 
-        var baseFile = img.getAttribute("data-img-base");
-        var gameSrc = img.getAttribute("src");
-        var netflixSrc = CHAR_IMG_BASE + "netflix/" + baseFile;
-        var alt = img.getAttribute("alt") || "";
+        const baseFile = img.getAttribute("data-img-base");
+        const gameSrc = img.getAttribute("src");
+        const netflixSrc = CHAR_IMG_BASE + "netflix/" + baseFile;
+        const alt = img.getAttribute("alt") || "";
 
         if (thumbWrap.parentNode === link) {
             link.parentNode.insertBefore(thumbWrap, link);
@@ -103,17 +101,17 @@ function initCharacterPortraitSliders() {
         thumbWrap.textContent = "";
         thumbWrap.classList.add("char-compare");
 
-        var inner = document.createElement("div");
+        const inner = document.createElement("div");
         inner.className = "char-compare-inner";
 
-        var gameImg = document.createElement("img");
+        const gameImg = document.createElement("img");
         gameImg.className = "char-compare-game";
         gameImg.src = gameSrc;
         gameImg.alt = alt;
         gameImg.setAttribute("width", "280");
         gameImg.setAttribute("height", "220");
 
-        var netflixImg = document.createElement("img");
+        const netflixImg = document.createElement("img");
         netflixImg.className = "char-compare-netflix";
         netflixImg.src = netflixSrc;
         netflixImg.alt = alt ? alt + " (Netflix)" : "Netflix portrayal";
@@ -124,14 +122,14 @@ function initCharacterPortraitSliders() {
         inner.appendChild(gameImg);
         inner.appendChild(netflixImg);
 
-        var rangeId = "portrait-range-" + idx;
+        const rangeId = "portrait-range-" + idx;
 
-        var label = document.createElement("label");
+        const label = document.createElement("label");
         label.className = "char-compare-label";
         label.setAttribute("for", rangeId);
         label.textContent = "Game vs Netflix portrait";
 
-        var range = document.createElement("input");
+        const range = document.createElement("input");
         range.type = "range";
         range.id = rangeId;
         range.className = "char-compare-range";
@@ -143,7 +141,7 @@ function initCharacterPortraitSliders() {
         range.setAttribute("aria-valuetext", "Game portrayal");
 
         function syncAria(v) {
-            var n = Number(v);
+            const n = Number(v);
             if (n <= 5) {
                 range.setAttribute("aria-valuetext", "Game portrayal");
             } else if (n >= 95) {
@@ -154,7 +152,7 @@ function initCharacterPortraitSliders() {
         }
 
         range.addEventListener("input", function () {
-            var v = range.value;
+            const v = range.value;
             netflixImg.style.clipPath = "inset(0 calc(100% - " + v + "%) 0 0)";
             syncAria(v);
         });
@@ -185,13 +183,13 @@ function initCharacterPortraitSliders() {
         if (card.getAttribute("data-single-portrait-init") === "1") {
             return;
         }
-        var thumbWrap = card.querySelector(".char-thumb-wrap");
-        var link = card.querySelector(".char-card-link");
+        const thumbWrap = card.querySelector(".char-thumb-wrap");
+        const link = card.querySelector(".char-card-link");
         if (!thumbWrap || !link) {
             return;
         }
-        var compareLabel = card.querySelector(".char-compare-label");
-        var img = thumbWrap.querySelector(":scope > img");
+        const compareLabel = card.querySelector(".char-compare-label");
+        const img = thumbWrap.querySelector(":scope > img");
         if (!img) {
             return;
         }
@@ -199,7 +197,7 @@ function initCharacterPortraitSliders() {
             link.parentNode.insertBefore(thumbWrap, link);
         }
         thumbWrap.classList.add("char-compare", "char-compare-single");
-        var inner = document.createElement("div");
+        const inner = document.createElement("div");
         inner.className = "char-compare-inner";
         thumbWrap.removeChild(img);
         img.classList.add("char-compare-game");
@@ -220,19 +218,19 @@ function initCharacterPortraitSliders() {
 
 // Live search box on the books table — hides rows that don't match as you type.
 function initBooksPage() {
-    var section = document.getElementById("books-table-section");
+    const section = document.getElementById("books-table-section");
     if (!section) { return; }
-    var searchInput = document.getElementById("book-table-search");
-    var rows = section.querySelectorAll("tbody tr[data-search-text]");
-    var emptyMsg = document.getElementById("books-search-empty");
-    var thead = section.querySelector("thead");
+    const searchInput = document.getElementById("book-table-search");
+    const rows = section.querySelectorAll("tbody tr[data-search-text]");
+    const emptyMsg = document.getElementById("books-search-empty");
+    const thead = section.querySelector("thead");
 
     function applySearch() {
-        var q = searchInput ? searchInput.value.trim().toLowerCase() : "";
-        var visible = 0;
+        const q = searchInput ? searchInput.value.trim().toLowerCase() : "";
+        let visible = 0;
         rows.forEach(function (tr) {
-            var hay = tr.getAttribute("data-search-text") || "";
-            var ok = !q || hay.includes(q);
+            const hay = tr.getAttribute("data-search-text") || "";
+            const ok = !q || hay.includes(q);
             if (ok) {
                 tr.removeAttribute("hidden");
                 visible++;
@@ -240,7 +238,7 @@ function initBooksPage() {
                 tr.setAttribute("hidden", "");
             }
         });
-        var noMatches = q && visible === 0;
+        const noMatches = q && visible === 0;
         if (emptyMsg) {
             if (noMatches) {
                 emptyMsg.removeAttribute("hidden");
@@ -265,35 +263,35 @@ function initBooksPage() {
 
 // Sets up category chip filtering and live text search for the bestiary creature grid.
 function initBestiaryPage() {
-    var section = document.getElementById("bestiary-catalog-section");
+    const section = document.getElementById("bestiary-catalog-section");
     if (!section) { return; }
-    var searchInput = document.getElementById("bestiary-search");
-    var cards = section.querySelectorAll(".bestiary-beast-card[data-search-text]");
-    var chipNav = document.querySelector("nav.bestiary-chip-nav");
-    var activeCategoryId = null;
+    const searchInput = document.getElementById("bestiary-search");
+    const cards = section.querySelectorAll(".bestiary-beast-card[data-search-text]");
+    const chipNav = document.querySelector("nav.bestiary-chip-nav");
+    let activeCategoryId = null;
 
     function updateChipActive() {
         updateChipActiveState(chipNav, activeCategoryId, "data-bestiary-filter");
     }
 
     function applySearch() {
-        var q = searchInput ? searchInput.value.trim().toLowerCase() : "";
+        const q = searchInput ? searchInput.value.trim().toLowerCase() : "";
         cards.forEach(function (card) {
-            var hay = card.getAttribute("data-search-text") || "";
-            var ok = !q || hay.includes(q);
+            const hay = card.getAttribute("data-search-text") || "";
+            const ok = !q || hay.includes(q);
             if (ok) {
                 card.removeAttribute("hidden");
             } else {
                 card.setAttribute("hidden", "");
             }
         });
-        var cats = section.querySelectorAll(".bestiary-category");
+        const cats = section.querySelectorAll(".bestiary-category");
         if (activeCategoryId) {
             cats.forEach(function (cat) {
                 if (cat.id !== activeCategoryId) {
                     cat.setAttribute("hidden", "");
                 } else {
-                    var visible = cat.querySelector(".bestiary-beast-card:not([hidden])");
+                    const visible = cat.querySelector(".bestiary-beast-card:not([hidden])");
                     if (visible) {
                         cat.removeAttribute("hidden");
                     } else {
@@ -303,7 +301,7 @@ function initBestiaryPage() {
             });
         } else {
             cats.forEach(function (cat) {
-                var visible = cat.querySelector(".bestiary-beast-card:not([hidden])");
+                const visible = cat.querySelector(".bestiary-beast-card:not([hidden])");
                 if (visible) {
                     cat.removeAttribute("hidden");
                 } else {
@@ -312,9 +310,9 @@ function initBestiaryPage() {
             });
         }
 
-        var emptyEl = document.getElementById("bestiary-empty");
+        const emptyEl = document.getElementById("bestiary-empty");
         if (emptyEl) {
-            var anyCard = section.querySelectorAll(
+            const anyCard = section.querySelectorAll(
                 ".bestiary-category:not([hidden]) .bestiary-beast-card:not([hidden])"
             ).length;
             if (q && anyCard === 0) {
@@ -326,7 +324,7 @@ function initBestiaryPage() {
     }
 
     if (chipNav) {
-        var showAllChip = chipNav.querySelector("[data-bestiary-filter=\"all\"]");
+        const showAllChip = chipNav.querySelector("[data-bestiary-filter=\"all\"]");
         if (showAllChip) {
             showAllChip.addEventListener("click", function (e) {
                 e.preventDefault();
@@ -339,7 +337,7 @@ function initBestiaryPage() {
             if (chip.getAttribute("data-bestiary-filter") === "all") { return; }
             chip.addEventListener("click", function (e) {
                 e.preventDefault();
-                var target = chip.getAttribute("data-target");
+                const target = chip.getAttribute("data-target");
                 activeCategoryId = target || null;
                 updateChipActive();
                 applySearch();
@@ -354,10 +352,10 @@ function initBestiaryPage() {
     applySearch();
 
     cards.forEach(function (card) {
-        var link = card.querySelector(".bestiary-card-link");
+        const link = card.querySelector(".bestiary-card-link");
         if (!link) { return; }
 
-        var img = link.querySelector("img.gallery-img");
+        const img = link.querySelector("img.gallery-img");
         if (img && img.parentNode === link) {
             link.parentNode.insertBefore(img, link);
         }
@@ -393,12 +391,12 @@ function initBestiaryPage() {
 
 // Sets up category chip filtering, live text search, and whole-card click navigation on the characters page.
 function initCharactersPage() {
-    var chipNav = document.getElementById("char-chip-nav");
+    const chipNav = document.getElementById("char-chip-nav");
     if (!chipNav) { return; }
-    var cards = document.querySelectorAll(".card.char-card-wrap[data-category]");
-    var searchInput = document.getElementById("characters-search");
-    var activeCategoryId = null;
-    var catSynonyms = {
+    const cards = document.querySelectorAll(".card.char-card-wrap[data-category]");
+    const searchInput = document.getElementById("characters-search");
+    let activeCategoryId = null;
+    const catSynonyms = {
         witcher: "witcher wolf school",
         sorceress: "sorceress sorcerer mage magic",
         royalty: "royalty crown king queen",
@@ -411,21 +409,21 @@ function initCharactersPage() {
     }
 
     function buildCharSearchHaystack(card) {
-        var bits = [];
-        var extra = card.getAttribute("data-search-text");
+        const bits = [];
+        const extra = card.getAttribute("data-search-text");
         if (extra) {
             bits.push(extra);
         }
-        var cat = card.getAttribute("data-category") || "";
+        const cat = card.getAttribute("data-category") || "";
         bits.push(cat);
         if (cat && catSynonyms[cat]) {
             bits.push(catSynonyms[cat]);
         }
-        var nameLink = card.querySelector(".char-card-link");
+        const nameLink = card.querySelector(".char-card-link");
         if (nameLink) {
             bits.push(nameLink.textContent);
         }
-        var role = card.querySelector(".char-role");
+        const role = card.querySelector(".char-role");
         if (role) {
             bits.push(role.textContent);
         }
@@ -439,10 +437,10 @@ function initCharactersPage() {
     }
 
     function applyCombined() {
-        var q = searchInput ? searchInput.value.trim().toLowerCase() : "";
-        for (var i = 0; i < cards.length; i++) {
-            var card = cards[i];
-            var cat = card.getAttribute("data-category") || "";
+        const q = searchInput ? searchInput.value.trim().toLowerCase() : "";
+        for (let i = 0; i < cards.length; i++) {
+            const card = cards[i];
+            const cat = card.getAttribute("data-category") || "";
             if (activeCategoryId && cat !== activeCategoryId) {
                 card.setAttribute("hidden", "");
                 continue;
@@ -451,7 +449,7 @@ function initCharactersPage() {
                 card.removeAttribute("hidden");
                 continue;
             }
-            var hay = card.__charSearchHay;
+            let hay = card.__charSearchHay;
             if (hay === undefined) {
                 hay = buildCharSearchHaystack(card);
                 card.__charSearchHay = hay;
@@ -463,10 +461,10 @@ function initCharactersPage() {
             }
         }
 
-        var emptyMsg = document.getElementById("characters-search-empty");
+        const emptyMsg = document.getElementById("characters-search-empty");
         if (emptyMsg) {
-            var visible = 0;
-            for (var j = 0; j < cards.length; j++) {
+            let visible = 0;
+            for (let j = 0; j < cards.length; j++) {
                 if (!cards[j].hasAttribute("hidden")) {
                     visible++;
                 }
@@ -479,7 +477,7 @@ function initCharactersPage() {
         }
     }
 
-    var showAllChip = chipNav.querySelector("[data-char-filter=\"all\"]");
+    const showAllChip = chipNav.querySelector("[data-char-filter=\"all\"]");
     if (showAllChip) {
         showAllChip.addEventListener("click", function (e) {
             e.preventDefault();
@@ -494,7 +492,7 @@ function initCharactersPage() {
         }
         chip.addEventListener("click", function (e) {
             e.preventDefault();
-            var target = chip.getAttribute("data-target");
+            const target = chip.getAttribute("data-target");
             activeCategoryId = target || null;
             updateChipActive();
             applyCombined();
@@ -509,10 +507,10 @@ function initCharactersPage() {
     document.querySelectorAll(".card.char-card-wrap").forEach(function (card) {
         card.setAttribute("tabindex", "0");
         card.setAttribute("role", "link");
-        var link = card.querySelector(".char-card-link");
+        const link = card.querySelector(".char-card-link");
         if (!link) { return; }
         card.addEventListener("click", function (e) {
-            var t = e.target;
+            const t = e.target;
             if (t.tagName === "A" || t.tagName === "BUTTON" || t.tagName === "INPUT") {
                 return;
             }
@@ -529,18 +527,18 @@ function initCharactersPage() {
 
 // Counts the cards in each bestiary section and writes the number into each chip's count badge.
 function fillBestiaryChipCounts() {
-    var counts = document.querySelectorAll("[data-count-for]");
-    for (var i = 0; i < counts.length; i++) {
-        var sectionId = counts[i].getAttribute("data-count-for");
-        var section = document.getElementById(sectionId);
+    const counts = document.querySelectorAll("[data-count-for]");
+    for (let i = 0; i < counts.length; i++) {
+        const sectionId = counts[i].getAttribute("data-count-for");
+        const section = document.getElementById(sectionId);
         if (section) {
-            var cards = section.querySelectorAll(".bestiary-beast-card");
+            const cards = section.querySelectorAll(".bestiary-beast-card");
             counts[i].textContent = cards.length;
         }
     }
 }
 
-var imageLightboxConfigs = [
+const imageLightboxConfigs = [
     { lightboxId: "gallery-lightbox", sourceId: "gallery-page-grid", thumbSelector: ".gallery-img" },
     { lightboxId: "gwent-lightbox", sourceId: "gwent-lightbox-source", thumbSelector: ".faction-portrait-img" },
     { lightboxId: "series-lightbox", sourceId: "series-lightbox-source", thumbSelector: ".series-poster" },
@@ -560,42 +558,42 @@ function lightboxThumbImage(thumb) {
 
 // Attaches a full lightbox to one modal element: thumbnails open it, arrows navigate, Escape/backdrop close it.
 function attachImageLightbox(root, source, thumbSelector) {
-    var modalImg = root.querySelector(".gallery-lightbox-img");
-    var captionEl = root.querySelector(".gallery-lightbox-caption");
-    var closeBtn = root.querySelector(".gallery-lightbox-close");
-    var backdrop = root.querySelector(".gallery-lightbox-backdrop");
-    var prevBtn = root.querySelector(".gallery-lightbox-prev");
-    var nextBtn = root.querySelector(".gallery-lightbox-next");
+    const modalImg = root.querySelector(".gallery-lightbox-img");
+    const captionEl = root.querySelector(".gallery-lightbox-caption");
+    const closeBtn = root.querySelector(".gallery-lightbox-close");
+    const backdrop = root.querySelector(".gallery-lightbox-backdrop");
+    const prevBtn = root.querySelector(".gallery-lightbox-prev");
+    const nextBtn = root.querySelector(".gallery-lightbox-next");
     if (!modalImg || !captionEl || !closeBtn || !backdrop) {
         return;
     }
 
-    var prevBodyOverflow = "";
-    var thumbs = [];
+    let prevBodyOverflow = "";
+    const thumbs = [];
     source.querySelectorAll(thumbSelector).forEach(function (thumb) {
         if (lightboxThumbImage(thumb)) {
             thumbs.push(thumb);
         }
     });
-    var canNavigate = Boolean(prevBtn && nextBtn && thumbs.length > 1);
-    var activeIndex = -1;
+    const canNavigate = Boolean(prevBtn && nextBtn && thumbs.length > 1);
+    let activeIndex = -1;
 
     function openModal(thumb, options) {
-        var img = lightboxThumbImage(thumb);
+        const img = lightboxThumbImage(thumb);
         if (!img) { return; }
         activeIndex = thumbs.indexOf(thumb);
-        var chosenSrc = img.currentSrc || img.getAttribute("src") || "";
+        const chosenSrc = img.currentSrc || img.getAttribute("src") || "";
         modalImg.src = chosenSrc;
         modalImg.alt = img.getAttribute("alt") || "";
-        var cap = img.nextElementSibling;
-        var text = "";
+        const cap = img.nextElementSibling;
+        let text = "";
         if (cap && cap.tagName === "P") {
             text = (cap.textContent || "").trim();
         } else {
             text = (img.getAttribute("alt") || "").trim();
         }
         captionEl.textContent = text;
-        var wasHidden = root.hasAttribute("hidden");
+        const wasHidden = root.hasAttribute("hidden");
         root.removeAttribute("hidden");
         if (wasHidden) {
             prevBodyOverflow = document.body.style.overflow;
@@ -616,11 +614,11 @@ function attachImageLightbox(root, source, thumbSelector) {
         if (!canNavigate || thumbs.length === 0) {
             return;
         }
-        var idx = activeIndex;
+        let idx = activeIndex;
         if (idx < 0) {
             idx = 0;
         }
-        var nextIndex = (idx + delta + thumbs.length) % thumbs.length;
+        const nextIndex = (idx + delta + thumbs.length) % thumbs.length;
         openModal(thumbs[nextIndex], { focus: false });
     }
 
@@ -677,11 +675,10 @@ function attachImageLightbox(root, source, thumbSelector) {
 
 // Loops through imageLightboxConfigs and initialises whichever lightboxes are present on the current page.
 function initImageLightboxes() {
-    var i;
-    for (i = 0; i < imageLightboxConfigs.length; i++) {
-        var cfg = imageLightboxConfigs[i];
-        var rootEl = document.getElementById(cfg.lightboxId);
-        var sourceEl = document.getElementById(cfg.sourceId);
+    for (let i = 0; i < imageLightboxConfigs.length; i++) {
+        const cfg = imageLightboxConfigs[i];
+        const rootEl = document.getElementById(cfg.lightboxId);
+        const sourceEl = document.getElementById(cfg.sourceId);
         if (!rootEl || !sourceEl) { continue; }
         attachImageLightbox(rootEl, sourceEl, cfg.thumbSelector);
     }
@@ -689,25 +686,25 @@ function initImageLightboxes() {
 
 // Initialises the feedback modal: open/close, focus trap, field validation, and simulated submit.
 function initFeedbackModal() {
-    var modal = document.getElementById("feedback-modal");
+    const modal = document.getElementById("feedback-modal");
     if (!modal) {
         return;
     }
-    var openBtn = document.getElementById("intro-feedback-btn");
+    const openBtn = document.getElementById("intro-feedback-btn");
     if (!openBtn) {
         return;
     }
 
-    var closeBtn = modal.querySelector(".feedback-modal-close");
-    var backdrop = modal.querySelector(".feedback-modal-backdrop");
-    var form = document.getElementById("feedback-modal-form");
-    var submitBtn = document.getElementById("feedback-modal-submit-btn");
-    var resetBtn = document.getElementById("feedback-modal-reset-btn");
-    var statusEl = document.getElementById("feedback-modal-status");
-    var errEl = document.getElementById("feedback-modal-error");
+    const closeBtn = modal.querySelector(".feedback-modal-close");
+    const backdrop = modal.querySelector(".feedback-modal-backdrop");
+    const form = document.getElementById("feedback-modal-form");
+    const submitBtn = document.getElementById("feedback-modal-submit-btn");
+    const resetBtn = document.getElementById("feedback-modal-reset-btn");
+    const statusEl = document.getElementById("feedback-modal-status");
+    const errEl = document.getElementById("feedback-modal-error");
 
-    var prevBodyOverflow = "";
-    var previouslyFocused = null;
+    let prevBodyOverflow = "";
+    let previouslyFocused = null;
 
     function getFocusable() {
         return Array.prototype.slice.call(
@@ -724,7 +721,7 @@ function initFeedbackModal() {
         modal.removeAttribute("hidden");
         modal.classList.remove("is-closing");
         modal.classList.add("is-opening");
-        var focusable = getFocusable();
+        const focusable = getFocusable();
         if (focusable.length) {
             focusable[0].focus();
         }
@@ -754,12 +751,12 @@ function initFeedbackModal() {
         if (e.key !== "Tab") {
             return;
         }
-        var focusable = getFocusable();
+        const focusable = getFocusable();
         if (!focusable.length) {
             return;
         }
-        var first = focusable[0];
-        var last = focusable[focusable.length - 1];
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
         if (e.shiftKey) {
             if (document.activeElement === first) {
                 e.preventDefault();
@@ -798,18 +795,18 @@ function initFeedbackModal() {
 
     function fieldLabelFor(el) {
         if (!el || !el.id) { return "This field"; }
-        var label = form.querySelector('label[for="' + el.id + '"]');
+        const label = form.querySelector('label[for="' + el.id + '"]');
         return label ? (label.textContent || "").trim() : "This field";
     }
 
-    var emailInput = document.getElementById("fm-email");
+    const emailInput = document.getElementById("fm-email");
     if (emailInput) {
         emailInput.addEventListener("input", function () {
             emailInput.setCustomValidity("");
         });
         emailInput.addEventListener("blur", function () {
             emailInput.setCustomValidity("");
-            var v = (emailInput.value || "").trim();
+            const v = (emailInput.value || "").trim();
             if (v && !v.includes("@")) {
                 emailInput.setCustomValidity("Email addresses need an @ symbol. Example: name@example.com");
             }
@@ -820,7 +817,7 @@ function initFeedbackModal() {
         e.preventDefault();
         clearMessages();
         if (!form.reportValidity()) {
-            var firstInvalid = form.querySelector(":invalid");
+            const firstInvalid = form.querySelector(":invalid");
             if (firstInvalid) {
                 showError(fieldLabelFor(firstInvalid) + ": " + (firstInvalid.validationMessage || "Please check this field."));
                 firstInvalid.focus();
@@ -834,7 +831,7 @@ function initFeedbackModal() {
         submitBtn.textContent = "Sending\u2026";
 
         window.setTimeout(function () {
-            var offline = navigator.onLine === false;
+            const offline = navigator.onLine === false;
             if (offline) {
                 submitBtn.disabled = false;
                 submitBtn.textContent = "Send message";
@@ -865,7 +862,7 @@ function initFeedbackModal() {
             submitBtn.removeAttribute("aria-label");
             resetBtn.setAttribute("hidden", "");
             clearMessages();
-            var first = document.getElementById("fm-fullname");
+            const first = document.getElementById("fm-fullname");
             if (first) { first.focus(); }
         });
     }
@@ -873,7 +870,7 @@ function initFeedbackModal() {
 
 // Shows the back-to-top button after the user scrolls down 300px, hides it again at the top.
 function initBackToTopButton() {
-    var scrollBtn = document.getElementById("back-to-top");
+    const scrollBtn = document.getElementById("back-to-top");
     if (!scrollBtn) { return; }
 
     window.addEventListener("scroll", function () {
@@ -889,7 +886,6 @@ function initBackToTopButton() {
     });
 }
 
-
 function restoreScrollAfterReturn() {
     document.querySelectorAll(".gallery-lightbox:not([hidden])").forEach(function (lb) {
         lb.setAttribute("hidden", "");
@@ -899,18 +895,7 @@ function restoreScrollAfterReturn() {
     }
 }
 
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () {
-        initCharacterPortraitSliders();
-        initCharactersPage();
-        initBooksPage();
-        initBestiaryPage();
-        fillBestiaryChipCounts();
-        initImageLightboxes();
-        initBackToTopButton();
-        initFeedbackModal();
-    });
-} else {
+document.addEventListener("DOMContentLoaded", function () {
     initCharacterPortraitSliders();
     initCharactersPage();
     initBooksPage();
@@ -919,7 +904,10 @@ if (document.readyState === "loading") {
     initImageLightboxes();
     initBackToTopButton();
     initFeedbackModal();
-}
+    if (document.getElementById("panel-wolf")) {
+        switchSchool("wolf");
+    }
+});
 
 window.addEventListener("pageshow", restoreScrollAfterReturn);
 window.addEventListener("focus", restoreScrollAfterReturn);
@@ -931,23 +919,17 @@ document.addEventListener("visibilitychange", function () {
 
 function switchSchool(schoolId) {
     switchTabPanel(document, schoolId);
-    var activeBtn = document.getElementById('tab-' + schoolId);
+    const activeBtn = document.getElementById("tab-" + schoolId);
     if (activeBtn) {
-        activeBtn.classList.add('active');
-        activeBtn.setAttribute('aria-selected', 'true');
+        activeBtn.classList.add("active");
+        activeBtn.setAttribute("aria-selected", "true");
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    if (document.getElementById('panel-wolf')) {
-        switchSchool('wolf');
-    }
-});
-
 document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") {
-        var menu = document.getElementById("nav-menu");
-        var btn = document.querySelector(".menu-btn");
+        const menu = document.getElementById("nav-menu");
+        const btn = document.querySelector(".menu-btn");
         if (menu && menu.classList.contains("nav-open")) {
             closeNavMenu();
             if (btn) { btn.focus(); }
@@ -956,8 +938,8 @@ document.addEventListener("keydown", function (e) {
 });
 
 document.addEventListener("click", function (e) {
-    var menu = document.getElementById("nav-menu");
-    var btn = document.querySelector(".menu-btn");
+    const menu = document.getElementById("nav-menu");
+    const btn = document.querySelector(".menu-btn");
     if (
         menu &&
         menu.classList.contains("nav-open") &&
@@ -970,16 +952,16 @@ document.addEventListener("click", function (e) {
 });
 
 function switchSeriesTab(tab) {
-    var tabIds = ['series', 'anime', 'sirens'];
-    var wrap = document.getElementById('series-lightbox-source');
+    const tabIds = ["series", "anime", "sirens"];
+    const wrap = document.getElementById("series-lightbox-source");
     if (!wrap) {
         return;
     }
     switchTabPanel(wrap, tab);
-    var tabIndex = tabIds.indexOf(tab);
-    var btns = wrap.querySelectorAll('.tab-btn');
+    const tabIndex = tabIds.indexOf(tab);
+    const btns = wrap.querySelectorAll(".tab-btn");
     if (tabIndex !== -1 && btns[tabIndex]) {
-        btns[tabIndex].classList.add('active');
-        btns[tabIndex].setAttribute('aria-selected', 'true');
+        btns[tabIndex].classList.add("active");
+        btns[tabIndex].setAttribute("aria-selected", "true");
     }
 }
